@@ -4,7 +4,7 @@ as part of the course Project Work in Artificial Intelligence at the Technical U
 For English voice conversion the [VCTK Multi-speaker Corpus](https://datashare.is.ed.ac.uk/handle/10283/3443) is used.<br>
 For Danish voice conversion the [Språkbankens ressurskatalog](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-19&lang=en) is used.
 
-## Research Question
+## Project Statement
 This project specifically looks at, to which degree voice conversion technologies can be utilized for transforming dialect heavy speech into a standard voice, to improve the performance of the existingDanish state-of-the-art speech to text system by danspeech.
 
 ### Research Questions
