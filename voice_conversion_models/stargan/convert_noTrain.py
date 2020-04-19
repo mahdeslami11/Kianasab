@@ -1,0 +1,337 @@
+'''
+Code used from StarGAN-Voice-Conversion repo.
+This script binds together pre-processing and converting.
+Created by August Semrau Andersen for DTU course #02466.
+'''
+
+# Imports for preprocess.py
+import os
+import sys
+import argparse
+import numpy as np
+from sklearn.model_selection import train_test_split
+from concurrent.futures import ProcessPoolExecutor
+from multiprocessing import cpu_count
+from functools import partial
+from tqdm import tqdm
+from preprocess import resample, resample_to_16k
+
+# Imports for convert.py
+import torch
+from os.path import join, basename
+import glob
+from data_loader import to_categorical
+from convert import load_wav
+from model import Generator
+from utils import *
+
+
+'''
+Modified split_data from preprocess.py
+'''
+
+# def split_data(paths):
+#     indices = np.arange(len(paths))
+#     test_size = 0.3  # All data goes to "testing" for conversion, not training model
+#     train_indices, test_indices = train_test_split(indices, test_size=test_size, random_state=1234)
+#     train_paths = list(np.array(paths)[train_indices])
+#     test_paths = list(np.array(paths)[test_indices])
+#     return train_paths, test_paths
+
+def get_spk_world_feats(spk_fold_path, mc_dir_train, mc_dir_test, sample_rate=16000):
+    paths = glob.glob(join(spk_fold_path, '*.wav'))
+    spk_name = basename(spk_fold_path)
+    # train_paths, test_paths = split_data(paths)
+    test_paths = paths
+    f0s = []
+    coded_sps = []
+    # for wav_file in train_paths:
+    for wav_file in test_paths:
+        f0, _, _, _, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
+        f0s.append(f0)
+        coded_sps.append(coded_sp)
+    log_f0s_mean, log_f0s_std = logf0_statistics(f0s)
+    coded_sps_mean, coded_sps_std = coded_sp_statistics(coded_sps)
+    np.savez(join(mc_dir_train, spk_name + '_stats.npz'),
+             log_f0s_mean=log_f0s_mean,
+             log_f0s_std=log_f0s_std,
+             coded_sps_mean=coded_sps_mean,
+             coded_sps_std=coded_sps_std)
+
+    # for wav_file in tqdm(train_paths):
+    #     wav_nam = basename(wav_file)
+    #     f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
+    #     normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
+    #     np.save(join(mc_dir_train, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
+
+    for wav_file in tqdm(test_paths):
+        wav_nam = basename(wav_file)
+        f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
+        normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
+        np.save(join(mc_dir_test, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
+    return 0
+
+
+'''
+Modified class TestDataset and function test from convert.py
+'''
+
+class TestDataset(object):
+
+    def __init__(self, config):
+        # assert config.trg_spk in config.speakers, f'The trg_spk should be chosen from {config.speakers}, but you choose {trg_spk}.'
+        # Source speaker
+        self.src_spk = config.src_spk
+        self.trg_spk = config.trg_spk
+        self.mc_files = sorted(glob.glob(join(config.test_data_dir, f'{config.src_spk}*.npy')))
+        # print(self.mc_files)
+        self.src_spk_stats = np.load(join(config.train_data_dir, f'{config.src_spk}_stats.npz'))
+        self.src_wav_dir = f'{config.wav_dir}/{config.src_spk}'
+
+        self.trg_spk_stats = np.load(join(config.train_data_dir, f'{config.trg_spk}_stats.npz'))
+
+        self.logf0s_mean_src = self.src_spk_stats['log_f0s_mean']
+        self.logf0s_std_src = self.src_spk_stats['log_f0s_std']
+        self.logf0s_mean_trg = self.trg_spk_stats['log_f0s_mean']
+        self.logf0s_std_trg = self.trg_spk_stats['log_f0s_std']
+        self.mcep_mean_src = self.src_spk_stats['coded_sps_mean']
+        self.mcep_std_src = self.src_spk_stats['coded_sps_std']
+        self.mcep_mean_trg = self.trg_spk_stats['coded_sps_mean']
+        self.mcep_std_trg = self.trg_spk_stats['coded_sps_std']
+
+        # Define target speaker from trained speakers
+        # self.speakers = config.speakers
+        # spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
+
+        self.speakers = ['p262', 'p272', 'p229', 'p232', 'p292', 'p293', 'p360', 'p361', 'p248', 'p251']
+        spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
+        self.spk_idx = spk2idx[config.trg_spk]
+        spk_cat = to_categorical([self.spk_idx], num_classes=len(self.speakers))
+        self.spk_c_trg = spk_cat
+
+    def get_batch_test_data(self, batch_size):
+        batch_data = []
+        # print(self.mc_files)
+        for i in range(batch_size):
+            # print(i)
+            mcfile = self.mc_files[i]
+            filename = basename(mcfile).split('-')[-1]
+            wavfile_path = join(self.src_wav_dir, filename.replace('npy', 'wav'))
+            batch_data.append(wavfile_path)
+        return batch_data
+
+def test(config):
+    os.makedirs(join(config.convert_dir, str(config.resume_iters)), exist_ok=True)
+    sampling_rate, num_mcep, frame_period = 16000, 36, 5
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    G = Generator().to(device)
+    test_loader = TestDataset(config)
+    # Restore model
+    print(f'Loading the trained models from step {config.resume_iters}...')
+    G_path = join(config.model_save_dir, f'{config.resume_iters}-G.ckpt')
+    G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
+
+    # Read a batch of testdata
+    test_wavfiles = test_loader.get_batch_test_data(batch_size=config.num_converted_wavs)
+    test_wavs = [load_wav(wavfile, sampling_rate) for wavfile in test_wavfiles]
+
+    with torch.no_grad():
+        for idx, wav in enumerate(test_wavs):
+            print(len(wav))
+            wav_name = basename(test_wavfiles[idx])
+            # print(wav_name)
+            f0, timeaxis, sp, ap = world_decompose(wav=wav, fs=sampling_rate, frame_period=frame_period)
+            f0_converted = pitch_conversion(f0=f0,
+                                            mean_log_src=test_loader.logf0s_mean_src,
+                                            std_log_src=test_loader.logf0s_std_src,
+                                            mean_log_target=test_loader.logf0s_mean_trg,
+                                            std_log_target=test_loader.logf0s_std_trg)
+            coded_sp = world_encode_spectral_envelop(sp=sp, fs=sampling_rate, dim=num_mcep)
+            print("Before being fed into G: ", coded_sp.shape)
+
+            coded_sp_norm = (coded_sp - test_loader.mcep_mean_src) / test_loader.mcep_std_src
+            coded_sp_norm_tensor = torch.FloatTensor(coded_sp_norm.T).unsqueeze_(0).unsqueeze_(1).to(device)
+            spk_conds = torch.FloatTensor(test_loader.spk_c_trg).to(device)
+            # print(spk_conds.size())
+            coded_sp_converted_norm = G(coded_sp_norm_tensor, spk_conds).data.cpu().numpy()
+            coded_sp_converted = np.squeeze(
+                coded_sp_converted_norm).T * test_loader.mcep_std_trg + test_loader.mcep_mean_trg
+            coded_sp_converted = np.ascontiguousarray(coded_sp_converted)
+            print("After being fed into G: ", coded_sp_converted.shape)
+            wav_transformed = world_speech_synthesis(f0=f0_converted, coded_sp=coded_sp_converted,
+                                                     ap=ap, fs=sampling_rate, frame_period=frame_period)
+            wav_id = wav_name.split('.')[0]
+            librosa.output.write_wav(join(config.convert_dir, str(config.resume_iters),
+                                          f'{wav_id}-vcto-{test_loader.trg_spk}.wav'), wav_transformed, sampling_rate)
+            if [True, False][0]:
+                wav_cpsyn = world_speech_synthesis(f0=f0, coded_sp=coded_sp,
+                                                   ap=ap, fs=sampling_rate, frame_period=frame_period)
+                librosa.output.write_wav(join(config.convert_dir, str(config.resume_iters), f'cpsyn-{wav_name}'),
+                                         wav_cpsyn, sampling_rate)
+
+
+
+'''
+Combination of preprocess.py and convert.py
+'''
+if __name__ == '__main__':
+
+    sample_rate_default = 16000
+    origin_wavpath_default = "./data/Corpus-Fagprojekt/wav48"  # Not needed for danish-corpus
+    target_wavpath_default = "./data/Corpus-Fagprojekt/wav16"
+    mc_dir_train_default = './data/mc_noTrain/train'  # Different directory for no training
+    mc_dir_test_default = './data/mc_noTrain/test'    # Different directory for no training
+    logs_dir_default = './logs'
+    models_dir_default = './models'
+    converted_dir_default = './converted'
+
+    # Parser takes inputs for running file as main
+    parser = argparse.ArgumentParser()
+
+    # Following allows for changes to preprocess.py
+    parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
+    parser.add_argument("--num_workers", type=int, default=None, help="Number of cpus to use.")
+    # Following allows for changes to convert.py
+    parser.add_argument('--resume_iters', type=int, default=None, help='step to resume for testing.')
+    parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
+    parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
+    parser.add_argument('--src_spk', type=str, default=None, help="Source speakers to convert seperated by '+'.")
+    parser.add_argument('--trg_spk', type=str, default='p272', help='Target speaker (FIXED).')
+    parser.add_argument("--speakers", type=str, default=None)  #This is used for TestDataset class
+
+    # Directories of preprocess.py and convert.py
+    parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default, help="48 kHz wav path.")
+    parser.add_argument("--target_wavpath", type=str, default=target_wavpath_default, help="16 kHz wav path.")
+    parser.add_argument("--mc_dir_train", type=str, default=mc_dir_train_default, help="Dir for training features.")
+    parser.add_argument("--mc_dir_test", type=str, default=mc_dir_test_default, help="Dir for testing features.")
+    parser.add_argument('--train_data_dir', type=str, default=mc_dir_train_default)
+    parser.add_argument('--test_data_dir', type=str, default=mc_dir_test_default)
+    parser.add_argument('--wav_dir', type=str, default=target_wavpath_default)
+    parser.add_argument('--log_dir', type=str, default=logs_dir_default)
+    parser.add_argument('--model_save_dir', type=str, default=models_dir_default)
+    parser.add_argument('--convert_dir', type=str, default=converted_dir_default)
+
+    # Parse arguments
+    argv = parser.parse_args()
+
+    # Redefine paths in case parsed arguments differ from default
+    sample_rate = argv.sample_rate
+    origin_wavpath = argv.origin_wavpath
+    target_wavpath = argv.target_wavpath
+    mc_dir_train = argv.mc_dir_train
+    mc_dir_test = argv.mc_dir_test
+    logs_dir_default = argv.log_dir
+    models_dir_default = argv.model_save_dir
+    converted_dir_default = argv.convert_dir
+
+    # Set num_workers to number og cpus unless specified
+    num_workers = argv.num_workers if argv.num_workers is not None else cpu_count()
+
+    # If no model-iteration has been specified, don't run
+    if argv.resume_iters is None:
+        raise RuntimeError("Please specify the step number for resuming.")
+
+    # Here it is specified which speakers should be converted
+    speaker_used = argv.src_spk if argv.src_spk is not None else None
+    if speaker_used is not None:
+        speaker_used = speaker_used.split('+')  # Make list of speakers
+        for speaker in speaker_used:
+            if speaker[:2] == 'p_':
+                continue
+            else:
+                speaker = 'p_'+speaker   # Add indication that pre-processing has been performed
+        # print('1',argv.src_spk)
+        argv.src_spk = speaker_used
+        # print('2',argv.src_spk)
+
+        # Add target speaker to speaker list for TestDataset class
+        testDataset_speaker_used = [None] * (len(speaker_used) + 1)
+        # print('3',testDataset_speaker_used)
+        target = str(argv.trg_spk)
+        # print('4',target)
+        testDataset_speaker_used[:-1] = speaker_used
+        testDataset_speaker_used[-1] = target
+        # print('5',testDataset_speaker_used)
+        argv.speakers = testDataset_speaker_used
+        # print(testDataset_speaker_used)
+        # print(speaker_used)
+        # print(argv.speakers)
+        # print(argv.src_spk)
+        # raise RuntimeError('Finish')
+
+    # If no speakers are specified, make it clear that nothing will be converted
+    elif not speaker_used:
+        # print("No speakers specified - No conversion will take place lol")
+        raise RuntimeError("No speakers specified - No conversion will take place")
+
+    # # Defining source speakers from speakers that will be converted
+    # if not argv.src_spk:
+    #     argv.src_spk = speaker_used
+
+    # Setting number of speakers
+    if not argv.num_speakers:
+        argv.num_speakers = len(speaker_used)
+
+    # If the original wav is 48K, first we want to resample to 16K
+    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
+
+    ## Next extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
+    # Make dirs to contain the MCEPs
+    os.makedirs(mc_dir_train, exist_ok=True)
+    os.makedirs(mc_dir_test, exist_ok=True)
+
+
+    num_workers = len(speaker_used)  # cpu_count()
+    print("number of workers: ", num_workers)
+    executor = ProcessPoolExecutor(max_workers=num_workers)
+
+    work_dir = target_wavpath
+    # spk_folders = os.listdir(work_dir)
+    # print("processing {} speaker folders".format(len(spk_folders)))
+    # print(spk_folders)
+
+    futures = []
+    for spk in speaker_used:
+        # Make folder for each speaker in mc_noTrain
+
+        # Lines below for individual folders of each speaker in mc_noTrain
+        # spk_mc_dir_test = os.path.join(mc_dir_test, spk)
+        # os.makedirs(spk_mc_dir_test, exist_ok=True)
+
+        spk_mc_dir_test = mc_dir_test
+        spk_path = os.path.join(work_dir, spk)
+        # Do processing
+        futures.append(executor.submit(partial(get_spk_world_feats, spk_path,
+                                               mc_dir_train, spk_mc_dir_test, sample_rate)))
+    result_list = [future.result() for future in tqdm(futures)]
+    print(result_list)
+    # sys.exit(0)
+
+    '''
+    END OF PREPROCESS.PY
+    
+    ONTO CONVERT.PY
+    '''
+
+    print(argv)
+
+    # If only one speaker should be converted
+    if len(speaker_used) == 1:
+        argv.src_spk = speaker_used[0]
+        argv.num_converted_wavs = len(glob.glob(join(argv.test_data_dir, f'{speaker_used[0]}*.npy')))
+        test(argv)
+
+    # If more than one speaker should be converted, test runs that number of times
+    else:
+        for speaker_to_convert in speaker_used:
+            argv.src_spk = speaker_to_convert  # Redifine for only one speaker
+
+            # Redefine number og wavs to convert to suit each speakers count
+            argv.num_converted_wavs = len(glob.glob(join(argv.test_data_dir, f'{speaker_to_convert}*.npy')))
+            test(argv)
+
+
+
+
+
