@@ -27,17 +27,9 @@ from utils import *
 
 
 '''
-Modified split_data from preprocess.py
+Modified function get_spk_feats from convert.py
+Changed so that _stats.npz file is saved also in the test directory.
 '''
-
-# def split_data(paths):
-#     indices = np.arange(len(paths))
-#     test_size = 0.3  # All data goes to "testing" for conversion, not training model
-#     train_indices, test_indices = train_test_split(indices, test_size=test_size, random_state=1234)
-#     train_paths = list(np.array(paths)[train_indices])
-#     test_paths = list(np.array(paths)[test_indices])
-#     return train_paths, test_paths
-
 def get_spk_world_feats(spk_fold_path, mc_dir_train, mc_dir_test, sample_rate=16000):
     paths = glob.glob(join(spk_fold_path, '*.wav'))
     spk_name = basename(spk_fold_path)
@@ -52,7 +44,7 @@ def get_spk_world_feats(spk_fold_path, mc_dir_train, mc_dir_test, sample_rate=16
         coded_sps.append(coded_sp)
     log_f0s_mean, log_f0s_std = logf0_statistics(f0s)
     coded_sps_mean, coded_sps_std = coded_sp_statistics(coded_sps)
-    np.savez(join(mc_dir_train, spk_name + '_stats.npz'),
+    np.savez(join(mc_dir_test, spk_name + '_stats.npz'),  # Changed mc_dir_train to mc_dir_test
              log_f0s_mean=log_f0s_mean,
              log_f0s_std=log_f0s_std,
              coded_sps_mean=coded_sps_mean,
@@ -74,8 +66,8 @@ def get_spk_world_feats(spk_fold_path, mc_dir_train, mc_dir_test, sample_rate=16
 
 '''
 Modified class TestDataset and function test from convert.py
+Changed so that _stats.npz file is loaded from test directory.
 '''
-
 class TestDataset(object):
 
     def __init__(self, config):
@@ -85,10 +77,10 @@ class TestDataset(object):
         self.trg_spk = config.trg_spk
         self.mc_files = sorted(glob.glob(join(config.test_data_dir, f'{config.src_spk}*.npy')))
         # print(self.mc_files)
-        self.src_spk_stats = np.load(join(config.train_data_dir, f'{config.src_spk}_stats.npz'))
+        self.src_spk_stats = np.load(join(config.test_data_dir, f'{config.src_spk}_stats.npz'))  # Changed to test dir
         self.src_wav_dir = f'{config.wav_dir}/{config.src_spk}'
 
-        self.trg_spk_stats = np.load(join(config.train_data_dir, f'{config.trg_spk}_stats.npz'))
+        self.trg_spk_stats = np.load(join(config.test_data_dir, f'{config.trg_spk}_stats.npz'))  # Changed to test dir
 
         self.logf0s_mean_src = self.src_spk_stats['log_f0s_mean']
         self.logf0s_std_src = self.src_spk_stats['log_f0s_std']
@@ -120,6 +112,11 @@ class TestDataset(object):
             batch_data.append(wavfile_path)
         return batch_data
 
+
+'''
+Modified function test from convert.py
+
+'''
 def test(config):
     os.makedirs(join(config.convert_dir, str(config.resume_iters)), exist_ok=True)
     sampling_rate, num_mcep, frame_period = 16000, 36, 5
