@@ -93,12 +93,10 @@ if __name__ == '__main__':
 
     sample_rate_default = 16000
 
-    origin_wavpath_default = "./data/english-corpus/wav48"
-    target_wavpath_default = "./data/english-corpus/wav16"
-    # origin_wavpath_default = "./data/danish-corpus/wav48"
-    # target_wavpath_default = "./data/danish-corpus/wav16"
-    mc_dir_train_default = './data/mc/train'
-    mc_dir_test_default = './data/mc/test'
+    origin_wavpath_default = "../data/VCTK-Corpus/wav48"
+    target_wavpath_default = "../data/VCTK-Corpus/wav16"
+    mc_dir_train_default = '../preprocessed_data/stargan/vctk/data/mc/train'
+    mc_dir_test_default = '../preprocessed_data/stargan/vctk/data/mc/test'
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
     parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default,
@@ -151,4 +149,3 @@ if __name__ == '__main__':
     result_list = [future.result() for future in tqdm(futures)]
     print(result_list)
     sys.exit(0)
-
