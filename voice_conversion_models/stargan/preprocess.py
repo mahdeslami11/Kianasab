@@ -90,8 +90,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     sample_rate_default = 16000
-    origin_wavpath_default = "./data/Corpus-Fagprojekt/wav48"
-    target_wavpath_default = "./data/Corpus-Fagprojekt/wav16"
+
+    origin_wavpath_default = "./data/english-corpus/wav48"
+    target_wavpath_default = "./data/english-corpus/wav16"
+    # origin_wavpath_default = "./data/danish-corpus/wav48"
+    # target_wavpath_default = "./data/danish-corpus/wav16"
     mc_dir_train_default = './data/mc/train'
     mc_dir_test_default = './data/mc/test'
 
@@ -123,7 +126,7 @@ if __name__ == '__main__':
     # speaker_used = ['p' + i for i in speaker_used]
     # speaker_used = ['p262', 'p272', 'p229']
     # speaker_used = ['p' + i for i in speaker_used]
-    speaker_used = ['p003']
+    # speaker_used = ['p003']
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
     # Make dirs to contain the MCEPs

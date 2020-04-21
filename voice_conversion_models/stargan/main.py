@@ -71,7 +71,8 @@ if __name__ == '__main__':
     # Directories.
     parser.add_argument('--train_data_dir', type=str, default='./data/mc/train')
     parser.add_argument('--test_data_dir', type=str, default='./data/mc/test')
-    parser.add_argument('--wav_dir', type=str, default="./data/Corpus-Fagprojekt/wav16")
+    parser.add_argument('--wav_dir', type=str, default="./data/english-corpus/wav16")
+    # parser.add_argument('--wav_dir', type=str, default="./data/danish-corpus/wav16")
     parser.add_argument('--log_dir', type=str, default='./logs')
     parser.add_argument('--model_save_dir', type=str, default='./models')
     parser.add_argument('--sample_dir', type=str, default='./samples')

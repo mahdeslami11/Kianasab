@@ -47,3 +47,29 @@ This module includes code for evaluating and comparing the accuracy of the Speec
     - Comparing the final text out put from each speech to text framework when voice input is converted or not using the statistical [McNemar's test](https://en.wikipedia.org/wiki/McNemar%27s_test)
 * Word Error Rate
     - Comparing the final text out put from each speech to text framework when voice input is converted or not using the performance metric [Word Error Rate](https://en.wikipedia.org/wiki/Word_error_rate).
+
+
+### Using StarGAN
+There are three runnable scripts, which have been used for this project, and therefore heavily modified:  
+* preprocess.py
+    - This script converts 48 kHz wav audio files to 16 kHz (from ./data/english-corpus/wav48 to ./data/english-corpus/wav16) 
+    and then extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds) to ./data/mc/train and ./data.mc/test.
+    - Run in terminal
+    ```
+    python3 preprocess.py 
+    ```
+* main.py  
+    - This script is used for training the StarGAN-VC model.  
+    - Run in terminal
+    ```
+    python3 main.py
+    ```
+* convert_noTrain.py  
+    - This script is used for converting wav files directly, meaning preprocess and converting happens together and no training data for model making is produces.  
+    - To define which model is used, --resume_iters 200000 designates that model iteration 200000 is used for conversion.  
+    - For now, source speakers should be defines by listing them seperated by a '+', so source speakers p200, p201 and p202 should be like this: <p200+p201+p201>.
+    - Run in terminal
+    ```
+    python3 convert_noTrain.py --resume_iters 200000 --src_spk p200+p201+p201
+    ```
+
