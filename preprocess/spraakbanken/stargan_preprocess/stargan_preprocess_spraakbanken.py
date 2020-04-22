@@ -24,27 +24,27 @@ from os.path import join, basename
 import subprocess
 
 
-def resample(spk, origin_wavpath, target_wavpath):
-    wavfiles = [i for i in os.listdir(join(origin_wavpath, spk)) if i.endswith(".wav")]
-    for wav in wavfiles:
-        folder_to = join(target_wavpath, spk)
-        os.makedirs(folder_to, exist_ok=True)
-        wav_to = join(folder_to, wav)
-        wav_from = join(origin_wavpath, spk, wav)
-        subprocess.call(['sox', wav_from, "-r", "16000", wav_to])
-    return 0
+# def resample(spk, origin_wavpath, target_wavpath):
+#     wavfiles = [i for i in os.listdir(join(origin_wavpath, spk)) if i.endswith(".wav")]
+#     for wav in wavfiles:
+#         folder_to = join(target_wavpath, spk)
+#         os.makedirs(folder_to, exist_ok=True)
+#         wav_to = join(folder_to, wav)
+#         wav_from = join(origin_wavpath, spk, wav)
+#         subprocess.call(['sox', wav_from, "-r", "16000", wav_to])
+#     return 0
 
 
-def resample_to_16k(origin_wavpath, target_wavpath, num_workers=1):
-    os.makedirs(target_wavpath, exist_ok=True)
-    spk_folders = os.listdir(origin_wavpath)
-    print(f"> Using {num_workers} workers!")
-    executor = ProcessPoolExecutor(max_workers=num_workers)
-    futures = []
-    for spk in spk_folders:
-        futures.append(executor.submit(partial(resample, spk, origin_wavpath, target_wavpath)))
-    result_list = [future.result() for future in tqdm(futures)]
-    print(result_list)
+# def resample_to_16k(origin_wavpath, target_wavpath, num_workers=1):
+#     os.makedirs(target_wavpath, exist_ok=True)
+#     spk_folders = os.listdir(origin_wavpath)
+#     print(f"> Using {num_workers} workers!")
+#     executor = ProcessPoolExecutor(max_workers=num_workers)
+#     futures = []
+#     for spk in spk_folders:
+#         futures.append(executor.submit(partial(resample, spk, origin_wavpath, target_wavpath)))
+#     result_list = [future.result() for future in tqdm(futures)]
+#     print(result_list)
 
 
 def split_data(paths):
@@ -95,14 +95,23 @@ if __name__ == '__main__':
 
     sample_rate_default = 16000
 
-    origin_wavpath_default = "../data/VCTK-Corpus/wav48"
-    target_wavpath_default = "../data/VCTK-Corpus/wav16"
-    mc_dir_train_default = '../preprocessed_data/stargan/spraakbanken/data/mc/train'
-    mc_dir_test_default = '../preprocessed_data/stargan/spraakbanken/data/mc/test'
+    # Has to be fitted to ssh scratch
+    # # origin_wavpath_default = "../data/danish-corpus"
+    # target_wavpath_default = "/s183921/data/danish-corpus"
+    # mc_dir_train_default = '/s183921/preprocessed_data/stargan/spraakbanken/data/mc/train'
+    # mc_dir_test_default = '/s183921/preprocessed_data/stargan/spraakbanken/data/mc/test'
+
+    # On august's machine
+    # origin_wavpath_default = "../../../../data/danish-corpus"
+    target_wavpath_default = "../../../../data/danish-corpus"
+    mc_dir_train_default = '../../../../preprocessed_data/stargan/spraakbanken/data/mc/train'
+    mc_dir_test_default = '../../../../preprocessed_data/stargan/spraakbanken/data/mc/test'
+
+
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
-    parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default,
-                        help="The original wav path to resample.")
+    # parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default,
+    #                     help="The original wav path to resample.")
     parser.add_argument("--target_wavpath", type=str, default=target_wavpath_default,
                         help="The original wav path to resample.")
     parser.add_argument("--mc_dir_train", type=str, default=mc_dir_train_default,
@@ -114,21 +123,27 @@ if __name__ == '__main__':
     argv = parser.parse_args()
 
     sample_rate = argv.sample_rate
-    origin_wavpath = argv.origin_wavpath
+    # origin_wavpath = argv.origin_wavpath
     target_wavpath = argv.target_wavpath
     mc_dir_train = argv.mc_dir_train
     mc_dir_test = argv.mc_dir_test
     num_workers = argv.num_workers if argv.num_workers is not None else cpu_count()
 
-    # The original wav in VCTK is 48K, first we want to resample to 16K
-    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
+    # # The original wav in VCTK is 48K, first we want to resample to 16K
+    # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
-    # WE only use 10 speakers listed below for this experiment.
-    # speaker_used = ['262', '272', '229', '232', '292', '293', '360', '361', '248', '251']
-    # speaker_used = ['p' + i for i in speaker_used]
-    # speaker_used = ['p262', 'p272', 'p229']
-    # speaker_used = ['p' + i for i in speaker_used]
-    # speaker_used = ['p003']
+    # WE only use 20 speakers listed below for this experiment.
+    # speaker_used = ['r5650104',
+    #                 'r5650035',
+    #                 'r5650023',
+    #                 'r5650072',
+    #                 'r5650060']
+    speaker_used = ['Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650104',
+                    'Stasjon01/110700/adb_0565/speech/scr0565/01/05650101/r5650035',
+                    'Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650023',
+                    'Stasjon01/210700/adb_0565/speech/scr0565/01/05650101/r5650072',
+                    'Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650060']
+
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
     # Make dirs to contain the MCEPs

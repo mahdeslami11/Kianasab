@@ -1,6 +1,8 @@
 '''
 Code taken directly from StarGAN-Voice-Conversion repo.
-Modified by August Semrau Andersen for DTU course #02466.
+
+Modified specifically for VCTK audio data.
+By August Semrau Andersen for DTU course #02466.
 '''
 
 
@@ -93,10 +95,17 @@ if __name__ == '__main__':
 
     sample_rate_default = 16000
 
-    origin_wavpath_default = "../data/VCTK-Corpus/wav48"
-    target_wavpath_default = "../data/VCTK-Corpus/wav16"
-    mc_dir_train_default = '../preprocessed_data/stargan/vctk/data/mc/train'
-    mc_dir_test_default = '../preprocessed_data/stargan/vctk/data/mc/test'
+    # Has to be fitted to ssh scratch
+    # origin_wavpath_default = "/s183921/data/VCTK-Corpus/wav48"
+    # target_wavpath_default = "/s183921/data/VCTK-Corpus/wav16"
+    # mc_dir_train_default = '/s183921/preprocessed_data/stargan/vctk/data/mc/train'
+    # mc_dir_test_default = '/s183921/preprocessed_data/stargan/vctk/data/mc/test'
+
+    # On august's machine
+    origin_wavpath_default = "../../../../data/VCTK-Corpus/wav48"
+    target_wavpath_default = "../../../../data/VCTK-Corpus/wav16"
+    mc_dir_train_default = '../../../../preprocessed_data/stargan/vctk/data/mc/train'
+    mc_dir_test_default = '../../../../preprocessed_data/stargan/vctk/data/mc/test'
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
     parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default,
@@ -121,12 +130,34 @@ if __name__ == '__main__':
     # The original wav in VCTK is 48K, first we want to resample to 16K
     resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
-    # WE only use 10 speakers listed below for this experiment.
-    # speaker_used = ['262', '272', '229', '232', '292', '293', '360', '361', '248', '251']
-    # speaker_used = ['p' + i for i in speaker_used]
-    # speaker_used = ['p262', 'p272', 'p229']
-    # speaker_used = ['p' + i for i in speaker_used]
-    # speaker_used = ['p003']
+    # WE only use 20 speakers listed below for this experiment.
+    speaker_used = ['p229',
+                    'p232',
+                    'p238',
+                    'p241',
+                    'p248']
+    # speaker_used = ['p229',
+    #                 'p232',
+    #                 'p238',
+    #                 'p241',
+    #                 'p248',
+    #                 'p251',
+    #                 'p256',
+    #                 'p262',
+    #                 'p266',
+    #                 'p272',
+    #                 'p278',
+    #                 'p286',
+    #                 'p288',
+    #                 'p292',
+    #                 'p293',
+    #                 'p297',
+    #                 'p307',
+    #                 'p345',
+    #                 'p360',
+    #                 'p361']
+
+
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
     # Make dirs to contain the MCEPs
