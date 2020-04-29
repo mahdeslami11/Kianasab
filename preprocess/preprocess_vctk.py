@@ -12,7 +12,7 @@ def save_path_if_valid(log:Logger, folder_path:str):
                 sp.write(f'{wav}\n')
                 num_of_wav += 1
 
-    log.write(f'Found {num_of_wav} wav files for speaker')
+    log.write_line(f'Found {num_of_wav} wav files for speaker')
 
 
 def preprocess_vctk(data_path:str):
@@ -23,19 +23,20 @@ def preprocess_vctk(data_path:str):
     :param data_path:   The path to the folder containing the VCTK speech data.
     '''
     log = Logger()
-    log.write(f'# Preprocessing of {data_path}')
-    log.write(f'A txt file of the VCTK preprocessed data is output to: ./vctk')
+    log.write_line(f'# Preprocessing of {data_path}')
+    log.write_line(f'A txt file of the VCTK preprocessed data is output to: ./vctk\n')
 
     num_of_speakers = 0
 
+    log.write_line('## Speaker Date')
     for f in listdir(data_path):
         if isdir(f) and 'p' in f:
-            log.write(f'Found speaker folder {f} for extracting speech data')
+            log.write_line(f'Found speaker folder {f} for extracting speech data')
             num_of_speakers += 1
             save_path_if_valid(log, f)
 
-    log.write(f'Found {num_of_speakers} speakers in total')
-    log.write(f'Preprocessing ended')
+    log.write_line(f'Found {num_of_speakers} speakers in total')
+    log.write_line(f'Preprocessing ended')
 
 if __name__ == '__main__':
     data_path = sys.argv[1]

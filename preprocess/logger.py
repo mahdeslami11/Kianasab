@@ -17,6 +17,10 @@ class Logger:
         with open(os.path.join(self.dir, 'log_history.txt'), 'a+') as history:
             history.write(f'Created logger with log path: {os.path.join(self.dir, str(self.id))}\n')
 
+    def write_line(self, content:str):
+        with open(f'{os.path.join(self.dir, str(self.id))}.md', 'a+') as f:
+            f.write(f'content\n')
+
     def write(self, content:str):
         with open(f'{os.path.join(self.dir, str(self.id))}.md', 'a+') as f:
             f.write(content)
