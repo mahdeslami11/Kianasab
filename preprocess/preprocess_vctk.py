@@ -2,8 +2,16 @@ import sys
 from os import listdir
 from os.path import join, isdir
 
-def save_path_if_valid(root_folder_path:str):
-    return None #TODO implement
+def save_path_if_valid(log:Logger, folder_path:str):
+    num_of_wav = 0
+
+    with open(join('vctk', 'speaker_paths_vctk.txt', 'w+')) as sp:
+        for wav in listdir(folder_path) if wav[-4] == '.wav':
+            sp.write(f'{wav}\n')
+            num_of_wav += 1
+
+    log.write(f'Found {num_of_wav} wav files for speaker')
+
 
 def preprocess_vctk(data_path:str):
     '''
@@ -14,13 +22,18 @@ def preprocess_vctk(data_path:str):
     '''
     log = Logger()
     log.write(f'# Preprocessing of {data_path}')
-    log.write(f'A json file of the VCTK preprocessed data is output to: ./vctk')
+    log.write(f'A txt file of the VCTK preprocessed data is output to: ./vctk')
 
-    speaker_folders = [f for f in listdir(data_path) if isdir(f) and 'p' in f]
-    log.write(f'Found speaker folders {speaker_folders} for extracting speech data')
+    num_of_speakers = 0
 
-    for f in speaker_folders:
-        save_path_if_valid(f)
+    for f in listdir(data_path):
+        if isdir(f) and 'p' in f:
+            log.write(f'Found speaker folder {f} for extracting speech data')
+            num_of_speakers += 1
+            save_path_if_valid(log, f)
+
+    log.write(f'Found {num_of_speakers} speakers in total')
+    log.write(f'Preprocessing ended')
 
 if __name__ == '__main__':
     data_path = sys.argv[1]
