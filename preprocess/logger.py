@@ -15,8 +15,8 @@ class Logger:
 
         #Write info file for latest run
         with open(os.path.join(self.dir, 'log_history.txt'), 'a+') as history:
-            history.write(f'Created logger with log path: {os.path.join(self.dir, self.id)} \n')
+            history.write(f'Created logger with log path: {os.path.join(self.dir, str(self.id))}\n')
 
     def write(self, content:str):
-        with open(f'{os.path.join(self.dir, self.id)}.md', 'w+') as f:
+        with open(f'{os.path.join(self.dir, str(self.id))}.md', 'a+') as f:
             f.write(content)
