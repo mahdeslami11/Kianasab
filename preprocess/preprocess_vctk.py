@@ -1,4 +1,5 @@
 import sys
+from logger import Logger
 from os import listdir
 from os.path import join, isdir
 
