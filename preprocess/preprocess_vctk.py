@@ -8,6 +8,7 @@ def save_path_if_valid(log:Logger, folder_path:str):
 
     with open(join('vctk', 'speaker_paths_vctk.txt'), 'w+') as sp:
         for wav in listdir(folder_path):
+            print(wav)
             if wav[-4] == '.wav':
                 sp.write(f'{wav}\n')
                 num_of_wav += 1
