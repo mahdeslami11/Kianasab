@@ -92,6 +92,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     sample_rate_default = 16000
+    
+
+    #Read 
 
     origin_wavpath_default = "./data/english-corpus/wav48"
     target_wavpath_default = "./data/english-corpus/wav16"

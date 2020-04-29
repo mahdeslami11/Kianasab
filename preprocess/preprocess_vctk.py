@@ -6,7 +6,7 @@ from os.path import join, isdir
 def save_path_if_valid(log:Logger, folder_path:str):
     num_of_wav = 0
 
-    with open(join('vctk', 'speaker_paths_vctk.txt'), 'w+') as sp:
+    with open(join('vctk', 'speaker_paths_vctk.txt'), 'a+') as sp:
         for wav in listdir(folder_path):
             if wav[-4:] == '.wav':
                 sp.write(f'{join(folder_path, wav)}\n')
