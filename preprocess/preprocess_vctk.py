@@ -30,7 +30,7 @@ def preprocess_vctk(data_path:str):
 
     log.write_line('## Speaker Data')
     for f in listdir(data_path):
-        print(f)
+        f = join(data_path, f)
         if isdir(f) and 'p' in f:
             log.write_line(f'Found speaker folder {f} for extracting speech data')
             num_of_speakers += 1
