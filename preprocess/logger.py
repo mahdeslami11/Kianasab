@@ -19,7 +19,7 @@ class Logger:
 
     def write_line(self, content:str):
         with open(f'{os.path.join(self.dir, str(self.id))}.md', 'a+') as f:
-            f.write(f'content\n')
+            f.write(f'{content}\n')
 
     def write(self, content:str):
         with open(f'{os.path.join(self.dir, str(self.id))}.md', 'a+') as f:
