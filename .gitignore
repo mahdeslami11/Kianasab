@@ -698,3 +698,6 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/vim,python,pycharm,pycharm+iml,pycharm+all,visualstudio,jupyternotebooks,visualstudiocode
+
+#private folder with content, that should not be pushed
+private/
