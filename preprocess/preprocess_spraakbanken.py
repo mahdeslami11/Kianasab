@@ -29,7 +29,7 @@ def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log
             use_path_if_valid(station, f_path, out_put_folder, log)
         elif isfile(f_path) and f[-4:] == '.wav' and len(dir_content) > 1:
             root_folder = root_folder_path.split(sep)[-1]
-            save_folder = join(out_put_folder, root_folder_path)
+            save_folder = join(out_put_folder, station, root_folder_path)
             if not isdir(save_folder):
                 log.write_line(f'Found new wav files', verbose=True)
                 log.write_line(f'Copying to {save_folder}...', verbose=True)
