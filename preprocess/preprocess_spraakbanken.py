@@ -3,6 +3,7 @@ import os
 import shutil
 from os import listdir, sep
 from os.path import isdir, join, isfile
+from logger import Logger
 
 def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log:Logger):
     '''
@@ -22,7 +23,7 @@ def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log
     '''
     log.write_line(f'Searching folder {root_folder_path}', verbose=True)
     dir_content = listdir(root_folder_path)
-    log.write_line(f'Folder size: {len(dir_content}', verbose=True)
+    log.write_line(f'Folder size: {len(dir_content)}', verbose=True)
     for i, f in enumerate(dir_content):
         f_path = join(root_folder_path, f)
         if isdir(f_path):

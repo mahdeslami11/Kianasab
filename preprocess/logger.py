@@ -25,6 +25,6 @@ class Logger:
 
     def write(self, content:str, verbose:bool=False):
         if verbose:
-            print(content
+            print(content)
         with open(f'{os.path.join(self.dir, str(self.id))}.md', 'a+') as f:
             f.write(content)

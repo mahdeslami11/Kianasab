@@ -1,2 +1,0 @@
-Created logger with log path: logs/6a420d4e-12e9-453b-ac72-6c188c1ec336
-Created logger with log path: logs/2466f896-b56c-4566-9fcf-09adc5c5f154
