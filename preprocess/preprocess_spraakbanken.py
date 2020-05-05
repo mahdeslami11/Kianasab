@@ -29,8 +29,8 @@ def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log
         if isdir(f_path):
             use_path_if_valid(station, f_path, out_put_folder, log)
         elif isfile(f_path) and f[-4:] == '.wav' and len(dir_content) > 1:
-            root_folder = root_folder_path.split(sep)[-1]
-            save_folder = join(out_put_folder, station, root_folder_path)
+            root_folder = root_folder_path.rsplit(sep, 1)[1]
+            save_folder = join(out_put_folder, f'{station}_{root_folder}')
             if not isdir(save_folder):
                 log.write_line(f'Found new wav files', verbose=True)
                 log.write_line(f'Copying to {save_folder}...', verbose=True)
@@ -54,14 +54,18 @@ def preprocess(data_path:str):
     out_put_folder = join(data_path.rsplit(sep, 1)[0], 'Spraakbanken-Corpus')
     if not isdir(out_put_folder):
         os.mkdir(out_put_folder)
-    log.write(f'# Preprocessing of {data_path}')
-    log.write(f'Danish preprocessed data from Spraakbanken is output to: {out_put_folder}')
+    log.write_line(f'# Preprocessing of {data_path}')
+    log.write_line(f'Danish preprocessed data from Spraakbanken is output to: {out_put_folder}')
+    log.write_line(f'Folder content: {listdir(data_path)}')
 
-    stasjon_folders = [f for f in listdir(data_path) if isdir(f) and 'stasjon' in f.lower()]
-    log.write(f'Found folders {stasjon_folders} for extracting speech data')
+    stasjon_folders = [f for f in listdir(data_path) 
+				if isdir(join(data_path, f)) and f.lower().startswith('stasjon')]
+    log.write_line(f'Found folders {stasjon_folders} for extracting speech data')
 
     for f in stasjon_folders:
-        use_path_if_valid(station=f, root_folder_path=join(data_path, f), 
+        station_ids = listdir(join(data_path, f))
+        for sid in station_ids:
+            use_path_if_valid(station=f'{f}_{sid}', root_folder_path=join(data_path, f, sid), 
                 out_put_folder=out_put_folder, log=log)
 
 
@@ -70,5 +74,5 @@ if __name__ == '__main__':
     Expects this script to be located on the DTU HPC Server with access to the
     work1 scratch
     '''
-    speaker_data_path = join('work1', 's183921', 'speaker_data', 'Spraakbanken-Raw')
+    speaker_data_path = join(f'{sep}work1', 's183921', 'speaker_data', 'Spraakbanken-Raw')
     preprocess(speaker_data_path)
