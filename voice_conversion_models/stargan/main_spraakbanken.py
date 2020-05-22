@@ -30,8 +30,10 @@ def main(config):
     # Data loader.
     train_loader = get_loader(config.train_data_dir, config.batch_size, 'train', num_workers=config.num_workers)
     test_loader = TestDataset(config.test_data_dir, config.wav_dir,
-                              src_spk='Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650023',
-                              trg_spk='Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650104')
+                              src_spk='Stasjon01_010800_r5650090',
+                              trg_spk='Stasjon01_010800_r5650091')
+                              # src_spk='Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650023',
+                              # trg_spk='Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650104')
 
     # Solver for training and testing StarGAN.
     solver = Solver(train_loader, test_loader, config)
@@ -47,7 +49,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Model configuration.
-    parser.add_argument('--num_speakers', type=int, default=5, help='dimension of speaker labels')  # Changed for now
+    parser.add_argument('--num_speakers', type=int, default=25, help='dimension of speaker labels')  # Changed for now
     # parser.add_argument('--num_speakers', type=int, default=10, help='dimension of speaker labels')
     parser.add_argument('--lambda_cls', type=float, default=10, help='weight for domain classification loss')
     parser.add_argument('--lambda_rec', type=float, default=10, help='weight for reconstruction loss')
@@ -69,33 +71,24 @@ if __name__ == '__main__':
     parser.add_argument('--test_iters', type=int, default=100000, help='test model from this step')
 
     # Miscellaneous.
-    parser.add_argument('--num_workers', type=int, default=1)
+    parser.add_argument('--num_workers', type=int, default=5)
     parser.add_argument('--mode', type=str, default='train', choices=['train', 'test'])
     parser.add_argument('--use_tensorboard', type=str2bool, default=True)
 
-    # Directories.
-    # parser.add_argument('--train_data_dir', type=str, default='/s183921/preprocessed_data/stargan/spraakbanken/data/mc/train')
-    # parser.add_argument('--test_data_dir', type=str, default='/s183921/preprocessed_data/stargan/spraakbanken/data/mc/test')
-    # parser.add_argument('--wav_dir', type=str, default="/s183921/data/danish-corpus")
-    # parser.add_argument('--log_dir', type=str, default='/s183921/logs/stargan/spraakbanken')
-    # parser.add_argument('--model_save_dir', type=str, default='/s183921/models/stargan/spraakbanken')
-    # parser.add_argument('--sample_dir', type=str, default='/s183921/samples/stargan/spraakbanken')
-
-    # On august's machine
-    parser.add_argument('--train_data_dir', type=str, default='../../../preprocessed_data/stargan/spraakbanken/data/mc/train')
-    parser.add_argument('--test_data_dir', type=str, default='../../../preprocessed_data/stargan/spraakbanken/data/mc/test')
-    parser.add_argument('--wav_dir', type=str, default="../../../data/danish-corpus")
-    # parser.add_argument('--wav_dir', type=str, default="./data/danish-corpus/wav16")
-    parser.add_argument('--log_dir', type=str, default='/s183921/logs/stargan/spraakbanken')
-    parser.add_argument('--model_save_dir', type=str, default='/s183921/models/stargan/spraakbanken')
-    parser.add_argument('--sample_dir', type=str, default='/s183921/samples/stargan/spraakbanken')
+    # Directories on ssh
+    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train')
+    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test')
+    parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus")
+    parser.add_argument('--log_dir', type=str, default='/work1/s183921/logs/stargan/spraakbanken')
+    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken')
+    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/samples/stargan/spraakbanken')
 
 
     # Step size.
     parser.add_argument('--log_step', type=int, default=10)
     parser.add_argument('--sample_step', type=int, default=1000)
-    parser.add_argument('--model_save_step', type=int, default=10000)  # Has been changed from 1.000 to 10.000
-    # parser.add_argument('--model_save_step', type=int, default=1000)
+    # parser.add_argument('--model_save_step', type=int, default=10000)  # Has been changed from 1.000 to 10.000
+    parser.add_argument('--model_save_step', type=int, default=1000)
     parser.add_argument('--lr_update_step', type=int, default=1000)
 
     config = parser.parse_args()

@@ -95,17 +95,11 @@ if __name__ == '__main__':
 
     sample_rate_default = 16000
 
-    # Has to be fitted to ssh scratch
-    # # origin_wavpath_default = "../data/danish-corpus"
-    # target_wavpath_default = "/s183921/data/danish-corpus"
-    # mc_dir_train_default = '/s183921/preprocessed_data/stargan/spraakbanken/data/mc/train'
-    # mc_dir_test_default = '/s183921/preprocessed_data/stargan/spraakbanken/data/mc/test'
-
-    # On august's machine
+    # On ssh filesystem
     # origin_wavpath_default = "../../../../data/danish-corpus"
-    target_wavpath_default = "../../../../data/danish-corpus"
-    mc_dir_train_default = '../../../../preprocessed_data/stargan/spraakbanken/data/mc/train'
-    mc_dir_test_default = '../../../../preprocessed_data/stargan/spraakbanken/data/mc/test'
+    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus"
+    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train'
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test'
 
 
 
@@ -133,16 +127,32 @@ if __name__ == '__main__':
     # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     # WE only use 20 speakers listed below for this experiment.
-    # speaker_used = ['r5650104',
-    #                 'r5650035',
-    #                 'r5650023',
-    #                 'r5650072',
-    #                 'r5650060']
-    speaker_used = ['Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650104',
-                    'Stasjon01/110700/adb_0565/speech/scr0565/01/05650101/r5650035',
-                    'Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650023',
-                    'Stasjon01/210700/adb_0565/speech/scr0565/01/05650101/r5650072',
-                    'Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650060']
+    speaker_used = ['Stasjon01_010800_r5650090',
+                    'Stasjon01_010800_r5650091',
+                    'Stasjon01_010800_r5650092',
+                    'Stasjon01_010800_r5650093',
+                    'Stasjon01_020800_r5650095',
+                    'Stasjon01_020800_r5650096',
+                    'Stasjon01_020800_r5650097',
+                    'Stasjon01_030700_r5650005',
+                    'Stasjon01_030700_r5650006',
+                    'Stasjon01_030800_r5650098',
+                    'Stasjon01_030800_r5650099',
+                    'Stasjon01_030800_r5650100',
+                    'Stasjon01_040700_r5650007',
+                    'Stasjon01_040700_r5650008',
+                    'Stasjon01_040700_r5650009',
+                    'Stasjon01_040700_r5650010',
+                    'Stasjon01_040800_r5650101',
+                    'Stasjon01_040800_r5650102',
+                    'Stasjon01_040800_r5650103',
+                    'Stasjon01_040800_r5650104',
+                    'Stasjon01_050700_r5650011',
+                    'Stasjon01_050700_r5650012',
+                    'Stasjon01_050700_r5650013',
+                    'Stasjon01_050700_r5650014',
+                    'Stasjon01_050700_r5650015']
+
 
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).

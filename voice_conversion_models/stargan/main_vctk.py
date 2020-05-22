@@ -45,7 +45,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Model configuration.
-    parser.add_argument('--num_speakers', type=int, default=5, help='dimension of speaker labels')  # Changed for now
+    parser.add_argument('--num_speakers', type=int, default=25, help='dimension of speaker labels')  # Changed for now
     # parser.add_argument('--num_speakers', type=int, default=10, help='dimension of speaker labels')
     parser.add_argument('--lambda_cls', type=float, default=10, help='weight for domain classification loss')
     parser.add_argument('--lambda_rec', type=float, default=10, help='weight for reconstruction loss')
@@ -71,21 +71,14 @@ if __name__ == '__main__':
     parser.add_argument('--mode', type=str, default='train', choices=['train', 'test'])
     parser.add_argument('--use_tensorboard', type=str2bool, default=True)
 
-    # Directories.
-    # parser.add_argument('--train_data_dir', type=str, default='/s183921/preprocessed_data/stargan/vctk/data/mc/train')
-    # parser.add_argument('--test_data_dir', type=str, default='/s183921/preprocessed_data/stargan/vctk/data/mc/test')
-    # parser.add_argument('--wav_dir', type=str, default="/s183921/data/VCTK-Corpus/wav16")
-    # parser.add_argument('--log_dir', type=str, default='/s183921/logs/stargan/vctk')
-    # parser.add_argument('--model_save_dir', type=str, default='/s183921/models/stargan/vctk')
-    # parser.add_argument('--sample_dir', type=str, default='/s183921/samples/stargan/vctk')
 
-    # On august's machine
-    parser.add_argument('--train_data_dir', type=str, default='../../../preprocessed_data/stargan/vctk/data/mc/train')
-    parser.add_argument('--test_data_dir', type=str, default='../../../preprocessed_data/stargan/vctk/data/mc/test')
-    parser.add_argument('--wav_dir', type=str, default="../../../data/VCTK-Corpus/wav16")
-    parser.add_argument('--log_dir', type=str, default='/s183921/logs/stargan/vctk')
-    parser.add_argument('--model_save_dir', type=str, default='/s183921/models/stargan/vctk')
-    parser.add_argument('--sample_dir', type=str, default='/s183921/samples/stargan/vctk')
+    # Directories on ssh
+    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/vctk/mc/train')
+    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/vctk/mc/test')
+    parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/VCTK-Corpus/wav16")
+    parser.add_argument('--log_dir', type=str, default='/work1/s183921/logs/stargan/vctk')
+    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/vctk')
+    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/samples/stargan/vctk')
 
 
     # Step size.

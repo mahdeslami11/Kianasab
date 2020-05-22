@@ -95,17 +95,12 @@ if __name__ == '__main__':
 
     sample_rate_default = 16000
 
-    # Has to be fitted to ssh scratch
-    # origin_wavpath_default = "/s183921/data/VCTK-Corpus/wav48"
-    # target_wavpath_default = "/s183921/data/VCTK-Corpus/wav16"
-    # mc_dir_train_default = '/s183921/preprocessed_data/stargan/vctk/data/mc/train'
-    # mc_dir_test_default = '/s183921/preprocessed_data/stargan/vctk/data/mc/test'
+    # On ssh filesystem
+    origin_wavpath_default = "/work1/s183921/speaker_data/VCTK-Corpus/wav48"
+    target_wavpath_default = "/work1/s183921/speaker_data/VCTK-Corpus/wav16"
+    mc_dir_train_default = "/work1/s183921/preprocessed_data/stargan/vctk/mc/train"
+    mc_dir_test_default = "/work1/s183921/preprocessed_data/stargan/vctk/mc/test"
 
-    # On august's machine
-    origin_wavpath_default = "../../../../data/VCTK-Corpus/wav48"
-    target_wavpath_default = "../../../../data/VCTK-Corpus/wav16"
-    mc_dir_train_default = '../../../../preprocessed_data/stargan/vctk/data/mc/train'
-    mc_dir_test_default = '../../../../preprocessed_data/stargan/vctk/data/mc/test'
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
     parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default,
@@ -131,31 +126,31 @@ if __name__ == '__main__':
     resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     # WE only use 20 speakers listed below for this experiment.
-    speaker_used = ['p229',
+    speaker_used = ['p225',
+                    'p226',
+                    'p227',
+                    'p228',
+                    'p229',
                     'p232',
                     'p238',
                     'p241',
-                    'p248']
-    # speaker_used = ['p229',
-    #                 'p232',
-    #                 'p238',
-    #                 'p241',
-    #                 'p248',
-    #                 'p251',
-    #                 'p256',
-    #                 'p262',
-    #                 'p266',
-    #                 'p272',
-    #                 'p278',
-    #                 'p286',
-    #                 'p288',
-    #                 'p292',
-    #                 'p293',
-    #                 'p297',
-    #                 'p307',
-    #                 'p345',
-    #                 'p360',
-    #                 'p361']
+                    'p248',
+                    'p251',
+                    'p256',
+                    'p262',
+                    'p266',
+                    'p272',
+                    'p278',
+                    'p286',
+                    'p288',
+                    'p292',
+                    'p293',
+                    'p297',
+                    'p307',
+                    'p345',
+                    'p360',
+                    'p361',
+                    'p374']
 
 
 
@@ -170,7 +165,7 @@ if __name__ == '__main__':
 
     work_dir = target_wavpath
     # spk_folders = os.listdir(work_dir)
-    # print("processing {} speaker folders".format(len(spk_folders)))
+    # print("processing {} speaker folders".format(len(spk_fo/home/august-ubuntu/PycharmProjects/TraderBotlders)))
     # print(spk_folders)
 
     futures = []
