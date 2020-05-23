@@ -701,3 +701,6 @@ MigrationBackup/
 
 #private folder with content, that should not be pushed
 private/
+
+#don't include logs
+log/
