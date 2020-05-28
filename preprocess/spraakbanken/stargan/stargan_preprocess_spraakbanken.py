@@ -77,13 +77,13 @@ def get_spk_world_feats(spk_fold_path, mc_dir_train, mc_dir_test, sample_rate=16
              coded_sps_std=coded_sps_std)
 
     for wav_file in tqdm(train_paths):
-        wav_nam = spk_name + basename(wav_file)
+        wav_nam = spk_name + "-" + basename(wav_file)
         f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
         normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
         np.save(join(mc_dir_train, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
 
     for wav_file in tqdm(test_paths):
-        wav_nam = spk_name + basename(wav_file)
+        wav_nam = spk_name + "-" + basename(wav_file)
         f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
         normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
         np.save(join(mc_dir_test, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
@@ -96,14 +96,14 @@ if __name__ == '__main__':
     sample_rate_default = 16000
 
     # On August's Computer
-    target_wavpath_default = "../../../../speaker_data/Spraakbanken-Corpus/"
-    mc_dir_train_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/train'
-    mc_dir_test_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/test'
+    # target_wavpath_default = "../../../../speaker_data/Spraakbanken-Corpus/"
+    # mc_dir_train_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/train'
+    # mc_dir_test_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/test'
 
     # # On ssh filesystem
-    # target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus/"
-    # mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train'
-    # mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test'
+    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus/"
+    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train'
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test'
 
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
@@ -120,7 +120,6 @@ if __name__ == '__main__':
     argv = parser.parse_args()
 
     sample_rate = argv.sample_rate
-    # origin_wavpath = argv.origin_wavpath
     target_wavpath = argv.target_wavpath
     mc_dir_train = argv.mc_dir_train
     mc_dir_test = argv.mc_dir_test
@@ -129,33 +128,32 @@ if __name__ == '__main__':
     # # The original wav in VCTK is 48K, first we want to resample to 16K
     # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
-    # WE only use 20 speakers listed below for this experiment.
-
+    #
     speaker_used = ["Stasjon01_210700_r5650072", ####
                     "Stasjon01_190700_r5650060",
-                    "Stasjon01_030700_r5650006",]
-                    # "Stasjon01_050700_r5650013",
-                    # "Stasjon01_040800_r5650101",
-                    # "Stasjon01_130700_r5650044",
-                    # "Stasjon01_070700_r5650024",
-                    # "Stasjon01_280700_r5650085",
-                    # "Stasjon01_040800_r5650103",
-                    # "Stasjon01_280700_r5650082",
-                    # "Stasjon01_040700_r5650007",
-                    # "Stasjon01_270700_r5650080",
-                    # "Stasjon01_040700_r5650010",
-                    # "Stasjon01_070800_r5650105",
-                    # "Stasjon01_080800_r5650114",
-                    # "Stasjon01_080800_r5650111",
-                    # "Stasjon01_070800_r5650107",
-                    # "Stasjon01_070800_r5650109",
-                    # "Stasjon01_270700_r5650077",
-                    # "Stasjon01_010800_r5650090",
-                    # "Stasjon01_020800_r5650096",
-                    # "Stasjon01_020800_r5650095",
-                    # "Stasjon01_110700_r5650032",
-                    # "Stasjon01_170700_r5650055",
-                    # "Stasjon01_050700_r5650012"]
+                    "Stasjon01_030700_r5650006",
+                    "Stasjon01_050700_r5650013",
+                    "Stasjon01_040800_r5650101",
+                    "Stasjon01_130700_r5650044",
+                    "Stasjon01_070700_r5650024",
+                    "Stasjon01_280700_r5650085",
+                    "Stasjon01_040800_r5650103",
+                    "Stasjon01_280700_r5650082",
+                    "Stasjon01_040700_r5650007",
+                    "Stasjon01_270700_r5650080",
+                    "Stasjon01_040700_r5650010",
+                    "Stasjon01_070800_r5650105",
+                    "Stasjon01_080800_r5650114",
+                    "Stasjon01_080800_r5650111",
+                    "Stasjon01_070800_r5650107",
+                    "Stasjon01_070800_r5650109",
+                    "Stasjon01_270700_r5650077",
+                    "Stasjon01_010800_r5650090",
+                    "Stasjon01_020800_r5650096",
+                    "Stasjon01_020800_r5650095",
+                    "Stasjon01_110700_r5650032",
+                    "Stasjon01_170700_r5650055",
+                    "Stasjon01_050700_r5650012"]
 
 
 
