@@ -33,22 +33,6 @@ def get_spectrograms(fpath):
       mel: A 2d array of shape (T, n_mels) <- Transposed
       mag: A 2d array of shape (T, 1+n_fft/2) <- Transposed
     '''
-    # num = np.random.randn()
-    # if num < .2:
-    #     y, sr = librosa.load(fpath, sr=hp.sr)
-    # else:
-    #     if num < .4:
-    #         tempo = 1.1
-    #     elif num < .6:
-    #         tempo = 1.2
-    #     elif num < .8:
-    #         tempo = 0.9
-    #     else:
-    #         tempo = 0.8
-    #     cmd = "ffmpeg -i {} -y ar {} -hide_banner -loglevel panic -ac 1 -filter:a atempo={} -vn temp.wav".format(fpath, hp.sr, tempo)
-    #     os.system(cmd)
-    #     y, sr = librosa.load('temp.wav', sr=hp.sr)
-
     # Loading sound file
     y, sr = librosa.load(fpath, sr=hp.sr)
 
