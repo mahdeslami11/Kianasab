@@ -12,8 +12,8 @@ from os.path import join, basename, dirname, split
 import numpy as np
 
 # Below is the accent info for the used 10 speakers.
-spk2acc = {'262': 'Edinburgh',  # F
-           '272': 'Edinburgh'},  # M
+# spk2acc = {'262': 'Edinburgh',  # F
+#            '272': 'Edinburgh'},  # M
            # '229': 'SouthEngland',  # F
            # '232': 'SouthEngland',  # M
            # '292': 'NorthernIrishBelfast',  # M
@@ -22,10 +22,61 @@ spk2acc = {'262': 'Edinburgh',  # F
            # '361': 'AmericanNewJersey',  # F
            # '248': 'India',  # F
            # '251': 'India'}  # M
+spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen", ####
+            "Stasjon01_190700_r5650060":"Copenhagen",
+            "Stasjon01_030700_r5650006":"Vestjylland",
+            "Stasjon01_050700_r5650013":"Vestjylland",
+            "Stasjon01_040800_r5650101":"Vestjylland",
+            "Stasjon01_130700_r5650044":"Vestjylland",
+            "Stasjon01_070700_r5650024":"VestSydjylland",
+            "Stasjon01_280700_r5650085":"VestSydjylland",
+            "Stasjon01_040800_r5650103":"VestSydjylland",
+            "Stasjon01_280700_r5650082":"VestSydjylland",
+            "Stasjon01_040700_r5650007":"Nordjylland",
+            "Stasjon01_270700_r5650080":"Nordjylland",
+            "Stasjon01_040700_r5650010":"Sonderjylland",
+            "Stasjon01_070800_r5650105":"Sonderjylland",
+            "Stasjon01_080800_r5650114":"Fyn",
+            "Stasjon01_080800_r5650111":"Fyn",
+            "Stasjon01_070800_r5650107":"Fyn",
+            "Stasjon01_070800_r5650109":"Fyn",
+            "Stasjon01_270700_r5650077":"VestSydsjaelland",
+            "Stasjon01_010800_r5650090":"VestSydsjaelland",
+            "Stasjon01_020800_r5650096":"VestSydsjaelland",
+            "Stasjon01_020800_r5650095":"VestSydsjaelland",
+            "Stasjon01_110700_r5650032":"Ostjylland",
+            "Stasjon01_170700_r5650055":"Ostjylland",
+            "Stasjon01_050700_r5650012":"Ostjylland"}
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 # Build a dict useful when we want to get one-hot representation of speakers.
 # speakers = ['p262', 'p272', 'p229', 'p232', 'p292', 'p293', 'p360', 'p361', 'p248', 'p251']
-speakers = ['p262', 'p272']
+speakers = ["Stasjon01_210700_r5650072", ####
+            "Stasjon01_190700_r5650060",
+            #"Stasjon01_110700_r5650035",
+            #"Stasjon01_110700_r5650033",
+            "Stasjon01_030700_r5650006",
+            "Stasjon01_050700_r5650013",
+            "Stasjon01_040800_r5650101",
+            "Stasjon01_130700_r5650044",
+            "Stasjon01_070700_r5650024",
+            "Stasjon01_280700_r5650085",
+            "Stasjon01_040800_r5650103",
+            "Stasjon01_280700_r5650082",
+            "Stasjon01_040700_r5650007",
+            "Stasjon01_270700_r5650080",
+            "Stasjon01_040700_r5650010",
+            "Stasjon01_070800_r5650105",
+            "Stasjon01_080800_r5650114",
+            "Stasjon01_080800_r5650111",
+            "Stasjon01_070800_r5650107",
+            "Stasjon01_070800_r5650109",
+            "Stasjon01_270700_r5650077",
+            "Stasjon01_010800_r5650090",
+            "Stasjon01_020800_r5650096",
+            "Stasjon01_020800_r5650095",
+            "Stasjon01_110700_r5650032",
+            "Stasjon01_170700_r5650055",
+            "Stasjon01_050700_r5650012"]
 spk2idx = dict(zip(speakers, range(len(speakers))))
 
 def to_categorical(y, num_classes=None):
@@ -58,7 +109,7 @@ class MyDataset(data.Dataset):
     """Dataset for MCEP features and speaker labels."""
     def __init__(self, data_dir):
         mc_files = glob.glob(join(data_dir, '*.npy'))
-        mc_files = [i for i in mc_files if basename(i)[:4] in speakers]
+        #mc_files = [i for i in mc_files if basename(i)[:25] in speakers]
         self.mc_files = self.rm_too_short_utt(mc_files)
         self.num_files = len(self.mc_files)
         print("\t Number of training samples: ", self.num_files)
@@ -122,6 +173,8 @@ class TestDataset(object):
 
     def get_batch_test_data(self, batch_size=8):
         batch_data = []
+        print(batch_size)
+        print(len(self.mc_files))
         for i in range(batch_size):
             mcfile = self.mc_files[i]
             filename = basename(mcfile).split('-')[-1]
@@ -130,7 +183,9 @@ class TestDataset(object):
         return batch_data
 
 def get_loader(data_dir, batch_size=32, mode='train', num_workers=1):
+    print(data_dir)
     dataset = MyDataset(data_dir)
+    print(dataset)
     data_loader = data.DataLoader(dataset=dataset,
                                   batch_size=batch_size,
                                   shuffle=(mode=='train'),
