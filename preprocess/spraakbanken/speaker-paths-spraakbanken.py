@@ -4,6 +4,7 @@
 ./data/danish-corpus/Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650102
 ./data/danish-corpus/Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650101
 ./data/danish-corpus/Stasjon01/040800/adb_0565/speech/scr0565/01/05650102/r5650103
+
 ./data/danish-corpus/Stasjon01/110700/adb_0565/speech/scr0565/01/05650101/r5650035  #
 ./data/danish-corpus/Stasjon01/110700/adb_0565/speech/scr0565/01/05650101/r5650032
 ./data/danish-corpus/Stasjon01/110700/adb_0565/speech/scr0565/01/05650101/r5650034
@@ -12,66 +13,76 @@
 
 ./data/danish-corpus/Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650023  #
 ./data/danish-corpus/Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650024
-
-
 ./data/danish-corpus/Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650025
-
-
 ./data/danish-corpus/Stasjon01/070700/adb_0565/speech/scr0565/01/05650101/r5650022
+
 
 ./data/danish-corpus/Stasjon01/210700/adb_0565/speech/scr0565/01/05650101/r5650072  #
 ./data/danish-corpus/Stasjon01/210700/adb_0565/speech/scr0565/01/05650101/r5650071
 ./data/danish-corpus/Stasjon01/210700/adb_0565/speech/scr0565/01/05650101/r5650070
+
 ./data/danish-corpus/Stasjon01/240700/adb_0565/speech/scr0565/01/05650101/r5650075
 ./data/danish-corpus/Stasjon01/240700/adb_0565/speech/scr0565/01/05650101/r5650074
 ./data/danish-corpus/Stasjon01/240700/adb_0565/speech/scr0565/01/05650101/r5650073
 ./data/danish-corpus/Stasjon01/240700/adb_0565/speech/scr0565/01/05650101/r5650076
+
 ./data/danish-corpus/Stasjon01/110800/adb_0565/speech/scr0565/01/05650102/r5650129
 ./data/danish-corpus/Stasjon01/110800/adb_0565/speech/scr0565/01/05650102/r5650127
 ./data/danish-corpus/Stasjon01/110800/adb_0565/speech/scr0565/01/05650102/r5650128
-./data/danish-corpus/Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650060  #
 
+./data/danish-corpus/Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650060  #
 ./data/danish-corpus/Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650063
 ./data/danish-corpus/Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650062
 ./data/danish-corpus/Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650061
 ./data/danish-corpus/Stasjon01/190700/adb_0565/speech/scr0565/01/05650101/r5650059
 
 
-./data/danish-corpus/Stasjon01/040700/adb_0565/speech/scr0565/01/05650101/r5650009
 ./data/danish-corpus/Stasjon01/040700/adb_0565/speech/scr0565/01/05650101/r5650007
 ./data/danish-corpus/Stasjon01/040700/adb_0565/speech/scr0565/01/05650101/r5650008
+./data/danish-corpus/Stasjon01/040700/adb_0565/speech/scr0565/01/05650101/r5650009
 ./data/danish-corpus/Stasjon01/040700/adb_0565/speech/scr0565/01/05650101/r5650010
+
+
 ./data/danish-corpus/Stasjon01/280700/adb_0565/speech/scr0565/01/05650101/r5650085
 ./data/danish-corpus/Stasjon01/280700/adb_0565/speech/scr0565/01/05650101/r5650082
 ./data/danish-corpus/Stasjon01/280700/adb_0565/speech/scr0565/01/05650101/r5650084
 ./data/danish-corpus/Stasjon01/280700/adb_0565/speech/scr0565/01/05650101/r5650081
+
 ./data/danish-corpus/Stasjon01/080800/adb_0565/speech/scr0565/01/05650102/r5650113
 ./data/danish-corpus/Stasjon01/080800/adb_0565/speech/scr0565/01/05650102/r5650111
 ./data/danish-corpus/Stasjon01/080800/adb_0565/speech/scr0565/01/05650102/r5650112
 ./data/danish-corpus/Stasjon01/080800/adb_0565/speech/scr0565/01/05650102/r5650115
 ./data/danish-corpus/Stasjon01/080800/adb_0565/speech/scr0565/01/05650102/r5650114
 ./data/danish-corpus/Stasjon01/080800/adb_0565/speech/scr0565/01/05650102/r5650116
+
+
 ./data/danish-corpus/Stasjon01/270700/adb_0565/speech/scr0565/01/05650101/r5650079
 ./data/danish-corpus/Stasjon01/270700/adb_0565/speech/scr0565/01/05650101/r5650078
 ./data/danish-corpus/Stasjon01/270700/adb_0565/speech/scr0565/01/05650101/r5650080
 ./data/danish-corpus/Stasjon01/270700/adb_0565/speech/scr0565/01/05650101/r5650077
+
 ./data/danish-corpus/Stasjon01/030700/adb_0565/speech/scr0565/01/05650101/r5650005
-
-
 ./data/danish-corpus/Stasjon01/030700/adb_0565/speech/scr0565/01/05650101/r5650006
+
+
 ./data/danish-corpus/Stasjon01/020800/adb_0565/speech/scr0565/01/05650101/r5650097
 ./data/danish-corpus/Stasjon01/020800/adb_0565/speech/scr0565/01/05650101/r5650096
 ./data/danish-corpus/Stasjon01/020800/adb_0565/speech/scr0565/01/05650101/r5650095
+
 ./data/danish-corpus/Stasjon01/010800/adb_0565/speech/scr0565/01/05650101/r5650091
 ./data/danish-corpus/Stasjon01/010800/adb_0565/speech/scr0565/01/05650101/r5650092
 ./data/danish-corpus/Stasjon01/010800/adb_0565/speech/scr0565/01/05650101/r5650093
 ./data/danish-corpus/Stasjon01/010800/adb_0565/speech/scr0565/01/05650101/r5650090
+
+
 ./data/danish-corpus/Stasjon01/060700/adb_0565/speech/scr0565/01/05650101/r5650016
 ./data/danish-corpus/Stasjon01/060700/adb_0565/speech/scr0565/01/05650101/r5650021
 ./data/danish-corpus/Stasjon01/060700/adb_0565/speech/scr0565/01/05650101/r5650018
 ./data/danish-corpus/Stasjon01/060700/adb_0565/speech/scr0565/01/05650101/r5650020
 ./data/danish-corpus/Stasjon01/060700/adb_0565/speech/scr0565/01/05650101/r5650017
 ./data/danish-corpus/Stasjon01/060700/adb_0565/speech/scr0565/01/05650101/r5650019
+
+
 ./data/danish-corpus/Stasjon01/070800/adb_0565/speech/scr0565/01/05650102/r5650107
 ./data/danish-corpus/Stasjon01/070800/adb_0565/speech/scr0565/01/05650102/r5650105
 ./data/danish-corpus/Stasjon01/070800/adb_0565/speech/scr0565/01/05650102/r5650108
@@ -79,58 +90,74 @@
 
 ./data/danish-corpus/Stasjon01/140700/adb_0565/speech/scr0565/01/05650101/r5650048
 ./data/danish-corpus/Stasjon01/140700/adb_0565/speech/scr0565/01/05650101/r5650049
+
+
 ./data/danish-corpus/Stasjon01/310700/adb_0565/speech/scr0565/01/05650101/r5650087
 ./data/danish-corpus/Stasjon01/310700/adb_0565/speech/scr0565/01/05650101/r5650088
 ./data/danish-corpus/Stasjon01/310700/adb_0565/speech/scr0565/01/05650101/r5650089
 ./data/danish-corpus/Stasjon01/310700/adb_0565/speech/scr0565/01/05650101/r5650086
+
+
 ./data/danish-corpus/Stasjon01/050700/adb_0565/speech/scr0565/01/05650101/r5650013
 ./data/danish-corpus/Stasjon01/050700/adb_0565/speech/scr0565/01/05650101/r5650012
 ./data/danish-corpus/Stasjon01/050700/adb_0565/speech/scr0565/01/05650101/r5650011
 ./data/danish-corpus/Stasjon01/050700/adb_0565/speech/scr0565/01/05650101/r5650015
 ./data/danish-corpus/Stasjon01/050700/adb_0565/speech/scr0565/01/05650101/r5650014
+
+
 ./data/danish-corpus/Stasjon01/130700/adb_0565/speech/scr0565/01/05650101/r5650047
 ./data/danish-corpus/Stasjon01/130700/adb_0565/speech/scr0565/01/05650101/r5650044
 ./data/danish-corpus/Stasjon01/130700/adb_0565/speech/scr0565/01/05650101/r5650046
 ./data/danish-corpus/Stasjon01/130700/adb_0565/speech/scr0565/01/05650101/r5650045
 ./data/danish-corpus/Stasjon01/130700/adb_0565/speech/scr0565/01/05650101/r5650043
+
+
 ./data/danish-corpus/Stasjon01/170700/adb_0565/speech/scr0565/01/05650101/r5650050
 ./data/danish-corpus/Stasjon01/170700/adb_0565/speech/scr0565/01/05650101/r5650055
 ./data/danish-corpus/Stasjon01/170700/adb_0565/speech/scr0565/01/05650101/r5650053
 ./data/danish-corpus/Stasjon01/170700/adb_0565/speech/scr0565/01/05650101/r5650051
 ./data/danish-corpus/Stasjon01/170700/adb_0565/speech/scr0565/01/05650101/r5650052
 ./data/danish-corpus/Stasjon01/170700/adb_0565/speech/scr0565/01/05650101/r5650054
+
+
 ./data/danish-corpus/Stasjon01/100800/adb_0565/speech/scr0565/01/05650102/r5650124
 ./data/danish-corpus/Stasjon01/100800/adb_0565/speech/scr0565/01/05650102/r5650125
 ./data/danish-corpus/Stasjon01/100800/adb_0565/speech/scr0565/01/05650102/r5650122
 ./data/danish-corpus/Stasjon01/100800/adb_0565/speech/scr0565/01/05650102/r5650123
+
+
 ./data/danish-corpus/Stasjon01/120700/adb_0565/speech/scr0565/01/05650101/r5650038
 ./data/danish-corpus/Stasjon01/120700/adb_0565/speech/scr0565/01/05650101/r5650037
 ./data/danish-corpus/Stasjon01/120700/adb_0565/speech/scr0565/01/05650101/r5650039
 ./data/danish-corpus/Stasjon01/120700/adb_0565/speech/scr0565/01/05650101/r5650040
 ./data/danish-corpus/Stasjon01/120700/adb_0565/speech/scr0565/01/05650101/r5650042
 ./data/danish-corpus/Stasjon01/120700/adb_0565/speech/scr0565/01/05650101/r5650041
+
+
 ./data/danish-corpus/Stasjon01/030800/adb_0565/speech/scr0565/01/05650101/r5650098
 ./data/danish-corpus/Stasjon01/030800/adb_0565/speech/scr0565/01/05650101/r5650099
 ./data/danish-corpus/Stasjon01/030800/adb_0565/speech/scr0565/01/05650101/r5650100
+
+
 ./data/danish-corpus/Stasjon01/100700/adb_0565/speech/scr0565/01/05650101/r5650026
 ./data/danish-corpus/Stasjon01/100700/adb_0565/speech/scr0565/01/05650101/r5650030
 ./data/danish-corpus/Stasjon01/100700/adb_0565/speech/scr0565/01/05650101/r5650027
 ./data/danish-corpus/Stasjon01/100700/adb_0565/speech/scr0565/01/05650101/r5650028
 ./data/danish-corpus/Stasjon01/100700/adb_0565/speech/scr0565/01/05650101/r5650029
 ./data/danish-corpus/Stasjon01/100700/adb_0565/speech/scr0565/01/05650101/r5650031
+
+
 ./data/danish-corpus/Stasjon01/090800/adb_0565/speech/scr0565/01/05650102/r5650118
 ./data/danish-corpus/Stasjon01/090800/adb_0565/speech/scr0565/01/05650102/r5650119
 ./data/danish-corpus/Stasjon01/090800/adb_0565/speech/scr0565/01/05650102/r5650121
 ./data/danish-corpus/Stasjon01/090800/adb_0565/speech/scr0565/01/05650102/r5650117
 ./data/danish-corpus/Stasjon01/090800/adb_0565/speech/scr0565/01/05650102/r5650120
+
+
 ./data/danish-corpus/Stasjon01/140800/adb_0565/speech/scr0565/01/05650102/r5650133
 ./data/danish-corpus/Stasjon01/140800/adb_0565/speech/scr0565/01/05650102/r5650131
 ./data/danish-corpus/Stasjon01/140800/adb_0565/speech/scr0565/01/05650102/r5650130
 '''
-
-
-
-
 
 
 

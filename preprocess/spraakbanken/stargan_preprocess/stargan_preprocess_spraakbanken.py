@@ -97,9 +97,9 @@ if __name__ == '__main__':
 
     # On ssh filesystem
     # origin_wavpath_default = "../../../../data/danish-corpus"
-    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus"
-    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train'
-    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test'
+    target_wavpath_default = "../../../../speaker_data/Spraakbanken-Corpus/"
+    mc_dir_train_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/train'
+    mc_dir_test_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/test'
 
 
 
@@ -127,31 +127,59 @@ if __name__ == '__main__':
     # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     # WE only use 20 speakers listed below for this experiment.
-    speaker_used = ['Stasjon01_010800_r5650090',
-                    'Stasjon01_010800_r5650091',
-                    'Stasjon01_010800_r5650092',
-                    'Stasjon01_010800_r5650093',
-                    'Stasjon01_020800_r5650095',
-                    'Stasjon01_020800_r5650096',
-                    'Stasjon01_020800_r5650097',
-                    'Stasjon01_030700_r5650005',
-                    'Stasjon01_030700_r5650006',
-                    'Stasjon01_030800_r5650098',
-                    'Stasjon01_030800_r5650099',
-                    'Stasjon01_030800_r5650100',
-                    'Stasjon01_040700_r5650007',
-                    'Stasjon01_040700_r5650008',
-                    'Stasjon01_040700_r5650009',
-                    'Stasjon01_040700_r5650010',
-                    'Stasjon01_040800_r5650101',
-                    'Stasjon01_040800_r5650102',
-                    'Stasjon01_040800_r5650103',
-                    'Stasjon01_040800_r5650104',
-                    'Stasjon01_050700_r5650011',
-                    'Stasjon01_050700_r5650012',
-                    'Stasjon01_050700_r5650013',
-                    'Stasjon01_050700_r5650014',
-                    'Stasjon01_050700_r5650015']
+    # speaker_used = ['Stasjon01_010800_r5650090',
+    #                 'Stasjon01_010800_r5650091',
+    #                 'Stasjon01_010800_r5650092',
+    #                 'Stasjon01_010800_r5650093',
+    #                 'Stasjon01_020800_r5650095',
+    #                 'Stasjon01_020800_r5650096',
+    #                 'Stasjon01_020800_r5650097',
+    #                 'Stasjon01_030700_r5650005',
+    #                 'Stasjon01_030700_r5650006',
+    #                 'Stasjon01_030800_r5650098',
+    #                 'Stasjon01_030800_r5650099',
+    #                 'Stasjon01_030800_r5650100',
+    #                 'Stasjon01_040700_r5650007',
+    #                 'Stasjon01_040700_r5650008',
+    #                 'Stasjon01_040700_r5650009',
+    #                 'Stasjon01_040700_r5650010',
+    #                 'Stasjon01_040800_r5650101',
+    #                 'Stasjon01_040800_r5650102',
+    #                 'Stasjon01_040800_r5650103',
+    #                 'Stasjon01_040800_r5650104',
+    #                 'Stasjon01_050700_r5650011',
+    #                 'Stasjon01_050700_r5650012',
+    #                 'Stasjon01_050700_r5650013',
+    #                 'Stasjon01_050700_r5650014',
+    #                 'Stasjon01_050700_r5650015']
+
+    speaker_used = ["Stasjon01_210700_r5650072", ####
+                    "Stasjon01_190700_r5650060",
+                    #"Stasjon01_110700_r5650035",
+                    #"Stasjon01_110700_r5650033",
+                    "Stasjon01_030700_r5650006",
+                    "Stasjon01_050700_r5650013",
+                    "Stasjon01_040800_r5650101",
+                    "Stasjon01_130700_r5650044",
+                    "Stasjon01_070700_r5650024",
+                    "Stasjon01_280700_r5650085",
+                    "Stasjon01_040800_r5650103",
+                    "Stasjon01_280700_r5650082",
+                    "Stasjon01_040700_r5650007",
+                    "Stasjon01_270700_r5650080",
+                    "Stasjon01_040700_r5650010",
+                    "Stasjon01_070800_r5650105",
+                    "Stasjon01_080800_r5650114",
+                    "Stasjon01_080800_r5650111",
+                    "Stasjon01_070800_r5650107",
+                    "Stasjon01_070800_r5650109",
+                    "Stasjon01_270700_r5650077",
+                    "Stasjon01_010800_r5650090",
+                    "Stasjon01_020800_r5650096",
+                    "Stasjon01_020800_r5650095",
+                    "Stasjon01_110700_r5650032",
+                    "Stasjon01_170700_r5650055",
+                    "Stasjon01_050700_r5650012"]
 
 
 
