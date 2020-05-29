@@ -22,6 +22,7 @@ def read_speaker_info(speaker_info_path):
     for speaker_id in os.listdir(speaker_info_path):
         speaker_id = speaker_id.strip()
         speaker_ids.append(speaker_id)
+    print(f'Speaker ids: {len(speaker_ids)}')
     return speaker_ids
 
 def read_filenames(root_dir):
