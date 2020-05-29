@@ -1,7 +1,7 @@
 . preprocess.config
 
 if [ $stage -le 0 ]; then
-    python3 dataset/make.py $raw_data_dir/wav48 $raw_data_dir/speaker-info.txt $data_dir $n_out_speakers $test_prop $sample_rate $n_utt_attr
+    python3 dataset/make.py $raw_data_dir $data_dir $n_out_speakers $test_prop $sample_rate $n_utt_attr
 fi
 
 if [ $stage -le 1 ]; then

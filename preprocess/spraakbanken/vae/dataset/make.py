@@ -65,12 +65,11 @@ def spec_feature_extraction(wav_file):
 
 if __name__ == '__main__':
     data_dir = sys.argv[1]
-    speaker_info_path = sys.argv[2]
-    output_dir = sys.argv[3]
-    test_speakers = int(sys.argv[4])
-    test_proportion = float(sys.argv[5])
-    sample_rate = int(sys.argv[6])
-    n_utts_attr = int(sys.argv[7])
+    output_dir = sys.argv[2]
+    test_speakers = int(sys.argv[3])
+    test_proportion = float(sys.argv[4])
+    sample_rate = int(sys.argv[5])
+    n_utts_attr = int(sys.argv[6])
 
     #Read all available speaker ids
     speaker_ids = read_speaker_info(speaker_info_path)
@@ -93,7 +92,7 @@ if __name__ == '__main__':
         in_test_path_list += path_list[-test_data_size:]
 
     #Train speakers
-    with open(os.path.join(output_dir, 'in_test_files.txt'), 'w') as f:
+    with open(os.path.join(output_dir, 'in_test_files.txt'), 'w+') as f:
         for path in in_test_path_list:
             f.write(f'{path}\n')
 
