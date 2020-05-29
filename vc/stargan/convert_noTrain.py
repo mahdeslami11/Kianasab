@@ -174,14 +174,27 @@ Combination of preprocess.py and convert.py
 '''
 if __name__ == '__main__':
 
+    # On SSH
+    # sample_rate_default = 16000
+    # resume_iters_default = 100000
+    # origin_wavpath_default = "/work1/s183921/newspeakers/wav48"
+    # target_wavpath_default = "/work1/s183921/newspeakers/stargan/wav16"
+    # mc_dir_train_default = '/work1/s183921/newspeakers/stargan/mc_noTrain/train'
+    # mc_dir_test_default = '/work1/s183921/newspeakers/stargan/mc_noTrain/test'
+    # logs_dir_default = '/work1/s183921/newspeakers/stargan/logs'
+    # models_dir_default = '/work1/s183921/trained_models/stargan'
+    # converted_dir_default = '/work1/s183921/converted_speakers/stargan'
+
+    # On August's machine
     sample_rate_default = 16000
-    origin_wavpath_default = "./data/Corpus-Fagprojekt/wav48"  # Not needed for danish-corpus
-    target_wavpath_default = "./data/Corpus-Fagprojekt/wav16"
-    mc_dir_train_default = './data/mc_noTrain/train'  # Different directory for no training
-    mc_dir_test_default = './data/mc_noTrain/test'    # Different directory for no training
-    logs_dir_default = './logs'
-    models_dir_default = './models'
-    converted_dir_default = './converted'
+    resume_iters_default = 100000
+    origin_wavpath_default = "../../../newspeakers/wav48"
+    target_wavpath_default = "../../../newspeakers/stargan/wav16"
+    mc_dir_train_default = '../../../newspeakers/stargan/mc_noTrain/train'
+    mc_dir_test_default = '../../../newspeakers/stargan/mc_noTrain/test'
+    logs_dir_default = '../../../newspeakers/stargan/logs'
+    models_dir_default = '../../../trained_models/stargan'
+    converted_dir_default = '../../../converted_speakers/stargan'
 
     # Parser takes inputs for running file as main
     parser = argparse.ArgumentParser()
@@ -190,7 +203,7 @@ if __name__ == '__main__':
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
     parser.add_argument("--num_workers", type=int, default=None, help="Number of cpus to use.")
     # Following allows for changes to convert.py
-    parser.add_argument('--resume_iters', type=int, default=None, help='step to resume for testing.')
+    parser.add_argument('--resume_iters', type=resume_iters_default, default=None, help='step to resume for testing.')
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers to convert seperated by '+'.")

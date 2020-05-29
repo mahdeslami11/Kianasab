@@ -12,16 +12,6 @@ from os.path import join, basename, dirname, split
 import numpy as np
 
 # Below is the accent info for the used 10 speakers.
-# spk2acc = {'262': 'Edinburgh',  # F
-#            '272': 'Edinburgh'},  # M
-           # '229': 'SouthEngland',  # F
-           # '232': 'SouthEngland',  # M
-           # '292': 'NorthernIrishBelfast',  # M
-           # '293': 'NorthernIrishBelfast',  # F
-           # '360': 'AmericanNewJersey',  # M
-           # '361': 'AmericanNewJersey',  # F
-           # '248': 'India',  # F
-           # '251': 'India'}  # M
 spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen", ####
             "Stasjon01_190700_r5650060":"Copenhagen",
             "Stasjon01_030700_r5650006":"Vestjylland",
@@ -49,11 +39,8 @@ spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen", ####
             "Stasjon01_050700_r5650012":"Ostjylland"}
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 # Build a dict useful when we want to get one-hot representation of speakers.
-# speakers = ['p262', 'p272', 'p229', 'p232', 'p292', 'p293', 'p360', 'p361', 'p248', 'p251']
 speakers = ["Stasjon01_210700_r5650072", ####
             "Stasjon01_190700_r5650060",
-            #"Stasjon01_110700_r5650035",
-            #"Stasjon01_110700_r5650033",
             "Stasjon01_030700_r5650006",
             "Stasjon01_050700_r5650013",
             "Stasjon01_040800_r5650101",
@@ -138,7 +125,7 @@ class MyDataset(data.Dataset):
 
     def __getitem__(self, index):
         filename = self.mc_files[index]
-        spk = basename(filename).split('_')[0]
+        spk = basename(filename).split('-')[0]
         spk_idx = spk2idx[spk]
         mc = np.load(filename)
         mc = self.sample_seg(mc)
