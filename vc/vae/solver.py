@@ -79,6 +79,9 @@ class Solver(object):
         return
 
     def ae_step(self, data, lambda_kl):
+        '''
+        Optimizing model according to given mel spectrogram training data
+        '''
         x = cc(data)
         mu, log_sigma, emb, dec = self.model(x)
         criterion = nn.L1Loss()

@@ -20,6 +20,7 @@ if __name__ == '__main__':
     utt_list = [key for key in data]
     utt_list = sorted(list(filter(lambda u : len(data[u]) > segment_size, utt_list)))
     print(f'{len(utt_list)} utterances')
+    #Choose n random speaker ids
     sample_utt_index_list = random.choices(range(len(utt_list)), k=n_samples)
 
     for i, utt_ind in enumerate(sample_utt_index_list):
