@@ -72,7 +72,7 @@ if __name__ == '__main__':
     n_utts_attr = int(sys.argv[6])
 
     #Read all available speaker ids
-    speaker_ids = read_speaker_info(speaker_info_path)
+    speaker_ids = read_speaker_info(data_dir)
     random.shuffle(speaker_ids)
 
     train_speaker_ids = speaker_ids[:-test_speakers]
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         path_list = speaker2filenames[speaker]
         out_test_path_list += path_list
 
-    with open(os.path.join(output_dir, 'out_test_files.txt'), 'w') as f:
+    with open(os.path.join(output_dir, 'out_test_files.txt'), 'w+') as f:
         for path in out_test_path_list:
             f.write(f'{path}\n')
 
