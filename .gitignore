@@ -706,4 +706,4 @@ private/
 log/
 
 #don't include submit shell scripts
-*submit.sh*
+*submit*.sh*
