@@ -85,10 +85,12 @@ class Solver(object):
         x = cc(data)
         mu, log_sigma, emb, dec = self.model(x)
         criterion = nn.L1Loss()
+        #Measures Mean Absolute Error between the decoded mel spectrogram and the given x mel spectrogram
         loss_rec = criterion(dec, x)
         loss_kl = 0.5 * torch.mean(torch.exp(log_sigma) + mu ** 2 - 1 - log_sigma)
         loss = self.config['lambda']['lambda_rec'] * loss_rec + \
                 lambda_kl * loss_kl
+        #Optimizing the loss function defined above
         self.opt.zero_grad()
         loss.backward()
         grad_norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(), 

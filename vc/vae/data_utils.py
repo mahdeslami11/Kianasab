@@ -50,6 +50,8 @@ class PickleDataset(Dataset):
 
     def __getitem__(self, ind):
         utt_id, t = self.indexes[ind]
+        #Extract speech segment from audio from time t till t + segment size.
+        #t is randomly defined for each utterence, to get segments from different times in the speeches
         segment = self.data[utt_id][t:t + self.segment_size]
         return segment
 

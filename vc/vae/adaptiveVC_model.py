@@ -22,7 +22,7 @@ from vclab.vc_models.adaptiveVC_model_files.preprocess.tacotron.utils import get
 import librosa 
 from vclab.vc_models.test_model import TestModel
 
-class AdaptiveVCModel(TestModel):
+class Inference(TestModel):
     """
     Class representing a rewrite of the inference.py from 
     the voice conversion model in the Adaptive Voice Conversion Paper:

@@ -10,7 +10,6 @@ import numpy as np
 import json
 from tacotron.utils import get_spectrograms
 
-#TODO Rewrite to work with Spraakbanken format
 def read_speaker_info(speaker_info_path):
     '''
     Reads all lines of a text-file. Each line is regarded as a path to a speaker audio file.
@@ -20,12 +19,9 @@ def read_speaker_info(speaker_info_path):
     returns a collection of speaker ids
     '''
     speaker_ids = []
-    with open(speaker_info_path, 'r') as f:
-        for i, line in enumerate(f):
-            if i == 0:
-                continue
-            speaker_id = line.strip().split()[0]
-            speaker_ids.append(speaker_id)
+    for speaker_id in os.listdir(speaker_info_path):
+        speaker_id = speaker_id.strip()
+        speaker_ids.append(speaker_id)
     return speaker_ids
 
 def read_filenames(root_dir):
@@ -38,11 +34,8 @@ def read_filenames(root_dir):
     '''
     speaker2filenames = defaultdict(lambda : [])
     for path in sorted(glob.glob(os.path.join(root_dir, '*/*'))):
-        filename = path.strip().split('/')[-1]
-        rematch = re.match(r'p(\d+)_(\d+)\.wav', filename)
-        if rematch is not None:
-            speaker_id, utt_id = rematch.groups()
-            speaker2filenames[speaker_id].append(path)
+        speaker_id = path.strip().split('/')[0]
+        speaker2filenames[speaker_id].append(path)
     return speaker2filenames
 
 def wave_feature_extraction(wav_file, sr):
@@ -72,19 +65,15 @@ def spec_feature_extraction(wav_file):
 
 if __name__ == '__main__':
     data_dir = sys.argv[1]
-    source_speaker_paths = sys.argv[2]
-    target_speaker_paths = sys.argv[3]
+    speaker_info_path = sys.argv[2]
     output_dir = sys.argv[3]
     test_speakers = int(sys.argv[4])
     test_proportion = float(sys.argv[5])
     sample_rate = int(sys.argv[6])
     n_utts_attr = int(sys.argv[7])
 
-    #Pick target speaker ids
-    target_ids = read_speaker_info(target_speaker_paths)
-
-    #Train test split 
-    source_ids = read_speaker_info(source_speaker_paths)
+    #Read all available speaker ids
+    speaker_ids = read_speaker_info(speaker_info_path)
     random.shuffle(speaker_ids)
 
     train_speaker_ids = speaker_ids[:-test_speakers]
@@ -103,12 +92,12 @@ if __name__ == '__main__':
         train_path_list += path_list[:-test_data_size]
         in_test_path_list += path_list[-test_data_size:]
 
-    #Source test speakers
+    #Train speakers
     with open(os.path.join(output_dir, 'in_test_files.txt'), 'w') as f:
         for path in in_test_path_list:
             f.write(f'{path}\n')
 
-    #Target speakers
+    #Test speakers
     for speaker in test_speaker_ids:
         path_list = speaker2filenames[speaker]
         out_test_path_list += path_list
