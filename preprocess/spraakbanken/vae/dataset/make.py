@@ -127,12 +127,12 @@ if __name__ == '__main__':
             mean = np.mean(all_train_data, axis=0)
             std = np.std(all_train_data, axis=0)
             attr = {'mean': mean, 'std': std}
-            with open(os.path.join(output_dir, 'attr.pkl'), 'wb') as f:
+            with open(os.path.join(output_dir, 'attr.pkl'), 'wb+') as f:
                 pickle.dump(attr, f)
         #Normalizing mel spectrogram data
         for key, val in data.items():
             val = (val - mean) / std
             data[key] = val
-        with open(output_path, 'wb') as f:
+        with open(output_path, 'wb+') as f:
             pickle.dump(data, f)
 
