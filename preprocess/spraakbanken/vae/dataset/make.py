@@ -34,8 +34,7 @@ def read_filenames(root_dir):
     '''
     speaker2filenames = defaultdict(lambda : [])
     for path in sorted(glob.glob(os.path.join(root_dir, '*/*'))):
-        print(path)
-        speaker_id = path.strip().split('/')[0]
+        speaker_id = path.strip().split('/')[-2]
         speaker2filenames[speaker_id].append(path)
     return speaker2filenames
 
