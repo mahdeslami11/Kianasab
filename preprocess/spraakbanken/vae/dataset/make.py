@@ -22,7 +22,6 @@ def read_speaker_info(speaker_info_path):
     for speaker_id in os.listdir(speaker_info_path):
         speaker_id = speaker_id.strip()
         speaker_ids.append(speaker_id)
-    print(f'Speaker ids: {len(speaker_ids)}')
     return speaker_ids
 
 def read_filenames(root_dir):
@@ -35,6 +34,7 @@ def read_filenames(root_dir):
     '''
     speaker2filenames = defaultdict(lambda : [])
     for path in sorted(glob.glob(os.path.join(root_dir, '*/*'))):
+        print(path)
         speaker_id = path.strip().split('/')[0]
         speaker2filenames[speaker_id].append(path)
     return speaker2filenames
