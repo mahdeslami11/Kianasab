@@ -110,10 +110,6 @@ if __name__ == '__main__':
     for dset, path_list in zip(['train', 'in_test', 'out_test'], \
             [train_path_list, in_test_path_list, out_test_path_list]):
 
-        #Create pickle file if not exist
-        if not os.path.exists(os.path.join(output_dir, dset)):
-            open(os.path.join(output_dir, dset), 'a').close()
-
         print(f'processing {dset} set, {len(path_list)} files')
         data = {}
         output_path = os.path.join(output_dir, f'{dset}.pkl')
