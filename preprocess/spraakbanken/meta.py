@@ -28,7 +28,7 @@ def read_record_states(c, info_dict):
 
 def read_info_states(c, info_dict):
     content = c.split('=')
-    if len(content > 1):
+    if len(content) > 1:
         right_side = content[1]
         delimiter = info_dict['delimiter']
         right_side = right_side.split(delimiter)[1]
