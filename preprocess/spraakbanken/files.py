@@ -4,6 +4,23 @@ import shutil
 from os import listdir, sep
 from os.path import isdir, join, isfile
 from logger import Logger
+import scipy
+import meta
+
+def is_valid_wav(fpath):
+    '''
+    Test if a given wav file is valid by testing if scipy can read the file.
+
+    :param fpath:   Path of the wav file to validate
+
+    Returns:        True if the wav file can be opened without any exception errors.
+                    False otherwise.
+    '''
+    try:
+        scipy.io.wavfile.read()
+        return True
+    except:
+        return False
 
 def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log:Logger):
     '''
@@ -28,7 +45,7 @@ def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log
         f_path = join(root_folder_path, f)
         if isdir(f_path):
             use_path_if_valid(station, f_path, out_put_folder, log)
-        elif isfile(f_path) and f[-4:] == '.wav' and len(dir_content) > 1:
+        elif isfile(f_path) and f[-4:] == '.wav' and is_valid_wav(fpath) and len(dir_content) > 1:
             root_folder = root_folder_path.rsplit(sep, 1)[1]
             save_folder = join(out_put_folder, f'{station}_{root_folder}')
             if not isdir(save_folder):
@@ -38,8 +55,6 @@ def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log
             shutil.copy(f_path, join(save_folder, f))
             print(f'Copying file {i+1}...', end='\r')
             
-
-
 
 def preprocess(data_path:str):
     '''
