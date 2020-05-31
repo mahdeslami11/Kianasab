@@ -22,7 +22,7 @@ def read_record_states(c, info_dict):
      delimiter = info_dict['delimiter']
      content = c.split(delimiter)
      utterance =  content[2]
-     if not utterance.contains('tavshed'):
+     if not 'tavshed' in utterance:
         info_dict[content[5]] = utterance
 
 
