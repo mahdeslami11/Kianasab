@@ -1,5 +1,4 @@
 import pickle 
-import librosa 
 import sys
 import glob 
 import random
@@ -38,19 +37,6 @@ def read_filenames(root_dir):
         speaker2filenames[speaker_id].append(path)
     return speaker2filenames
 
-def wave_feature_extraction(wav_file, sr):
-    '''
-    Trims leading and trailing silence of the given audio file.
-    Silence is defined as a sound level below 20 decibel.
-
-    :param wav_file:    The wav_file to trim for silence
-    :param sr:          The sampling rate to use when loading the audio file
-
-    returns the trimmed audio signal
-    '''
-    y, sr = librosa.load(wav_file, sr)
-    y, _ = librosa.effects.trim(y, top_db=20)
-    return y
 
 def spec_feature_extraction(wav_file):
     '''
