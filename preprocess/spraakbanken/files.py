@@ -6,6 +6,8 @@ from os.path import isdir, join, isfile
 from logger import Logger
 import scipy
 import meta
+import glob
+import json
 
 def is_valid_wav(fpath):
     '''
@@ -22,40 +24,6 @@ def is_valid_wav(fpath):
     except:
         return False
 
-def use_path_if_valid(station:str, root_folder_path:str, out_put_folder:str, log:Logger):
-    '''
-    Recursive function which drills down into folders, searching for wav files.
-    When found will copy the wav files to a destination defined by the station
-    and out_put_folder params.
-    The function is desgined for the speech data from Spraakbanken
-
-    :param station:             The station folder from Spraakbanken speech data
-    :param root_folder_path:    The current root folder in the recursive process
-    :param out_put_folder:      The root folder for copying wav files to.
-                                This folder will be where files are copyied
-                                to create a new file structure, better suited for
-                                doing voice convertion.
-    :param log:                 The Logger object used to log what is happening
-                                during the copying of wav files
-    '''
-    log.write_line(f'Searching folder {root_folder_path}', verbose=True)
-    dir_content = listdir(root_folder_path)
-    log.write_line(f'Folder size: {len(dir_content)}', verbose=True)
-    for i, f in enumerate(dir_content):
-        f_path = join(root_folder_path, f)
-        if isdir(f_path):
-            use_path_if_valid(station, f_path, out_put_folder, log)
-        elif isfile(f_path) and f[-4:] == '.wav' and is_valid_wav(fpath) and len(dir_content) > 1:
-            root_folder = root_folder_path.rsplit(sep, 1)[1]
-            save_folder = join(out_put_folder, f'{station}_{root_folder}')
-            if not isdir(save_folder):
-                log.write_line(f'Found new wav files', verbose=True)
-                log.write_line(f'Copying to {save_folder}...', verbose=True)
-                os.mkdir(save_folder)
-            shutil.copy(f_path, join(save_folder, f))
-            print(f'Copying file {i+1}...', end='\r')
-            
-
 def preprocess(data_path:str):
     '''
     Preprocess function for extracting usable wav speaker files from Spraakbanken Danish speech data.
@@ -71,17 +39,24 @@ def preprocess(data_path:str):
         os.mkdir(out_put_folder)
     log.write_line(f'# Preprocessing of {data_path}')
     log.write_line(f'Danish preprocessed data from Spraakbanken is output to: {out_put_folder}')
-    log.write_line(f'Folder content: {listdir(data_path)}')
 
-    stasjon_folders = [f for f in listdir(data_path) 
-				if isdir(join(data_path, f)) and f.lower().startswith('stasjon')]
-    log.write_line(f'Found folders {stasjon_folders} for extracting speech data')
-
-    for f in stasjon_folders:
-        station_ids = listdir(join(data_path, f))
-        for sid in station_ids:
-            use_path_if_valid(station=f'{f}_{sid}', root_folder_path=join(data_path, f, sid), 
-                out_put_folder=out_put_folder, log=log)
+    #Search for all speaker audio files
+    speaker_paths = glob.glob('/work1/s183921/speaker_data/Spraakbanken-Raw/*/*/*/speech/*/*/*/r*') 
+    for sp in speaker_paths:
+        speaker_id = sp.split('/')[-1]
+        out_speaker = join(out_put_folder, speaker_id)
+        if not isdir(out_speaker):
+            log.write_line(f'Found new speaker {speaker_id}', verbose=True)
+            wav_files = glob.glob(join(sp, '*.wav'))
+            if len(wav_files) > 1:
+                log.write_line(f'Copying to {out_speaker}...', verbose=True)
+                os.mkdir(out_speaker)
+                #Save speaker and utterance meta data as json
+                json.dumps(meta.read_spl_file(speaker_id), join(out_speaker, 'meta.json'))
+                for i, wav in enumerate(wav_files):
+                    if is_valid_wav(wav):
+                        shutil.copy(wav, join(out_speaker, f))
+                        print(f'Copying file {i+1}...', end='\r')
 
 
 if __name__ == '__main__':
