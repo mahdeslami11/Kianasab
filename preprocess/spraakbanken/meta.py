@@ -26,7 +26,7 @@ def read_spl_file(fpath:str):
     substation = info[1]
     speaker = info[2]
 
-    for f in listdir(join(station,substation,'adb_0565','data','scr0565',f'0{station_id}',speaker)):
+    for f in listdir(join('/work1/s183921',station,substation,'adb_0565','data','scr0565',f'0{station_id}',speaker)):
         with open(f, 'r') as spl:
             spl_content = spl.readlines()
             spl_content = spl_content.split('\n\n')
