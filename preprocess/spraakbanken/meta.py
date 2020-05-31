@@ -67,7 +67,7 @@ def read_spl_file(speaker_id:str):
         
         for f in spl:
             content = f.split('\n')
-            for c in content:
+            for c in content[1:]:
                 if content[0] == '[system]':
                     read_system_info(c, info_dict)
                 elif content[0] == '[info states]':
