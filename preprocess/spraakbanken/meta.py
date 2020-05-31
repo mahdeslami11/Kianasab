@@ -27,14 +27,18 @@ def read_record_states(c, info_dict):
 
 
 def read_info_states(c, info_dict):
-    right_side = c.split('=')[1]
-    delimiter = info_dict['delimiter']
-    if str.startswith(right_side, 'age'):
-        info_dict['age'] = right_side.split(delimiter)[1]
-    elif str.startswith(right_side, 'sex'):
-        info_dict['sex'] = right_side.split(delimiter)[1]
-    elif str.startswith(right_side, 'region of dialect'):
-        info_dict['dialect'] = right_side.split(delimiter)[1]
+    content = c.split('=')
+    if len(content > 1):
+        right_side = content[1]
+        delimiter = info_dict['delimiter']
+        right_side = right_side.split(delimiter)[1]
+        if len(right_side) > 1:
+            if str.startswith(right_side, 'age'):
+                info_dict['age'] = right_side.split(delimiter)[1]
+            elif str.startswith(right_side, 'sex'):
+                info_dict['sex'] = right_side.split(delimiter)[1]
+            elif str.startswith(right_side, 'region of dialect'):
+                info_dict['dialect'] = right_side.split(delimiter)[1]
 
 def read_system_info(c, info_dict):
     if str.startswith(c, 'delimiter'):
