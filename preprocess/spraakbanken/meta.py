@@ -14,14 +14,16 @@ def read_info_states(c, info_dict):
     if len(content) > 1:
         right_side = content[1]
         delimiter = info_dict['delimiter']
-        right_side = right_side.split(delimiter)[1]
+        right_side = right_side.split(delimiter)
         if len(right_side) > 1:
-            if str.startswith(right_side, 'age'):
-                info_dict['age'] = right_side.split(delimiter)[1]
-            elif str.startswith(right_side, 'sex'):
-                info_dict['sex'] = right_side.split(delimiter)[1]
-            elif str.startswith(right_side, 'region of dialect'):
-                info_dict['dialect'] = right_side.split(delimiter)[1]
+            key = right_side[0]
+            val = right_side[1]
+            if str.startswith(key, 'age'):
+                info_dict['age'] = val 
+            elif str.startswith(key, 'sex'):
+                info_dict['sex'] = val 
+            elif str.startswith(key, 'region of dialect'):
+                info_dict['dialect'] = val
 
 def read_system_info(c, info_dict):
     if str.startswith(c, 'delimiter'):
