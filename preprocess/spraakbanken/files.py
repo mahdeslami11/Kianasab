@@ -49,27 +49,25 @@ def preprocess(data_path:str):
             wav_files = glob.glob(join(sp, '*.wav'))
             if len(wav_files) > 1:
                 #Save speaker and utterance meta data as json
-<<<<<<< HEAD
                 meta_data = meta.read_spl_file(speaker_id)
                 if 'region of dialect' not in meta_data.keys():
                     log.write_line(f'Speaker {speaker_id} did not have a registered dialect')
                     break
                 else:
-                    json.dumps(meta_data, join(out_speaker, 'meta.json'))
+                    with open(join(out_speaker, 'meta.json'), 'w+') as meta_file:
+                        meta_file.write(json.dumps(meta_data))
+                        json.dumps(meta_data, join(out_speaker, 'meta.json'))
+
                     log.write_line(f'Copying to {out_speaker}...', verbose=True)
                     os.mkdir(out_speaker)
-                    for i, wav in enumerate(wav_files):
+                    count = 0
+                    for wav in wav_files:
                         if is_valid_wav(wav):
+                            count += 1
                             shutil.copy(wav, join(out_speaker, f))
-                            print(f'Copying file {i+1}...', end='\r')
-=======
-                with open(join(out_speaker, 'meta.json'), 'w+') as meta_file:
-                    meta_file.write(json.dumps(meta.read_spl_file(speaker_id)))
-                for i, wav in enumerate(wav_files):
-                    if is_valid_wav(wav):
-                        shutil.copy(wav, join(out_speaker, f))
-                        print(f'Copying file {i+1}...', end='\r')
->>>>>>> 7b858080d10cd1fd3a156cdf9a3284efe1b69c0b
+                            print(f'Copying file {count}...', end='\r')
+                        else:
+                            print(f'File {wav} was invalid. Could not be opened by librosa')
 
 
 if __name__ == '__main__':

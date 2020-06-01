@@ -1,0 +1,5 @@
+Loaded module: python3/3.6.2
+  File "files.py", line 52
+    <<<<<<< HEAD
+    ^
+IndentationError: expected an indented block
