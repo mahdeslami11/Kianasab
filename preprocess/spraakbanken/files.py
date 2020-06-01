@@ -47,7 +47,6 @@ def preprocess(data_path:str):
         if not isdir(out_speaker):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
-            print(wav_files)
             if len(wav_files) > 1:
                 #Save speaker and utterance meta data as json
                 meta_data = meta.read_spl_file(speaker_id)
