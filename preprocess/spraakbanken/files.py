@@ -4,10 +4,9 @@ import shutil
 from os import listdir, sep
 from os.path import isdir, join, isfile
 from logger import Logger
-import scipy
-import meta
 import glob
 import json
+import librosa
 
 def is_valid_wav(fpath):
     '''
@@ -19,7 +18,7 @@ def is_valid_wav(fpath):
                     False otherwise.
     '''
     try:
-        scipy.io.wavfile.read()
+        librosa.load(fpath)
         return True
     except:
         return False
@@ -49,14 +48,19 @@ def preprocess(data_path:str):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
             if len(wav_files) > 1:
-                log.write_line(f'Copying to {out_speaker}...', verbose=True)
-                os.mkdir(out_speaker)
                 #Save speaker and utterance meta data as json
-                json.dumps(meta.read_spl_file(speaker_id), join(out_speaker, 'meta.json'))
-                for i, wav in enumerate(wav_files):
-                    if is_valid_wav(wav):
-                        shutil.copy(wav, join(out_speaker, f))
-                        print(f'Copying file {i+1}...', end='\r')
+                meta_data = meta.read_spl_file(speaker_id)
+                if 'region of dialect' not in meta_data.keys():
+                    log.write_line(f'Speaker {speaker_id} did not have a registered dialect')
+                    break
+                else:
+                    json.dumps(meta_data, join(out_speaker, 'meta.json'))
+                    log.write_line(f'Copying to {out_speaker}...', verbose=True)
+                    os.mkdir(out_speaker)
+                    for i, wav in enumerate(wav_files):
+                        if is_valid_wav(wav):
+                            shutil.copy(wav, join(out_speaker, f))
+                            print(f'Copying file {i+1}...', end='\r')
 
 
 if __name__ == '__main__':
