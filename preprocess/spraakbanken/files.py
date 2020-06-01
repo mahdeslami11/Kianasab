@@ -7,6 +7,7 @@ from logger import Logger
 import glob
 import json
 import librosa
+import meta
 
 def is_valid_wav(fpath):
     '''

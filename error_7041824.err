@@ -1,0 +1,7 @@
+Loaded module: python3/3.6.2
+Traceback (most recent call last):
+  File "files.py", line 79, in <module>
+    preprocess(speaker_data_path)
+  File "files.py", line 52, in preprocess
+    meta_data = meta.read_spl_file(speaker_id)
+NameError: name 'meta' is not defined

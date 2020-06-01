@@ -1,0 +1,74 @@
+Found new speaker r5650571
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@n-62-20-2>
+Subject: Job 7041824: <Norm> in cluster <dcc> Exited
+
+Job <Norm> was submitted from host <n-62-30-6> by user <s183921> in cluster <dcc> at Mon Jun  1 10:07:06 2020
+Job was executed on host(s) <4*n-62-20-2>, in queue <gpuv100>, as user <s183921> in cluster <dcc> at Mon Jun  1 10:07:07 2020
+</zhome/bd/0/137202> was used as the home directory.
+</work1/s183921/fagprojekt2020> was used as the working directory.
+Started at Mon Jun  1 10:07:07 2020
+Terminated at Mon Jun  1 10:07:13 2020
+Results reported at Mon Jun  1 10:07:13 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+###  specify queue --
+#BSUB -q gpuv100
+### Mulige gpu clusters gpuv100, gpuk80 og gpuk40
+### -- Ask for number of cores
+#BSUB -n 4
+### -- Specify that the process should be run exclusively on a gpu
+#BSUB -gpu "num=1:mode=exclusive_process"
+### -- set the job Name --
+#BSUB -J Norm 
+### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
+#BSUB -W 10:00
+# request 10GB of system-memory
+#BSUB -R "rusage[mem=10GB]"
+### User email address
+#BSUB -u s183921@student.dtu.dk
+### -- send notification at completion--
+##BSUB -N
+### -- Specify the output and error file. %J is the job-id --
+### -- -o and -e mean append, -oo and -eo mean overwrite --
+#BSUB -oo output_%J.out
+#BSUB -eo error_%J.err
+# -- end of LSF options --
+
+#Load modules
+module load python3
+
+cd preprocess/spraakbanken
+python3 files.py
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   2.43 sec.
+    Max Memory :                                 43 MB
+    Average Memory :                             43.00 MB
+    Total Requested Memory :                     40960.00 MB
+    Delta Memory :                               40917.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   17 sec.
+    Turnaround time :                            7 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <error_7041824.err> for stderr output of this job.
+
