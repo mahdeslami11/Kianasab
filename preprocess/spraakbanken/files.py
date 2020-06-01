@@ -19,7 +19,7 @@ def is_valid_wav(fpath):
                     False otherwise.
     '''
     try:
-        scipy.io.wavfile.read()
+        scipy.io.wavfile.read(fpath)
         return True
     except:
         return False
@@ -52,7 +52,8 @@ def preprocess(data_path:str):
                 log.write_line(f'Copying to {out_speaker}...', verbose=True)
                 os.mkdir(out_speaker)
                 #Save speaker and utterance meta data as json
-                json.dumps(meta.read_spl_file(speaker_id), join(out_speaker, 'meta.json'))
+                with open(join(out_speaker, 'meta.json'), 'w+') as meta_file:
+                    meta_file.write(json.dumps(meta.read_spl_file(speaker_id)))
                 for i, wav in enumerate(wav_files):
                     if is_valid_wav(wav):
                         shutil.copy(wav, join(out_speaker, f))
