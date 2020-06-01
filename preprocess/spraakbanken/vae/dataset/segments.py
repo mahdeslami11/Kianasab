@@ -30,6 +30,6 @@ if __name__ == '__main__':
         t = random.randint(0, len(data[utt_id]) - segment_size)
         samples.append((utt_id, t))
 
-    with open(sample_path, 'w') as f:
+    with open(sample_path, 'w+') as f:
         json.dump(samples, f)
 

@@ -11,5 +11,5 @@ if __name__ == '__main__':
 
     reduced_data = {key:val for key, val in data.items() if val.shape[0] > segment_size}
 
-    with open(output_path, 'wb') as f:
+    with open(output_path, 'wb+') as f:
         pickle.dump(reduced_data, f)
