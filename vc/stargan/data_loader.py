@@ -12,7 +12,7 @@ from os.path import join, basename, dirname, split
 import numpy as np
 
 # Below is the accent info for the used 10 speakers.
-spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen", ####
+spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen",  # Target speaker
             "Stasjon01_190700_r5650060":"Copenhagen",
             "Stasjon01_030700_r5650006":"Vestjylland",
             "Stasjon01_050700_r5650013":"Vestjylland",
@@ -39,7 +39,7 @@ spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen", ####
             "Stasjon01_050700_r5650012":"Ostjylland"}
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 # Build a dict useful when we want to get one-hot representation of speakers.
-speakers = ["Stasjon01_210700_r5650072", ####
+speakers = ["Stasjon01_210700_r5650072",  # Target speaker
             "Stasjon01_190700_r5650060",
             "Stasjon01_030700_r5650006",
             "Stasjon01_050700_r5650013",
@@ -137,7 +137,7 @@ class MyDataset(data.Dataset):
 
 class TestDataset(object):
     """Dataset for testing."""
-    def __init__(self, data_dir, wav_dir, src_spk='p262', trg_spk='p272'):
+    def __init__(self, data_dir, wav_dir, src_spk="Stasjon01_070800_r5650109", trg_spk="Stasjon01_210700_r5650072"):
         self.src_spk = src_spk
         self.trg_spk = trg_spk
         self.mc_files = sorted(glob.glob(join(data_dir, '{}*.npy'.format(self.src_spk))))

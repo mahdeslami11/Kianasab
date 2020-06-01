@@ -21,35 +21,11 @@ from collections import namedtuple
 from sklearn.model_selection import train_test_split
 import glob
 from os.path import join, basename
-import subprocess
-
-
-# def resample(spk, origin_wavpath, target_wavpath):
-#     wavfiles = [i for i in os.listdir(join(origin_wavpath, spk)) if i.endswith(".wav")]
-#     for wav in wavfiles:
-#         folder_to = join(target_wavpath, spk)
-#         os.makedirs(folder_to, exist_ok=True)
-#         wav_to = join(folder_to, wav)
-#         wav_from = join(origin_wavpath, spk, wav)
-#         subprocess.call(['sox', wav_from, "-r", "16000", wav_to])
-#     return 0
-
-
-# def resample_to_16k(origin_wavpath, target_wavpath, num_workers=1):
-#     os.makedirs(target_wavpath, exist_ok=True)
-#     spk_folders = os.listdir(origin_wavpath)
-#     print(f"> Using {num_workers} workers!")
-#     executor = ProcessPoolExecutor(max_workers=num_workers)
-#     futures = []
-#     for spk in spk_folders:
-#         futures.append(executor.submit(partial(resample, spk, origin_wavpath, target_wavpath)))
-#     result_list = [future.result() for future in tqdm(futures)]
-#     print(result_list)
 
 
 def split_data(paths):
     indices = np.arange(len(paths))
-    test_size = 0.1
+    test_size = 0.05
     train_indices, test_indices = train_test_split(indices, test_size=test_size, random_state=1234)
     train_paths = list(np.array(paths)[train_indices])
     test_paths = list(np.array(paths)[test_indices])
@@ -101,7 +77,7 @@ if __name__ == '__main__':
     # mc_dir_test_default = '../../../../preprocessed_data/stargan/spraakbanken/mc/test'
 
     # # On ssh filesystem
-    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus/"
+    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus"
     mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train'
     mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test'
 
@@ -125,11 +101,9 @@ if __name__ == '__main__':
     mc_dir_test = argv.mc_dir_test
     num_workers = argv.num_workers if argv.num_workers is not None else cpu_count()
 
-    # # The original wav in VCTK is 48K, first we want to resample to 16K
-    # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
-    #
-    speaker_used = ["Stasjon01_210700_r5650072", ####
+    # Defining speakers in the dataset for training StarGAN
+    speaker_used = ["Stasjon01_210700_r5650072",  # Target speaker
                     "Stasjon01_190700_r5650060",
                     "Stasjon01_030700_r5650006",
                     "Stasjon01_050700_r5650013",
@@ -167,9 +141,6 @@ if __name__ == '__main__':
     executor = ProcessPoolExecutor(max_workers=num_workers)
 
     work_dir = target_wavpath
-    # spk_folders = os.listdir(work_dir)
-    # print("processing {} speaker folders".format(len(spk_folders)))
-    # print(spk_folders)
 
     futures = []
     for spk in speaker_used:
