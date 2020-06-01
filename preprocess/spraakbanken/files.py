@@ -56,7 +56,7 @@ def preprocess(data_path:str):
                     continue
                 else:
                     with open(join(out_speaker, 'meta.json'), 'w+') as meta_file:
-                        meta_file.write(json.dumps(meta_data))
+                        meta_file.write(json.dumps(meta_data, indent=4))
                         json.dumps(meta_data, join(out_speaker, 'meta.json'))
 
                     log.write_line(f'Copying to {out_speaker}...', verbose=True)
