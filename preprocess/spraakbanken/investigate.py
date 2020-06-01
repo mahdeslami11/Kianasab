@@ -2,11 +2,11 @@ import glob
 from os.path import join
 import json
 import matplotlib.pyplot as plt
-
-plt.rc('font': {
-        'family': 'normal',
-        'size'  : 16
-    })
+font =  {
+            'family': 'normal',
+            'size'  : 16
+        }
+plt.rc('font',**font)
 
 def plot_dialect_distribution(fpath):
     dialects = []
