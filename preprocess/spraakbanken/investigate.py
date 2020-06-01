@@ -3,6 +3,11 @@ from os.path import join
 import json
 import matplotlib.pyplot as plt
 
+plt.rc('font': {
+        'family': 'normal',
+        'size'  : 16
+    })
+
 def plot_dialect_distribution(fpath):
     dialects = []
     for meta_data in glob.glob(join(fpath,'*/*.json')):
