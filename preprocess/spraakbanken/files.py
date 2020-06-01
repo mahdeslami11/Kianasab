@@ -51,7 +51,7 @@ def preprocess(data_path:str):
             if len(wav_files) > 1:
                 #Save speaker and utterance meta data as json
                 meta_data = meta.read_spl_file(speaker_id)
-                if 'region of dialect' not in meta_data.keys():
+                if 'dialect' not in meta_data.keys():
                     log.write_line(f'Speaker {speaker_id} did not have a registered dialect')
                     continue
                 else:
