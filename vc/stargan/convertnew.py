@@ -124,31 +124,31 @@ class TestDataset(object):
         # self.speakers = config.speakers
         # spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
 
-        self.speakers = ["Stasjon01_210700_r5650072",  # Target speaker
-                        "Stasjon01_190700_r5650060",
-                        "Stasjon01_030700_r5650006",
-                        "Stasjon01_050700_r5650013",
-                        "Stasjon01_040800_r5650101",
-                        "Stasjon01_130700_r5650044",
-                        "Stasjon01_070700_r5650024",
-                        "Stasjon01_280700_r5650085",
-                        "Stasjon01_040800_r5650103",
-                        "Stasjon01_280700_r5650082",
-                        "Stasjon01_040700_r5650007",
-                        "Stasjon01_270700_r5650080",
-                        "Stasjon01_040700_r5650010",
-                        "Stasjon01_070800_r5650105",
-                        "Stasjon01_080800_r5650114",
-                        "Stasjon01_080800_r5650111",
-                        "Stasjon01_070800_r5650107",
-                        "Stasjon01_070800_r5650109",
-                        "Stasjon01_270700_r5650077",
-                        "Stasjon01_010800_r5650090",
-                        "Stasjon01_020800_r5650096",
-                        "Stasjon01_020800_r5650095",
-                        "Stasjon01_110700_r5650032",
-                        "Stasjon01_170700_r5650055",
-                        "Stasjon01_050700_r5650012"]
+        self.speakers = ["r5650072",  # Target speaker
+                         "r5650060",
+                         "r5650006",
+                         "r5650013",
+                         "r5650101",
+                         "r5650044",
+                         "r5650024",
+                         "r5650085",
+                         "r5650103",
+                         "r5650082",
+                         "r5650007",
+                         "r5650080",
+                         "r5650010",
+                         "r5650105",
+                         "r5650114",
+                         "r5650111",
+                         "r5650107",
+                         "r5650109",
+                         "r5650077",
+                         "r5650090",
+                         "r5650096",
+                         "r5650095",
+                         "r5650032",
+                         "r5650055",
+                         "r5650012"]
         spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
         self.spk_idx = spk2idx[config.trg_spk]
         # print(self.spk_idx)
@@ -269,7 +269,7 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    parser.add_argument('--trg_spk', type=str, default='Stasjon01_210700_r5650072', help='Target speaker (FIXED).')
+    parser.add_argument('--trg_spk', type=str, default='r5650072', help='Target speaker (FIXED).')
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
     # Directories of preprocessing and converting
