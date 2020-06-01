@@ -5,7 +5,8 @@ def read_record_states(c, info_dict):
      content = c.split(delimiter)
      utterance =  content[2]
      if not 'tavshed' in utterance:
-        info_dict[content[5]] = utterance
+        if len(content) > 5:
+            info_dict[content[5]] = utterance
 
 
 def read_info_states(c, info_dict):
