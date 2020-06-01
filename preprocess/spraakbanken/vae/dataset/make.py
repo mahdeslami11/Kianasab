@@ -49,21 +49,34 @@ def spec_feature_extraction(wav_file):
     mel, mag = get_spectrograms(wav_file)
     return mel, mag
 
+def is_int(s:str):
+    try:
+        int(s)
+        return True
+    except:
+        return False
+
 if __name__ == '__main__':
     data_dir = sys.argv[1]
     output_dir = sys.argv[2]
-    test_speakers = int(sys.argv[3])
+    test_speakers = int(sys.argv[3]) if is_int(sys.argv[3]) else sys.argv[3]
     test_proportion = float(sys.argv[4])
     sample_rate = int(sys.argv[5])
     n_utts_attr = int(sys.argv[6])
 
 
     #Read all available speaker ids
-    speaker_ids = read_speaker_info(data_dir)
-    random.shuffle(speaker_ids)
+    if is_int(test_speakers):
+        speaker_ids = read_speaker_info(data_dir)
+        random.shuffle(speaker_ids)
 
-    train_speaker_ids = speaker_ids[:-test_speakers]
-    test_speaker_ids = speaker_ids[-test_speakers:]
+        train_speaker_ids = speaker_ids[:-test_speakers]
+        test_speaker_ids = speaker_ids[-test_speakers:]
+    else:
+        with open(test_speakers, 'r') as ts:
+            speaker_ids = json.loads(ts.read())
+            train_speaker_ids = speaker_ids['train']
+            test_speaker_ids = speaker_ids['test']
 
     speaker2filenames = read_filenames(data_dir)
 
