@@ -48,10 +48,10 @@ def preprocess(data_path:str):
         if not isdir(out_speaker):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
-            print(wav_files)
             if len(wav_files) > 1:
                 #Save speaker and utterance meta data as json
                 meta_data = meta.read_spl_file(speaker_id)
+                print(meta_data)
                 if 'dialect' not in meta_data.keys():
                     log.write_line(f'Speaker {speaker_id} did not have a registered dialect')
                     continue
