@@ -22,7 +22,7 @@ import torch
 from os.path import join, basename
 import glob
 from data_loader import to_categorical
-from convert import load_wav
+# from convert import load_wav
 from model import Generator
 from utils import *
 
@@ -169,6 +169,10 @@ class TestDataset(object):
             batch_data.append(wavfile_path)
         return batch_data
 
+def load_wav(wavfile, sr=16000):
+    wav, _ = librosa.load(wavfile, sr=sr, mono=True)
+    return wav_padding(wav, sr=sr, frame_period=5, multiple=4)  # TODO
+    # return wav
 
 '''
 Modified function test from convert.py
