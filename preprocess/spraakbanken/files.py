@@ -52,7 +52,7 @@ def preprocess(data_path:str):
                 meta_data = meta.read_spl_file(speaker_id)
                 if 'region of dialect' not in meta_data.keys():
                     log.write_line(f'Speaker {speaker_id} did not have a registered dialect')
-                    break
+                    continue
                 else:
                     with open(join(out_speaker, 'meta.json'), 'w+') as meta_file:
                         meta_file.write(json.dumps(meta_data))
