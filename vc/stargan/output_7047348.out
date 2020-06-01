@@ -1,0 +1,182 @@
+Requirement already satisfied: librosa in ./main_stargan_env/lib/python3.6/site-packages
+Requirement already satisfied: numpy>=1.15.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: numba>=0.43.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: resampy>=0.2.2 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: joblib>=0.12 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: six>=1.3 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: soundfile>=0.9.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: decorator>=3.0.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: scikit-learn!=0.19.0,>=0.14.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: audioread>=2.0.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: scipy>=1.0.0 in ./main_stargan_env/lib/python3.6/site-packages (from librosa)
+Requirement already satisfied: llvmlite<=0.33.0.dev0,>=0.31.0.dev0 in ./main_stargan_env/lib/python3.6/site-packages (from numba>=0.43.0->librosa)
+Requirement already satisfied: setuptools in /appl/python/3.6.2/lib/python3.6/site-packages (from numba>=0.43.0->librosa)
+Requirement already satisfied: cffi>=1.0 in ./main_stargan_env/lib/python3.6/site-packages (from soundfile>=0.9.0->librosa)
+Requirement already satisfied: threadpoolctl>=2.0.0 in ./main_stargan_env/lib/python3.6/site-packages (from scikit-learn!=0.19.0,>=0.14.0->librosa)
+Requirement already satisfied: pycparser in ./main_stargan_env/lib/python3.6/site-packages (from cffi>=1.0->soundfile>=0.9.0->librosa)
+Requirement already satisfied: pyworld in ./main_stargan_env/lib/python3.6/site-packages
+Requirement already satisfied: numpy in ./main_stargan_env/lib/python3.6/site-packages (from pyworld)
+Requirement already satisfied: cython>=0.24.0 in ./main_stargan_env/lib/python3.6/site-packages (from pyworld)
+Requirement already satisfied: tqdm in ./main_stargan_env/lib/python3.6/site-packages
+Requirement already satisfied: torch in ./main_stargan_env/lib/python3.6/site-packages
+Requirement already satisfied: future in ./main_stargan_env/lib/python3.6/site-packages (from torch)
+Requirement already satisfied: numpy in ./main_stargan_env/lib/python3.6/site-packages (from torch)
+Requirement already satisfied: torchvision in ./main_stargan_env/lib/python3.6/site-packages
+Requirement already satisfied: pillow>=4.1.1 in ./main_stargan_env/lib/python3.6/site-packages (from torchvision)
+Requirement already satisfied: numpy in ./main_stargan_env/lib/python3.6/site-packages (from torchvision)
+Requirement already satisfied: torch==1.5.0 in ./main_stargan_env/lib/python3.6/site-packages (from torchvision)
+Requirement already satisfied: future in ./main_stargan_env/lib/python3.6/site-packages (from torch==1.5.0->torchvision)
+Collecting tensorboardX
+  Using cached https://files.pythonhosted.org/packages/35/f1/5843425495765c8c2dd0784a851a93ef204d314fc87bcc2bbb9f662a3ad1/tensorboardX-2.0-py2.py3-none-any.whl
+Requirement already satisfied: six in ./main_stargan_env/lib/python3.6/site-packages (from tensorboardX)
+Collecting protobuf>=3.8.0 (from tensorboardX)
+  Using cached https://files.pythonhosted.org/packages/28/05/9867ef8eafd12265267bee138fa2c46ebf34a276ea4cbe184cba4c606e8b/protobuf-3.12.2-cp36-cp36m-manylinux1_x86_64.whl
+Requirement already satisfied: numpy in ./main_stargan_env/lib/python3.6/site-packages (from tensorboardX)
+Requirement already satisfied: setuptools in /appl/python/3.6.2/lib/python3.6/site-packages (from protobuf>=3.8.0->tensorboardX)
+Installing collected packages: protobuf, tensorboardX
+Successfully installed protobuf-3.12.2 tensorboardX-2.0
+/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train
+	 Number of training samples:  7276
+<data_loader.MyDataset object at 0x7f01d2dc10f0>
+Generator(
+  (main): Sequential(
+    (0): Conv2d(26, 64, kernel_size=(3, 9), stride=(1, 1), padding=(1, 4), bias=False)
+    (1): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): Conv2d(64, 128, kernel_size=(4, 8), stride=(2, 2), padding=(1, 3), bias=False)
+    (4): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (5): ReLU(inplace=True)
+    (6): Conv2d(128, 256, kernel_size=(4, 8), stride=(2, 2), padding=(1, 3), bias=False)
+    (7): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (8): ReLU(inplace=True)
+    (9): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (10): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (11): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (12): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (13): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (14): ResidualBlock(
+      (main): Sequential(
+        (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): InstanceNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (15): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (16): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (17): ReLU(inplace=True)
+    (18): ConvTranspose2d(128, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
+    (19): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (20): ReLU(inplace=True)
+    (21): Conv2d(64, 1, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+  )
+)
+G
+The number of parameters: 9099456
+Discriminator(
+  (main): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (3): LeakyReLU(negative_slope=0.01)
+    (4): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (5): LeakyReLU(negative_slope=0.01)
+    (6): Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Conv2d(512, 1024, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+    (9): LeakyReLU(negative_slope=0.01)
+  )
+  (conv_dis): Conv2d(1024, 1, kernel_size=(1, 8), stride=(1, 1), bias=False)
+  (conv_clf_spks): Conv2d(1024, 25, kernel_size=(1, 8), stride=(1, 1), bias=False)
+)
+D
+The number of parameters: 11357120
+4
+16
+Start training...
+Elapsed [0:00:05], Iteration [10/200000], D/loss_real: -0.8229, D/loss_fake: 0.2802, D/loss_cls_spks: 3.2168, D/loss_gp: 0.9709, G/loss_fake: -0.4491, G/loss_rec: 0.8261, G/loss_cls_spks: 3.2246
+Elapsed [0:00:06], Iteration [20/200000], D/loss_real: -70.0220, D/loss_fake: 16.9481, D/loss_cls_spks: 5.6326, D/loss_gp: 0.0399, G/loss_fake: -13.6792, G/loss_rec: 0.8270, G/loss_cls_spks: 3.2961
+Elapsed [0:00:07], Iteration [30/200000], D/loss_real: -24.0757, D/loss_fake: 0.6177, D/loss_cls_spks: 3.5752, D/loss_gp: 0.1132, G/loss_fake: -4.1566, G/loss_rec: 0.9661, G/loss_cls_spks: 3.0899
+Elapsed [0:00:09], Iteration [40/200000], D/loss_real: -33.7448, D/loss_fake: -32.6226, D/loss_cls_spks: 3.5884, D/loss_gp: 0.6478, G/loss_fake: 63.4027, G/loss_rec: 1.0102, G/loss_cls_spks: 7.6175
+Elapsed [0:00:10], Iteration [50/200000], D/loss_real: -53.5062, D/loss_fake: 15.4699, D/loss_cls_spks: 3.4599, D/loss_gp: 0.1997, G/loss_fake: -9.9185, G/loss_rec: 0.8988, G/loss_cls_spks: 3.7937
+Elapsed [0:00:11], Iteration [60/200000], D/loss_real: -69.5064, D/loss_fake: -18.9290, D/loss_cls_spks: 4.1216, D/loss_gp: 1.4271, G/loss_fake: 40.2091, G/loss_rec: 0.9667, G/loss_cls_spks: 6.2580
+Elapsed [0:00:12], Iteration [70/200000], D/loss_real: -62.9067, D/loss_fake: -15.5632, D/loss_cls_spks: 5.1910, D/loss_gp: 1.1855, G/loss_fake: 17.5013, G/loss_rec: 0.9023, G/loss_cls_spks: 3.7891
+Elapsed [0:00:13], Iteration [80/200000], D/loss_real: -34.0845, D/loss_fake: -9.3622, D/loss_cls_spks: 3.3451, D/loss_gp: 0.3878, G/loss_fake: 7.4071, G/loss_rec: 0.9484, G/loss_cls_spks: 4.3789
+Elapsed [0:00:14], Iteration [90/200000], D/loss_real: -68.1616, D/loss_fake: 4.7266, D/loss_cls_spks: 3.2876, D/loss_gp: 1.2034, G/loss_fake: 27.7454, G/loss_rec: 0.9731, G/loss_cls_spks: 4.2881
+Elapsed [0:00:15], Iteration [100/200000], D/loss_real: -62.0579, D/loss_fake: -2.9104, D/loss_cls_spks: 3.3378, D/loss_gp: 0.9494, G/loss_fake: 16.4319, G/loss_rec: 0.9671, G/loss_cls_spks: 4.2934
+Elapsed [0:00:17], Iteration [110/200000], D/loss_real: -37.7321, D/loss_fake: -18.0732, D/loss_cls_spks: 3.6208, D/loss_gp: 0.6191, G/loss_fake: -7.8969, G/loss_rec: 0.9904, G/loss_cls_spks: 3.3508
+Elapsed [0:00:18], Iteration [120/200000], D/loss_real: -33.2000, D/loss_fake: -30.9950, D/loss_cls_spks: 3.5299, D/loss_gp: 0.9483, G/loss_fake: 29.7342, G/loss_rec: 0.9804, G/loss_cls_spks: 4.2555
+Elapsed [0:00:19], Iteration [130/200000], D/loss_real: -39.2111, D/loss_fake: -32.0788, D/loss_cls_spks: 3.7767, D/loss_gp: 1.4209, G/loss_fake: 40.2960, G/loss_rec: 1.0097, G/loss_cls_spks: 5.3397
+Elapsed [0:00:20], Iteration [140/200000], D/loss_real: -43.5712, D/loss_fake: -21.9367, D/loss_cls_spks: 3.3334, D/loss_gp: 1.2874, G/loss_fake: 16.6578, G/loss_rec: 0.9394, G/loss_cls_spks: 3.9608
+Elapsed [0:00:21], Iteration [150/200000], D/loss_real: -79.9449, D/loss_fake: 4.6702, D/loss_cls_spks: 3.5127, D/loss_gp: 1.7027, G/loss_fake: -11.3662, G/loss_rec: 0.9351, G/loss_cls_spks: 3.9038
+Elapsed [0:00:22], Iteration [160/200000], D/loss_real: -56.6847, D/loss_fake: -9.8397, D/loss_cls_spks: 3.4503, D/loss_gp: 1.2914, G/loss_fake: 10.8877, G/loss_rec: 0.9707, G/loss_cls_spks: 3.7430
+Elapsed [0:00:24], Iteration [170/200000], D/loss_real: -46.6754, D/loss_fake: -16.6955, D/loss_cls_spks: 3.4330, D/loss_gp: 1.3024, G/loss_fake: 30.7148, G/loss_rec: 0.9695, G/loss_cls_spks: 3.3739
+Elapsed [0:00:25], Iteration [180/200000], D/loss_real: -22.2029, D/loss_fake: -47.9557, D/loss_cls_spks: 3.6822, D/loss_gp: 1.4564, G/loss_fake: -32.4222, G/loss_rec: 0.9300, G/loss_cls_spks: 3.2760
+Elapsed [0:00:26], Iteration [190/200000], D/loss_real: -58.1763, D/loss_fake: -7.8115, D/loss_cls_spks: 3.5248, D/loss_gp: 1.5990, G/loss_fake: 1.1572, G/loss_rec: 0.9557, G/loss_cls_spks: 3.4042
+Elapsed [0:00:27], Iteration [200/200000], D/loss_real: -72.3965, D/loss_fake: -2.5831, D/loss_cls_spks: 3.2513, D/loss_gp: 1.9629, G/loss_fake: 11.5665, G/loss_rec: 0.9604, G/loss_cls_spks: 3.9353
+Elapsed [0:00:28], Iteration [210/200000], D/loss_real: -41.2185, D/loss_fake: -23.9419, D/loss_cls_spks: 3.9601, D/loss_gp: 1.1719, G/loss_fake: 8.0303, G/loss_rec: 0.9696, G/loss_cls_spks: 3.5659
+Elapsed [0:00:29], Iteration [220/200000], D/loss_real: -66.0191, D/loss_fake: 6.5107, D/loss_cls_spks: 3.4416, D/loss_gp: 1.3684, G/loss_fake: 16.0827, G/loss_rec: 0.9965, G/loss_cls_spks: 3.5478
+Elapsed [0:00:31], Iteration [230/200000], D/loss_real: -54.8435, D/loss_fake: -17.5641, D/loss_cls_spks: 3.2541, D/loss_gp: 1.7113, G/loss_fake: 30.1064, G/loss_rec: 1.0245, G/loss_cls_spks: 3.8184
+Elapsed [0:00:33], Iteration [240/200000], D/loss_real: -57.8620, D/loss_fake: -18.1834, D/loss_cls_spks: 3.2578, D/loss_gp: 1.7720, G/loss_fake: 16.0279, G/loss_rec: 1.0457, G/loss_cls_spks: 3.6786
+Elapsed [0:00:34], Iteration [250/200000], D/loss_real: -70.6309, D/loss_fake: -11.7272, D/loss_cls_spks: 3.3779, D/loss_gp: 2.0974, G/loss_fake: 51.3152, G/loss_rec: 1.0261, G/loss_cls_spks: 4.5101
+Elapsed [0:00:35], Iteration [260/200000], D/loss_real: -55.9371, D/loss_fake: -22.3110, D/loss_cls_spks: 3.2106, D/loss_gp: 1.7073, G/loss_fake: -9.1447, G/loss_rec: 1.0058, G/loss_cls_spks: 3.4986
+Elapsed [0:00:36], Iteration [270/200000], D/loss_real: -66.2388, D/loss_fake: -3.9328, D/loss_cls_spks: 3.3264, D/loss_gp: 1.8654, G/loss_fake: 7.0311, G/loss_rec: 1.0386, G/loss_cls_spks: 3.6896
+Elapsed [0:00:37], Iteration [280/200000], D/loss_real: -29.7840, D/loss_fake: -36.4252, D/loss_cls_spks: 3.6542, D/loss_gp: 1.4837, G/loss_fake: -25.4218, G/loss_rec: 1.0531, G/loss_cls_spks: 3.2913
+Elapsed [0:00:38], Iteration [290/200000], D/loss_real: -52.1843, D/loss_fake: -12.7693, D/loss_cls_spks: 3.2320, D/loss_gp: 1.6017, G/loss_fake: -2.7202, G/loss_rec: 1.0803, G/loss_cls_spks: 3.5931
+Elapsed [0:00:40], Iteration [300/200000], D/loss_real: -62.4379, D/loss_fake: -13.9248, D/loss_cls_spks: 3.2238, D/loss_gp: 1.8626, G/loss_fake: 3.7845, G/loss_rec: 0.9965, G/loss_cls_spks: 3.6481
+Elapsed [0:00:41], Iteration [310/200000], D/loss_real: -70.4652, D/loss_fake: 6.2908, D/loss_cls_spks: 3.3271, D/loss_gp: 1.5314, G/loss_fake: -0.0665, G/loss_rec: 0.9712, G/loss_cls_spks: 3.7402
+Elapsed [0:00:42], Iteration [320/200000], D/loss_real: -69.5114, D/loss_fake: 8.5068, D/loss_cls_spks: 3.3989, D/loss_gp: 1.4960, G/loss_fake: -13.9151, G/loss_rec: 0.9611, G/loss_cls_spks: 3.6401
+Elapsed [0:00:43], Iteration [330/200000], D/loss_real: -67.0235, D/loss_fake: 12.8162, D/loss_cls_spks: 3.2084, D/loss_gp: 1.2884, G/loss_fake: 6.7001, G/loss_rec: 1.0289, G/loss_cls_spks: 3.2734
+Elapsed [0:00:44], Iteration [340/200000], D/loss_real: -41.1725, D/loss_fake: -13.1547, D/loss_cls_spks: 3.4813, D/loss_gp: 1.1802, G/loss_fake: 6.8599, G/loss_rec: 1.0486, G/loss_cls_spks: 3.2177
+Elapsed [0:00:45], Iteration [350/200000], D/loss_real: -37.1164, D/loss_fake: -15.6310, D/loss_cls_spks: 3.1870, D/loss_gp: 1.1945, G/loss_fake: 15.2968, G/loss_rec: 1.0183, G/loss_cls_spks: 3.4632
+Elapsed [0:00:46], Iteration [360/200000], D/loss_real: -69.3493, D/loss_fake: 21.0077, D/loss_cls_spks: 3.0138, D/loss_gp: 1.0499, G/loss_fake: -11.7724, G/loss_rec: 0.9619, G/loss_cls_spks: 3.5803
+Elapsed [0:00:48], Iteration [370/200000], D/loss_real: -62.5403, D/loss_fake: 23.7130, D/loss_cls_spks: 3.2192, D/loss_gp: 0.6174, G/loss_fake: -2.5747, G/loss_rec: 0.9895, G/loss_cls_spks: 3.3191
+Elapsed [0:00:49], Iteration [380/200000], D/loss_real: -54.6967, D/loss_fake: 7.1455, D/loss_cls_spks: 3.2544, D/loss_gp: 0.9386, G/loss_fake: 3.3958, G/loss_rec: 1.0394, G/loss_cls_spks: 3.4644
+Elapsed [0:00:50], Iteration [390/200000], D/loss_real: -65.1224, D/loss_fake: 4.9770, D/loss_cls_spks: 3.3566, D/loss_gp: 1.3865, G/loss_fake: -1.8016, G/loss_rec: 1.0189, G/loss_cls_spks: 3.7740
+Elapsed [0:00:51], Iteration [400/200000], D/loss_real: -48.5826, D/loss_fake: -6.9113, D/loss_cls_spks: 3.2520, D/loss_gp: 1.0535, G/loss_fake: -14.2544, G/loss_rec: 1.0027, G/loss_cls_spks: 3.5078
+Elapsed [0:00:52], Iteration [410/200000], D/loss_real: -67.2662, D/loss_fake: 13.8134, D/loss_cls_spks: 3.0077, D/loss_gp: 1.1224, G/loss_fake: -16.4408, G/loss_rec: 1.0122, G/loss_cls_spks: 3.3066
+Elapsed [0:00:53], Iteration [420/200000], D/loss_real: -34.1290, D/loss_fake: -17.6504, D/loss_cls_spks: 3.3707, D/loss_gp: 1.2990, G/loss_fake: 6.0047, G/loss_rec: 1.0169, G/loss_cls_spks: 3.6825
+Elapsed [0:00:55], Iteration [430/200000], D/loss_real: -57.1509, D/loss_fake: 9.6465, D/loss_cls_spks: 3.1901, D/loss_gp: 1.1762, G/loss_fake: -2.5987, G/loss_rec: 0.9626, G/loss_cls_spks: 3.5369
+Elapsed [0:00:56], Iteration [440/200000], D/loss_real: -60.4973, D/loss_fake: 15.8221, D/loss_cls_spks: 3.2556, D/loss_gp: 0.7734, G/loss_fake: -10.0995, G/loss_rec: 0.9894, G/loss_cls_spks: 3.7820
+Elapsed [0:00:57], Iteration [450/200000], D/loss_real: -41.9630, D/loss_fake: -7.2809, D/loss_cls_spks: 3.1356, D/loss_gp: 0.9025, G/loss_fake: -10.6054, G/loss_rec: 1.0232, G/loss_cls_spks: 3.8176
