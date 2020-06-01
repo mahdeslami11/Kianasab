@@ -12,58 +12,58 @@ from os.path import join, basename, dirname, split
 import numpy as np
 
 # Below is the accent info for the used 10 speakers.
-spk2acc = {"Stasjon01_210700_r5650072":"Copenhagen", ####
-            "Stasjon01_190700_r5650060":"Copenhagen",
-            "Stasjon01_030700_r5650006":"Vestjylland",
-            "Stasjon01_050700_r5650013":"Vestjylland",
-            "Stasjon01_040800_r5650101":"Vestjylland",
-            "Stasjon01_130700_r5650044":"Vestjylland",
-            "Stasjon01_070700_r5650024":"VestSydjylland",
-            "Stasjon01_280700_r5650085":"VestSydjylland",
-            "Stasjon01_040800_r5650103":"VestSydjylland",
-            "Stasjon01_280700_r5650082":"VestSydjylland",
-            "Stasjon01_040700_r5650007":"Nordjylland",
-            "Stasjon01_270700_r5650080":"Nordjylland",
-            "Stasjon01_040700_r5650010":"Sonderjylland",
-            "Stasjon01_070800_r5650105":"Sonderjylland",
-            "Stasjon01_080800_r5650114":"Fyn",
-            "Stasjon01_080800_r5650111":"Fyn",
-            "Stasjon01_070800_r5650107":"Fyn",
-            "Stasjon01_070800_r5650109":"Fyn",
-            "Stasjon01_270700_r5650077":"VestSydsjaelland",
-            "Stasjon01_010800_r5650090":"VestSydsjaelland",
-            "Stasjon01_020800_r5650096":"VestSydsjaelland",
-            "Stasjon01_020800_r5650095":"VestSydsjaelland",
-            "Stasjon01_110700_r5650032":"Ostjylland",
-            "Stasjon01_170700_r5650055":"Ostjylland",
-            "Stasjon01_050700_r5650012":"Ostjylland"}
+spk2acc = {"r5650072":"Copenhagen",  # Target speaker
+           "r5650060":"Copenhagen",
+           "r5650006":"Vestjylland",
+           "r5650013":"Vestjylland",
+           "r5650101":"Vestjylland",
+           "r5650044":"Vestjylland",
+           "r5650024":"VestSydjylland",
+           "r5650085":"VestSydjylland",
+           "r5650103":"VestSydjylland",
+           "r5650082":"VestSydjylland",
+           "r5650007":"Nordjylland",
+           "r5650080":"Nordjylland",
+           "r5650010":"Sonderjylland",
+           "r5650105":"Sonderjylland",
+           "r5650114":"Fyn",
+           "r5650111":"Fyn",
+           "r5650107":"Fyn",
+           "r5650109":"Fyn",
+           "r5650077":"VestSydsjaelland",
+           "r5650090":"VestSydsjaelland",
+           "r5650096":"VestSydsjaelland",
+           "r5650095":"VestSydsjaelland",
+           "r5650032":"Ostjylland",
+           "r5650055":"Ostjylland",
+           "r5650012":"Ostjylland"}
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 # Build a dict useful when we want to get one-hot representation of speakers.
-speakers = ["Stasjon01_210700_r5650072", ####
-            "Stasjon01_190700_r5650060",
-            "Stasjon01_030700_r5650006",
-            "Stasjon01_050700_r5650013",
-            "Stasjon01_040800_r5650101",
-            "Stasjon01_130700_r5650044",
-            "Stasjon01_070700_r5650024",
-            "Stasjon01_280700_r5650085",
-            "Stasjon01_040800_r5650103",
-            "Stasjon01_280700_r5650082",
-            "Stasjon01_040700_r5650007",
-            "Stasjon01_270700_r5650080",
-            "Stasjon01_040700_r5650010",
-            "Stasjon01_070800_r5650105",
-            "Stasjon01_080800_r5650114",
-            "Stasjon01_080800_r5650111",
-            "Stasjon01_070800_r5650107",
-            "Stasjon01_070800_r5650109",
-            "Stasjon01_270700_r5650077",
-            "Stasjon01_010800_r5650090",
-            "Stasjon01_020800_r5650096",
-            "Stasjon01_020800_r5650095",
-            "Stasjon01_110700_r5650032",
-            "Stasjon01_170700_r5650055",
-            "Stasjon01_050700_r5650012"]
+speakers = ["r5650072",  # Target speaker
+            "r5650060",
+            "r5650006",
+            "r5650013",
+            "r5650101",
+            "r5650044",
+            "r5650024",
+            "r5650085",
+            "r5650103",
+            "r5650082",
+            "r5650007",
+            "r5650080",
+            "r5650010",
+            "r5650105",
+            "r5650114",
+            "r5650111",
+            "r5650107",
+            "r5650109",
+            "r5650077",
+            "r5650090",
+            "r5650096",
+            "r5650095",
+            "r5650032",
+            "r5650055",
+            "r5650012"]
 spk2idx = dict(zip(speakers, range(len(speakers))))
 
 def to_categorical(y, num_classes=None):
@@ -137,7 +137,7 @@ class MyDataset(data.Dataset):
 
 class TestDataset(object):
     """Dataset for testing."""
-    def __init__(self, data_dir, wav_dir, src_spk='p262', trg_spk='p272'):
+    def __init__(self, data_dir, wav_dir, src_spk="Stasjon01_070800_r5650109", trg_spk="Stasjon01_210700_r5650072"):
         self.src_spk = src_spk
         self.trg_spk = trg_spk
         self.mc_files = sorted(glob.glob(join(data_dir, '{}*.npy'.format(self.src_spk))))
