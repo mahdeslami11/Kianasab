@@ -4,7 +4,7 @@ import json
 import matplotlib.pyplot as plt
 font =  {
             'family': 'normal',
-            'size'  : 16
+            'size'  : 24 
         }
 plt.rc('font',**font)
 
@@ -20,5 +20,5 @@ def plot_dialect_distribution(fpath):
     plt.savefig('plots/dialects.png')
 
 if __name__ == '__main__':
-    plt.gcf().set_size_inches(20,20)
+    plt.gcf().set_size_inches(30,20)
     plot_dialect_distribution('/work1/s183921/speaker_data/Spraakbanken-Corpus')
