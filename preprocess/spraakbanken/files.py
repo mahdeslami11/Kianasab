@@ -51,7 +51,6 @@ def preprocess(data_path:str):
             if len(wav_files) > 1:
                 #Save speaker and utterance meta data as json
                 meta_data = meta.read_spl_file(speaker_id)
-                print(meta_data)
                 if 'dialect' not in meta_data.keys():
                     log.write_line(f'Speaker {speaker_id} did not have a registered dialect')
                     continue
@@ -65,6 +64,7 @@ def preprocess(data_path:str):
                     for wav in wav_files:
                         if is_valid_wav(wav):
                             count += 1
+                            f = wav.split(sep)[-1]
                             shutil.copy(wav, join(out_speaker, f))
                             print(f'Copying file {count}...', end='\r')
                         else:
