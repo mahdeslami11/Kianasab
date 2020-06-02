@@ -12,31 +12,31 @@ from os.path import join, basename, dirname, split
 import numpy as np
 
 # Below is the accent info for the used 10 speakers.
-spk2acc = {"r5650072":"Copenhagen",  # Target speaker
-           "r5650060":"Copenhagen",
-           "r5650006":"Vestjylland",
-           "r5650013":"Vestjylland",
-           "r5650101":"Vestjylland",
-           "r5650044":"Vestjylland",
-           "r5650024":"VestSydjylland",
-           "r5650085":"VestSydjylland",
-           "r5650103":"VestSydjylland",
-           "r5650082":"VestSydjylland",
-           "r5650007":"Nordjylland",
-           "r5650080":"Nordjylland",
-           "r5650010":"Sonderjylland",
-           "r5650105":"Sonderjylland",
-           "r5650114":"Fyn",
-           "r5650111":"Fyn",
-           "r5650107":"Fyn",
-           "r5650109":"Fyn",
-           "r5650077":"VestSydsjaelland",
-           "r5650090":"VestSydsjaelland",
-           "r5650096":"VestSydsjaelland",
-           "r5650095":"VestSydsjaelland",
-           "r5650032":"Ostjylland",
-           "r5650055":"Ostjylland",
-           "r5650012":"Ostjylland"}
+spk2acc = {"r5650072": "Copenhagen",  # Target speaker
+           "r5650060": "Copenhagen",
+           "r5650006": "Vestjylland",
+           "r5650013": "Vestjylland",
+           "r5650101": "Vestjylland",
+           "r5650044": "Vestjylland",
+           "r5650024": "VestSydjylland",
+           "r5650085": "VestSydjylland",
+           "r5650103": "VestSydjylland",
+           "r5650082": "VestSydjylland",
+           "r5650007": "Nordjylland",
+           "r5650080": "Nordjylland",
+           "r5650010": "Sonderjylland",
+           "r5650105": "Sonderjylland",
+           "r5650114": "Fyn",
+           "r5650111": "Fyn",
+           "r5650107": "Fyn",
+           "r5650109": "Fyn",
+           "r5650077": "VestSydsjaelland",
+           "r5650090": "VestSydsjaelland",
+           "r5650096": "VestSydsjaelland",
+           "r5650095": "VestSydsjaelland",
+           "r5650032": "Ostjylland",
+           "r5650055": "Ostjylland",
+           "r5650012": "Ostjylland"}
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 # Build a dict useful when we want to get one-hot representation of speakers.
 speakers = ["r5650072",  # Target speaker
@@ -137,7 +137,7 @@ class MyDataset(data.Dataset):
 
 class TestDataset(object):
     """Dataset for testing."""
-    def __init__(self, data_dir, wav_dir, src_spk="Stasjon01_070800_r5650109", trg_spk="Stasjon01_210700_r5650072"):
+    def __init__(self, data_dir, wav_dir, src_spk="r5650109", trg_spk="r5650072"):
         self.src_spk = src_spk
         self.trg_spk = trg_spk
         self.mc_files = sorted(glob.glob(join(data_dir, '{}*.npy'.format(self.src_spk))))
