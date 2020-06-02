@@ -32,7 +32,7 @@ def read_filenames(root_dir):
     returns a dictionary with speaker ids mapped to a collection of speaker audio files
     '''
     speaker2filenames = defaultdict(lambda : [])
-    for path in sorted(glob.glob(os.path.join(root_dir, '*/*'))):
+    for path in sorted(glob.glob(os.path.join(root_dir, '*/*.wav'))):
         speaker_id = path.strip().split('/')[-2]
         speaker2filenames[speaker_id].append(path)
     return speaker2filenames
