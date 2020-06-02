@@ -73,14 +73,9 @@ def get_spk_world_feats(spk_fold_path, mc_dir_test, sample_rate=16000):
              coded_sps_mean=coded_sps_mean,
              coded_sps_std=coded_sps_std)
 
-    # for wav_file in tqdm(train_paths):
-    #     wav_nam = basename(wav_file)
-    #     f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
-    #     normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
-    #     np.save(join(mc_dir_train, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
-
     for wav_file in tqdm(test_paths):
-        wav_nam = spk_name + "-" + basename(wav_file)
+        # wav_nam = spk_name + "-" + basename(wav_file)
+        wav_nam = basename(wav_file)
         f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
         normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
         np.save(join(mc_dir_test, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
@@ -99,7 +94,7 @@ Changed so that _stats.npz file is loaded from test directory.
 class TestDataset(object):
 
     def __init__(self, config):
-        # assert config.trg_spk in config.speakers, f'The trg_spk should be chosen from {config.speakers}, but you choose {trg_spk}.'
+
         # Source speaker
         self.src_spk = config.src_spk
         self.trg_spk = config.trg_spk
@@ -121,9 +116,6 @@ class TestDataset(object):
         self.mcep_std_trg = self.trg_spk_stats['coded_sps_std']
 
         # Define target speaker from trained speakers
-        # self.speakers = config.speakers
-        # spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
-
         self.speakers = ["r5650072",  # Target speaker
                          "r5650060",
                          "r5650006",
@@ -149,23 +141,22 @@ class TestDataset(object):
                          "r5650032",
                          "r5650055",
                          "r5650012"]
+        assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
         spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
         self.spk_idx = spk2idx[config.trg_spk]
-        # print(self.spk_idx)
         spk_cat = to_categorical([self.spk_idx], num_classes=len(self.speakers))
         self.spk_c_trg = spk_cat
-        # print(self.spk_c_trg)
 
     def get_batch_test_data(self, batch_size):
         batch_data = []
         # print(self.mc_files)
         for i in range(batch_size):
-            # print(i)
+            print(i)
             mcfile = self.mc_files[i]
-            filename = basename(mcfile).split('-')[-1]
-            # print(filename)
+            filename = basename(mcfile)#.split('-')[-1]
+            print(filename)
             wavfile_path = join(self.src_wav_dir, filename.replace('npy', 'wav'))
-            # print(wavfile_path)
+            print(wavfile_path)
             batch_data.append(wavfile_path)
         return batch_data
 
@@ -212,7 +203,7 @@ def test(config):
             coded_sp_norm = (coded_sp - test_loader.mcep_mean_src) / test_loader.mcep_std_src
             coded_sp_norm_tensor = torch.FloatTensor(coded_sp_norm.T).unsqueeze_(0).unsqueeze_(1).to(device)
             spk_conds = torch.FloatTensor(test_loader.spk_c_trg).to(device)
-            # print(spk_conds.size())
+            print(spk_conds.size())
             coded_sp_converted_norm = G(coded_sp_norm_tensor, spk_conds).data.cpu().numpy()
             coded_sp_converted = np.squeeze(
                 coded_sp_converted_norm).T * test_loader.mcep_std_trg + test_loader.mcep_mean_trg
@@ -236,27 +227,26 @@ Combination of original preprocess.py and original convert.py
 if __name__ == '__main__':
 
     # On SSH
-    sample_rate_default = 16000
-    resume_iters_default = 100000
-    origin_wavpath_default = "/work1/s183921/newspeakers/wav48"
-    target_wavpath_default = "/work1/s183921/newspeakers/stargan/wav16"
-    # mc_dir_train_default = '/work1/s183921/newspeakers/stargan/mc'
-    mc_dir_test_default = '/work1/s183921/newspeakers/stargan/mc'
-    logs_dir_default = '/work1/s183921/newspeakers/stargan/logs'
-    models_dir_default = '/work1/s183921/trained_models/stargan/spraakbanken'
-    converted_dir_default = '/work1/s183921/converted_speakers/stargan'
+    # sample_rate_default = 16000
+    # resume_iters_default = 100000
+    # origin_wavpath_default = "/work1/s183921/newspeakers/wav48"
+    # target_wavpath_default = "/work1/s183921/newspeakers/stargan/wav16"
+    # # mc_dir_train_default = '/work1/s183921/newspeakers/stargan/mc'
+    # mc_dir_test_default = '/work1/s183921/newspeakers/stargan/mc'
+    # logs_dir_default = '/work1/s183921/newspeakers/stargan/logs'
+    # models_dir_default = '/work1/s183921/trained_models/stargan/spraakbanken'
+    # converted_dir_default = '/work1/s183921/converted_speakers/stargan'
 
     # On August's machine
-    # sample_rate_default = 16000
-    # resume_iters_default = 8000
-    # origin_wavpath_default = "../../../newspeakers/wav48"
-    # target_wavpath_default = "../../../newspeakers/stargan/wav16"
-    # # mc_dir_train_default = '../../../newspeakers/stargan/mc/'
-    # mc_dir_test_default = '../../../newspeakers/stargan/mc/'
-    # logs_dir_default = '../../../newspeakers/stargan/logs'
-    # models_dir_default = '../../../trained_models/stargan/spraakbanken'
-    # # models_dir_default = '../../../StarGAN-VC_Fagprojekt/models'
-    # converted_dir_default = '../../../converted_speakers/stargan'
+    sample_rate_default = 16000
+    resume_iters_default = 200000
+    origin_wavpath_default = "../../../newspeakers/wav48"
+    target_wavpath_default = "../../../newspeakers/stargan/wav16"
+    # mc_dir_train_default = '../../../newspeakers/stargan/mc/'
+    mc_dir_test_default = '../../../newspeakers/stargan/mc/'
+    logs_dir_default = '../../../newspeakers/stargan/logs'
+    models_dir_default = '../../../trained_models/stargan/spraakbanken'
+    converted_dir_default = '../../../converted_speakers/stargan'
 
     # Parser takes inputs for running file as main
     parser = argparse.ArgumentParser()

@@ -29,9 +29,7 @@ def main(config):
 
     # Data loader.
     train_loader = get_loader(config.train_data_dir, config.batch_size, 'train', num_workers=config.num_workers)
-    test_loader = TestDataset(config.test_data_dir, config.wav_dir,
-                              src_spk="r5650109",
-                              trg_spk="r5650072")
+    test_loader = TestDataset(config.test_data_dir, config.wav_dir, src_spk="r5650111", trg_spk="r5650072")
 
     # Solver for training and testing StarGAN.
     solver = Solver(train_loader, test_loader, config)
@@ -48,9 +46,9 @@ if __name__ == '__main__':
 
     # Model configuration.
     parser.add_argument('--num_speakers', type=int, default=25, help='dimension of speaker labels')  # Specified
-    parser.add_argument('--lambda_cls', type=float, default=10, help='weight for domain classification loss')
-    parser.add_argument('--lambda_rec', type=float, default=10, help='weight for reconstruction loss')
-    parser.add_argument('--lambda_gp', type=float, default=10, help='weight for gradient penalty')
+    parser.add_argument('--lambda_cls', type=float, default=25, help='weight for domain classification loss')  # Specified
+    parser.add_argument('--lambda_rec', type=float, default=25, help='weight for reconstruction loss')  # Specified
+    parser.add_argument('--lambda_gp', type=float, default=25, help='weight for gradient penalty')  # Specified
     parser.add_argument('--sampling_rate', type=int, default=16000, help='sampling rate')
 
     # Training configuration.
@@ -68,7 +66,7 @@ if __name__ == '__main__':
     parser.add_argument('--test_iters', type=int, default=100000, help='test model from this step')
 
     # Miscellaneous.
-    parser.add_argument('--num_workers', type=int, default=25)  # Specified
+    parser.add_argument('--num_workers', type=int, default=1)
     parser.add_argument('--mode', type=str, default='train', choices=['train', 'test'])
     parser.add_argument('--use_tensorboard', type=str2bool, default=True)
 
