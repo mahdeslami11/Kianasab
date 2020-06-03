@@ -12,58 +12,81 @@ from os.path import join, basename, dirname, split
 import numpy as np
 
 # Below is the accent info for the used 10 speakers.
-spk2acc = {"r5650072": "Copenhagen",  # Target speaker
-           "r5650060": "Copenhagen",
-           "r5650006": "Vestjylland",
-           "r5650013": "Vestjylland",
-           "r5650101": "Vestjylland",
-           "r5650044": "Vestjylland",
-           "r5650024": "VestSydjylland",
-           "r5650085": "VestSydjylland",
-           "r5650103": "VestSydjylland",
-           "r5650082": "VestSydjylland",
-           "r5650007": "Nordjylland",
-           "r5650080": "Nordjylland",
-           "r5650010": "Sonderjylland",
-           "r5650105": "Sonderjylland",
-           "r5650114": "Fyn",
-           "r5650111": "Fyn",
-           "r5650107": "Fyn",
-           "r5650109": "Fyn",
-           "r5650077": "VestSydsjaelland",
-           "r5650090": "VestSydsjaelland",
-           "r5650096": "VestSydsjaelland",
-           "r5650095": "VestSydsjaelland",
-           "r5650032": "Ostjylland",
-           "r5650055": "Ostjylland",
-           "r5650012": "Ostjylland"}
+# spk2acc = {"r5650072": "Copenhagen",  # Target speaker
+#            "r5650060": "Copenhagen",
+#            "r5650006": "Vestjylland",
+#            "r5650013": "Vestjylland",
+#            "r5650101": "Vestjylland",
+#            "r5650044": "Vestjylland",
+#            "r5650024": "VestSydjylland",
+#            "r5650085": "VestSydjylland",
+#            "r5650103": "VestSydjylland",
+#            "r5650082": "VestSydjylland",
+#            "r5650007": "Nordjylland",
+#            "r5650080": "Nordjylland",
+#            "r5650010": "Sonderjylland",
+#            "r5650105": "Sonderjylland",
+#            "r5650114": "Fyn",
+#            "r5650111": "Fyn",
+#            "r5650107": "Fyn",
+#            "r5650109": "Fyn",
+#            "r5650077": "VestSydsjaelland",
+#            "r5650090": "VestSydsjaelland",
+#            "r5650096": "VestSydsjaelland",
+#            "r5650095": "VestSydsjaelland",
+#            "r5650032": "Ostjylland",
+#            "r5650055": "Ostjylland",
+#            "r5650012": "Ostjylland"}
+spk2acc = {'262': 'Edinburgh', #F
+           '272': 'Edinburgh', #M
+           '229': 'SouthEngland', #F
+           '232': 'SouthEngland', #M
+           '292': 'NorthernIrishBelfast', #M
+           '293': 'NorthernIrishBelfast', #F
+           '360': 'AmericanNewJersey', #M
+           '361': 'AmericanNewJersey', #F
+           '248': 'India', #F
+           '251': 'India'} #M
+
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 # Build a dict useful when we want to get one-hot representation of speakers.
-speakers = ["r5650072",  # Target speaker
-            "r5650060",
-            "r5650006",
-            "r5650013",
-            "r5650101",
-            "r5650044",
-            "r5650024",
-            "r5650085",
-            "r5650103",
-            "r5650082",
-            "r5650007",
-            "r5650080",
-            "r5650010",
-            "r5650105",
-            "r5650114",
-            "r5650111",
-            "r5650107",
-            "r5650109",
-            "r5650077",
-            "r5650090",
-            "r5650096",
-            "r5650095",
-            "r5650032",
-            "r5650055",
-            "r5650012"]
+# speakers = ["r5650072",  # Target speaker
+#             "r5650060",
+#             "r5650006",
+#             "r5650013",
+#             "r5650101",
+#             "r5650044",
+#             "r5650024",
+#             "r5650085",
+#             "r5650103",
+#             "r5650082",
+#             "r5650007",
+#             "r5650080",
+#             "r5650010",
+#             "r5650105",
+#             "r5650114",
+#             "r5650111",
+#             "r5650107",
+#             "r5650109",
+#             "r5650077",
+#             "r5650090",
+#             "r5650096",
+#             "r5650095",
+#             "r5650032",
+#             "r5650055",
+#             "r5650012"]
+
+speakers = ['p262',
+            'p272',
+            'p229',
+            'p232',
+            'p292',
+            'p293',
+            'p360',
+            'p361',
+            'p248',
+            'p251']
+
 spk2idx = dict(zip(speakers, range(len(speakers))))
 
 def to_categorical(y, num_classes=None):
@@ -96,7 +119,7 @@ class MyDataset(data.Dataset):
     """Dataset for MCEP features and speaker labels."""
     def __init__(self, data_dir):
         mc_files = glob.glob(join(data_dir, '*.npy'))
-        #mc_files = [i for i in mc_files if basename(i)[:25] in speakers]
+        mc_files = [i for i in mc_files if basename(i)[:4] in speakers]  # Specified
         self.mc_files = self.rm_too_short_utt(mc_files)
         self.num_files = len(self.mc_files)
         print("\t Number of training samples: ", self.num_files)
@@ -104,8 +127,7 @@ class MyDataset(data.Dataset):
             mc = np.load(f)
             if mc.shape[0] <= min_length:
                 print(f)
-                raise RuntimeError \
-                    (f"The data may be corrupted! We need all MCEP features having more than {min_length} frames!")
+                raise RuntimeError(f"The data may be corrupted! We need all MCEP features having more than {min_length} frames!")
 
     def rm_too_short_utt(self, mc_files, min_length=min_length):
         new_mc_files = []
@@ -125,7 +147,7 @@ class MyDataset(data.Dataset):
 
     def __getitem__(self, index):
         filename = self.mc_files[index]
-        spk = basename(filename).split('-')[0]
+        spk = basename(filename).split('_')[0]  # Specified
         spk_idx = spk2idx[spk]
         mc = np.load(filename)
         mc = self.sample_seg(mc)
@@ -137,7 +159,7 @@ class MyDataset(data.Dataset):
 
 class TestDataset(object):
     """Dataset for testing."""
-    def __init__(self, data_dir, wav_dir, src_spk="r5650109", trg_spk="r5650072"):
+    def __init__(self, data_dir, wav_dir, src_spk="p262", trg_spk="p272"):
         self.src_spk = src_spk
         self.trg_spk = trg_spk
         self.mc_files = sorted(glob.glob(join(data_dir, '{}*.npy'.format(self.src_spk))))

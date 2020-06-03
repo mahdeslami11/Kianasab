@@ -141,11 +141,15 @@ class TestDataset(object):
                          "r5650032",
                          "r5650055",
                          "r5650012"]
+
+
         assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
         spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
         self.spk_idx = spk2idx[config.trg_spk]
+        print(self.spk_idx)
         spk_cat = to_categorical([self.spk_idx], num_classes=len(self.speakers))
         self.spk_c_trg = spk_cat
+        print(self.spk_c_trg)
 
     def get_batch_test_data(self, batch_size):
         batch_data = []
@@ -179,6 +183,7 @@ def test(config):
     print(f'Loading the trained models from step {config.resume_iters}...')
     G_path = join(config.model_save_dir, f'{config.resume_iters}-G.ckpt')
     G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
+    print(G)
     # Read a batch of testdata
     test_wavfiles = test_loader.get_batch_test_data(batch_size=config.num_converted_wavs)
     test_wavs = [load_wav(wavfile, sampling_rate) for wavfile in test_wavfiles]
@@ -187,7 +192,7 @@ def test(config):
 
     with torch.no_grad():
         for idx, wav in enumerate(test_wavs):
-            # print(len(wav))
+            print(len(wav))
             wav_name = basename(test_wavfiles[idx])
             # print(wav_name)
             f0, timeaxis, sp, ap = world_decompose(wav=wav, fs=sampling_rate, frame_period=frame_period)
@@ -198,12 +203,11 @@ def test(config):
                                             std_log_target=test_loader.logf0s_std_trg)
             coded_sp = world_encode_spectral_envelop(sp=sp, fs=sampling_rate, dim=num_mcep)
             print("Before being fed into G: ", coded_sp.shape)
-            # print((coded_sp - test_loader.mcep_mean_src))
-            # print(test_loader.mcep_std_src)
+
             coded_sp_norm = (coded_sp - test_loader.mcep_mean_src) / test_loader.mcep_std_src
             coded_sp_norm_tensor = torch.FloatTensor(coded_sp_norm.T).unsqueeze_(0).unsqueeze_(1).to(device)
             spk_conds = torch.FloatTensor(test_loader.spk_c_trg).to(device)
-            print(spk_conds.size())
+            # print(spk_conds.size())
             coded_sp_converted_norm = G(coded_sp_norm_tensor, spk_conds).data.cpu().numpy()
             coded_sp_converted = np.squeeze(
                 coded_sp_converted_norm).T * test_loader.mcep_std_trg + test_loader.mcep_mean_trg
@@ -239,7 +243,7 @@ if __name__ == '__main__':
 
     # On August's machine
     sample_rate_default = 16000
-    resume_iters_default = 200000
+    resume_iters_default = 100000
     origin_wavpath_default = "../../../newspeakers/wav48"
     target_wavpath_default = "../../../newspeakers/stargan/wav16"
     # mc_dir_train_default = '../../../newspeakers/stargan/mc/'
@@ -259,7 +263,7 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    parser.add_argument('--trg_spk', type=str, default='r5650072', help='Target speaker (FIXED).')
+    parser.add_argument('--trg_spk', type=str, default="r5650072", help='Target speaker (FIXED).')
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
     # Directories of preprocessing and converting
@@ -295,11 +299,14 @@ if __name__ == '__main__':
     if argv.resume_iters is None:
         raise RuntimeError("Please specify the step number for resuming.")
 
+    # If the original wav is 48K, first we want to resample to 16K
+    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
+
     # Here it is specified which speakers should be converted
     speaker_used = argv.src_spk if argv.src_spk is not None else None
 
     if speaker_used is None:
-        speaker_used = os.listdir(origin_wavpath)
+        speaker_used = os.listdir(target_wavpath)
         print(speaker_used)
         argv.src_spk = speaker_used
 
@@ -309,9 +316,6 @@ if __name__ == '__main__':
 
     # Setting number of speakers
     argv.num_speakers = len(speaker_used)
-
-    # If the original wav is 48K, first we want to resample to 16K
-    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     ## Next extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
     # Make dirs to contain the MCEPs
