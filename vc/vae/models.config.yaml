@@ -1,0 +1,70 @@
+ContentEncoder:
+  act: relu
+  bank_scale: 1
+  bank_size: 8
+  c_bank: 128
+  c_h: 128
+  c_in: 512
+  c_out: 128
+  dropout_rate: 0
+  kernel_size: 5
+  n_conv_blocks: 6
+  subsample:
+  - 1
+  - 2
+  - 1
+  - 2
+  - 1
+  - 2
+Decoder:
+  act: relu
+  c_cond: 128
+  c_h: 128
+  c_in: 128
+  c_out: 512
+  dropout_rate: 0
+  kernel_size: 5
+  n_conv_blocks: 6
+  sn: false
+  upsample:
+  - 2
+  - 1
+  - 2
+  - 1
+  - 2
+  - 1
+SpeakerEncoder:
+  act: relu
+  bank_scale: 1
+  bank_size: 8
+  c_bank: 128
+  c_h: 128
+  c_in: 512
+  c_out: 128
+  dropout_rate: 0
+  kernel_size: 5
+  n_conv_blocks: 6
+  n_dense_blocks: 6
+  subsample:
+  - 1
+  - 2
+  - 1
+  - 2
+  - 1
+  - 2
+annealing_iters: 20000
+data_loader:
+  batch_size: 128
+  frame_size: 1
+  segment_size: 128
+  shuffle: true
+lambda:
+  lambda_kl: 1
+  lambda_rec: 10
+optimizer:
+  amsgrad: true
+  beta1: 0.9
+  beta2: 0.999
+  grad_norm: 5
+  lr: 0.0005
+  weight_decay: 0.0001
