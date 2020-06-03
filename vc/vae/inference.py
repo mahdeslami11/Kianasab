@@ -6,8 +6,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import yaml
 import pickle
-from vclab.vc_models.adaptiveVC_model_files.model import AE
-from vclab.vc_models.adaptiveVC_model_files.utils import *
 from functools import reduce
 import json
 from collections import defaultdict
@@ -17,9 +15,11 @@ from torch.utils.data import DataLoader
 from argparse import ArgumentParser, Namespace
 from scipy.io.wavfile import write
 import random
+import librosa 
 from vclab.vc_models.adaptiveVC_model_files.preprocess.tacotron.utils import melspectrogram2wav
 from vclab.vc_models.adaptiveVC_model_files.preprocess.tacotron.utils import get_spectrograms
-import librosa 
+from vclab.vc_models.adaptiveVC_model_files.model import AE
+from vclab.vc_models.adaptiveVC_model_files.utils import *
 from vclab.vc_models.test_model import TestModel
 
 class Inference(TestModel):
