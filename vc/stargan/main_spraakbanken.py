@@ -79,20 +79,20 @@ if __name__ == '__main__':
     # parser.add_argument('--sample_dir', type=str, default='../../../trained_models/stargan/samples/spraakbanken')
 
     # Directories on SSH
-    # parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train')
-    # parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test')
-    # parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus")
-    # parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/spraakbanken')
-    # parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken')
-    # parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken')
+    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train')
+    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test')
+    parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus")
+    parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/spraakbanken')
+    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken')
+    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken')
 
     # Directories on SSH training VCTK
-    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/speaker_data/mc/train')
-    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/speaker_data/mc/test')
-    parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/VCTK-Corpus/wav16")
-    parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/vctk')
-    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/vctk')
-    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/vctk')
+    # parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/speaker_data/mc/train')
+    # parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/speaker_data/mc/test')
+    # parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/VCTK-Corpus/wav16")
+    # parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/vctk')
+    # parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/vctk')
+    # parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/vctk')
 
 
     # Step size.
