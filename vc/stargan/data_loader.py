@@ -148,7 +148,7 @@ class MyDataset(data.Dataset):
 
     def __getitem__(self, index):
         filename = self.mc_files[index]
-        spk = basename(filename).split('-')[0]  # Specified
+        spk = basename(filename).split('_')[0]
         spk_idx = spk2idx[spk]
         mc = np.load(filename)
         mc = self.sample_seg(mc)
