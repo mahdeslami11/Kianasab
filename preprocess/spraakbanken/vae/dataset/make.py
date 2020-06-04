@@ -60,17 +60,13 @@ if __name__ == '__main__':
 
     print('Reading speaker ids')
     speaker_ids = read_speaker_info(data_dir)
-    print(f'Speaker Ids: \n {speaker_ids}')
     random.shuffle(speaker_ids)
 
     train_speaker_ids = speaker_ids[:-test_speakers]
     test_speaker_ids = speaker_ids[-test_speakers:]
-    print(f'\n\nTrain speaker ids: \n {train_speaker_ids}')
-    print(f'\n\nTest speaker ids: \n {test_speaker_ids}')
 
     print('Reading speaker2filenames')
     speaker2filenames = read_filenames(data_dir)
-    print('Speaker2filenames: \n{speaker2filenames}')
 
     #Speaker file extraction
     train_path_list, in_test_path_list, out_test_path_list = [], [], []
@@ -110,6 +106,7 @@ if __name__ == '__main__':
                 print(f'processing {i} files')
             filename = path.strip().split('/')[-1]
             mel, mag = spec_feature_extraction(path)
+            print(mel)
             data[filename] = mel
             if dset == 'train' and i < n_utts_attr:
                 all_train_data.append(mel)
