@@ -59,7 +59,7 @@ def get_spk_world_feats(spk_fold_path, mc_dir_train, mc_dir_test, sample_rate=16
         np.save(join(mc_dir_train, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
 
     for wav_file in tqdm(test_paths):
-        wav_nam = spk_name + "-" + basename(wav_file)
+        wav_nam = spk_name + "_" + basename(wav_file)
         f0, timeaxis, sp, ap, coded_sp = world_encode_wav(wav_file, fs=sample_rate)
         normed_coded_sp = normalize_coded_sp(coded_sp, coded_sps_mean, coded_sps_std)
         np.save(join(mc_dir_test, wav_nam.replace('.wav', '.npy')), normed_coded_sp, allow_pickle=False)
