@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/work1/s183921/fagprojekt2020')
+sys.path.append('/work1/s183921/fagprojekt2020/')
 import torch
 import numpy as np
 import os
@@ -18,8 +18,8 @@ from torch.utils.data import DataLoader
 from argparse import ArgumentParser, Namespace
 from scipy.io.wavfile import write
 import random
-from preprocess.tacotron.utils import melspectrogram2wav
-from preprocess.tacotron.utils import get_spectrograms
+from preprocess.spraakbanken.vae.dataset.tacotron.utils import melspectrogram2wav
+from preprocess.spraakbanken.vae.dataset.tacotron.utils import get_spectrograms
 import librosa
 
 class Inferencer(object):

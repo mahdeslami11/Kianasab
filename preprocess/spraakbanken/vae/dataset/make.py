@@ -49,36 +49,28 @@ def spec_feature_extraction(wav_file):
     mel, mag = get_spectrograms(wav_file)
     return mel, mag
 
-def is_int(s:str):
-    try:
-        int(s)
-        return True
-    except:
-        return False
-
 if __name__ == '__main__':
     data_dir = sys.argv[1]
     output_dir = sys.argv[2]
-    test_speakers = int(sys.argv[3]) if is_int(sys.argv[3]) else sys.argv[3]
+    test_speakers = int(sys.argv[3])
     test_proportion = float(sys.argv[4])
     sample_rate = int(sys.argv[5])
     n_utts_attr = int(sys.argv[6])
 
 
-    #Read all available speaker ids
-    if is_int(test_speakers):
-        speaker_ids = read_speaker_info(data_dir)
-        random.shuffle(speaker_ids)
+    print('Reading speaker ids')
+    speaker_ids = read_speaker_info(data_dir)
+    print(f'Speaker Ids: \n {speaker_ids}')
+    random.shuffle(speaker_ids)
 
-        train_speaker_ids = speaker_ids[:-test_speakers]
-        test_speaker_ids = speaker_ids[-test_speakers:]
-    else:
-        with open(test_speakers, 'r') as ts:
-            speaker_ids = json.loads(ts.read())
-            train_speaker_ids = speaker_ids['train']
-            test_speaker_ids = speaker_ids['test']
+    train_speaker_ids = speaker_ids[:-test_speakers]
+    test_speaker_ids = speaker_ids[-test_speakers:]
+    print(f'\n\nTrain speaker ids: \n {train_speaker_ids}')
+    print(f'\n\nTest speaker ids: \n {test_speaker_ids}')
 
+    print('Reading speaker2filenames')
     speaker2filenames = read_filenames(data_dir)
+    print('Speaker2filenames: \n{speaker2filenames}')
 
     #Speaker file extraction
     train_path_list, in_test_path_list, out_test_path_list = [], [], []
