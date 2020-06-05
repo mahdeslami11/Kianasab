@@ -14,7 +14,6 @@ from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import cpu_count
 from functools import partial
 from tqdm import tqdm
-# from preprocess import resample, resample_to_16k
 import subprocess
 
 # Imports for convert.py
@@ -125,22 +124,22 @@ class TestDataset(object):
                          "r5650024",
                          "r5650085",
                          "r5650103",
-                         "r5650082"]#,
-                         # "r5650007",
-                         # "r5650080",
-                         # "r5650010",
-                         # "r5650105",
-                         # "r5650114",
-                         # "r5650111",
-                         # "r5650107",
-                         # "r5650109",
-                         # "r5650077",
-                         # "r5650090",
-                         # "r5650096",
-                         # "r5650095",
-                         # "r5650032",
-                         # "r5650055",
-                         # "r5650012"]
+                         "r5650082",
+                         "r5650007",
+                         "r5650080",
+                         "r5650010",
+                         "r5650105",
+                         "r5650114",
+                         "r5650111",
+                         "r5650107",
+                         "r5650109",
+                         "r5650077",
+                         "r5650090",
+                         "r5650096",
+                         "r5650095",
+                         "r5650032",
+                         "r5650055",
+                         "r5650012"]
 
 
         assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
@@ -251,8 +250,8 @@ if __name__ == '__main__':
     # mc_dir_train_default = '../../../newspeakers/stargan/mc/'
     mc_dir_test_default = '../../../newspeakers/stargan/mc/'
     logs_dir_default = '../../../newspeakers/stargan/logs'
-    # models_dir_default = '../../../trained_models/stargan/spraakbanken'
-    models_dir_default = '../../../trained_models/stargan/10spk_spraakbanken'
+    models_dir_default = '../../../trained_models/stargan/spraakbanken'
+    # models_dir_default = '../../../trained_models/stargan/10spk_spraakbanken'
 
     converted_dir_default = '../../../converted_speakers/stargan'
 

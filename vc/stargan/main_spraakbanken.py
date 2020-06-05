@@ -29,7 +29,9 @@ def main(config):
 
     # Data loader.
     train_loader = get_loader(config.train_data_dir, config.batch_size, 'train', num_workers=config.num_workers)
-    test_loader = TestDataset(config.test_data_dir, config.wav_dir, src_spk="r5650082", trg_spk="r5650072")
+    # test_loader = TestDataset(config.test_data_dir, config.wav_dir, src_spk="r5650082", trg_spk="r5650072")
+    test_loader = TestDataset(config.test_data_dir, config.wav_dir, src_spk="r6110013", trg_spk="r6110050")
+
 
     # Solver for training and testing StarGAN.
     solver = Solver(train_loader, test_loader, config)
@@ -45,7 +47,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Model configuration.
-    parser.add_argument('--num_speakers', type=int, default=25, help='dimension of speaker labels')  # Specified
+    parser.add_argument('--num_speakers', type=int, default=10, help='dimension of speaker labels')  # Specified
     parser.add_argument('--lambda_cls', type=float, default=10, help='weight for domain classification loss')  # Specified
     parser.add_argument('--lambda_rec', type=float, default=10, help='weight for reconstruction loss')  # Specified
     parser.add_argument('--lambda_gp', type=float, default=10, help='weight for gradient penalty')  # Specified
@@ -78,13 +80,21 @@ if __name__ == '__main__':
     # parser.add_argument('--model_save_dir', type=str, default='../../../trained_models/stargan/spraakbanken')
     # parser.add_argument('--sample_dir', type=str, default='../../../trained_models/stargan/samples/spraakbanken')
 
-    # Directories on SSH
-    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train')
-    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test')
-    parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus")
+    # Directories on SSH normal spraakbanken dataset
+    # parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train')
+    # parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test')
+    # parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus")
+    # parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/spraakbanken')
+    # parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken')
+    # parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken')
+
+    # Directories on SSH big spraakbanken dataset
+    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/train')
+    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/test')
+    parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus-Test")
     parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/spraakbanken')
-    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken')
-    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken')
+    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken-Test')
+    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken-Test')
 
     # Directories on SSH training VCTK
     # parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/speaker_data/mc/train')
