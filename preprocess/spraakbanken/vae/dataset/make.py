@@ -8,6 +8,7 @@ import re
 import numpy as np
 import json
 from tacotron.utils import get_spectrograms
+from tinydb import TinyDB
 
 def read_speaker_info(speaker_info_path):
     '''
@@ -57,6 +58,8 @@ if __name__ == '__main__':
     sample_rate = int(sys.argv[5])
     n_utts_attr = int(sys.argv[6])
 
+    db = TinyDB(os.path.join(output_dir, 'tinydb.json'))
+        
 
     print('Reading speaker ids')
     speaker_ids = read_speaker_info(data_dir)
@@ -106,7 +109,7 @@ if __name__ == '__main__':
                 print(f'processing {i} files')
             filename = path.strip().split('/')[-1]
             mel, mag = spec_feature_extraction(path)
-            print(mel)
+            db.insert({
             data[filename] = mel
             if dset == 'train' and i < n_utts_attr:
                 all_train_data.append(mel)
