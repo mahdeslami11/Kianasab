@@ -34,7 +34,7 @@ def preprocess(data_path:str):
     :param data_path:   The path to the folder containing the Statsjon speech data.
     '''
     log = Logger()
-    out_put_folder = join(data_path.rsplit(sep, 1)[0], 'Spraakbanken-Corpus-Test')
+    out_put_folder = join(data_path.rsplit(sep, 2)[0], 'Spraakbanken-Corpus-Test')
     if not isdir(out_put_folder):
         os.mkdir(out_put_folder)
     log.write_line(f'# Preprocessing of {data_path}')
@@ -59,15 +59,15 @@ def preprocess(data_path:str):
                 else:
                     log.write_line(f'Copying to {out_speaker}...', verbose=True)
                     os.mkdir(out_speaker)
-                    with open(join(out_speaker, 'meta.json'), 'w+') as meta_file:
+                    with open(join(out_speaker, '{speaker_id}_meta.json'), 'w+') as meta_file:
                         meta_file.write(json.dumps(meta_data, indent=4))
 
                     count = 0
                     for wav in wav_files:
                         if is_valid_wav(wav):
                             count += 1
-                            f = wav.split(sep)[-1]
-                            shutil.copy(wav, join(out_speaker, f))
+                            filename = wav.split(sep)[-1]
+                            shutil.copy(wav, join(out_speaker, f'{speaker_id}_{filename}'))
                             print(f'Copying file {count}...', end='\r')
                         else:
                             print(f'File {wav} was invalid. Could not be opened by librosa')
