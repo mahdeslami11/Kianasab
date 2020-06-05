@@ -34,14 +34,14 @@ def preprocess(data_path:str):
     :param data_path:   The path to the folder containing the Statsjon speech data.
     '''
     log = Logger()
-    out_put_folder = join(data_path.rsplit(sep, 1)[0], 'Spraakbanken-Corpus')
+    out_put_folder = join(data_path.rsplit(sep, 1)[0], 'Spraakbanken-Corpus-Test')
     if not isdir(out_put_folder):
         os.mkdir(out_put_folder)
     log.write_line(f'# Preprocessing of {data_path}')
     log.write_line(f'Danish preprocessed data from Spraakbanken is output to: {out_put_folder}')
 
     #Search for all speaker audio files
-    speaker_paths = glob.glob('/work1/s183921/speaker_data/Spraakbanken-Raw/*/*/*/speech/*/*/*/r*') 
+    speaker_paths = glob.glob(join(data_path, '*/*/*/speech/*/*/*/r*')) 
     for sp in speaker_paths:
         speaker_id = sp.split('/')[-1]
         out_speaker = join(out_put_folder, speaker_id)
@@ -50,7 +50,7 @@ def preprocess(data_path:str):
             wav_files = glob.glob(join(sp, '*.wav'))
             if len(wav_files) > 1:
                 #Change the path to fit your own file structure if needed
-                spl_file = glob.glob(f'/work1/s183921/speaker_data/Spraakbanken-Raw/*/*/*/data/*/*/*/{speaker_id}.spl')[0]
+                spl_file = glob.glob(join(data_path, f'*/*/*/data/*/*/*/{speaker_id}.spl'))[0]
                 #Save speaker and utterance meta data as json
                 meta_data = meta.read_spl_file(speaker_id, spl_file)
                 if 'dialect' not in meta_data.keys():
@@ -78,5 +78,5 @@ if __name__ == '__main__':
     Expects this script to be located on the DTU HPC Server with access to the
     work1 scratch
     '''
-    speaker_data_path = join(f'{sep}work1', 's183921', 'speaker_data', 'Spraakbanken-Raw')
+    speaker_data_path = join(f'{sep}work1', 's183921', 'speaker_data', 'Spraakbanken-Raw', 'da_0611_test')
     preprocess(speaker_data_path)
