@@ -59,7 +59,7 @@ def preprocess(data_path:str):
                 else:
                     log.write_line(f'Copying to {out_speaker}...', verbose=True)
                     os.mkdir(out_speaker)
-                    with open(join(out_speaker, '{speaker_id}_meta.json'), 'w+') as meta_file:
+                    with open(join(out_speaker, f'{speaker_id}_meta.json'), 'w+') as meta_file:
                         meta_file.write(json.dumps(meta_data, indent=4))
 
                     count = 0
