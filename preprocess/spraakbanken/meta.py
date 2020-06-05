@@ -32,7 +32,7 @@ def read_system_info(c, info_dict):
         info_dict['frequency'] = c.split('=')[1]
 
 
-def read_spl_file(speaker_id:str):
+def read_spl_file(speaker_id:str, spl_file:str):
     '''
     Reads the content of a speaker .spl info file for the speaker with the given id
 
@@ -42,9 +42,6 @@ def read_spl_file(speaker_id:str):
     '''
     info_dict = {}
     info_dict['speaker'] = speaker_id
-
-    #Change the path to fit your own file structure if needed
-    spl_file = glob.glob(f'/work1/s183921/speaker_data/Spraakbanken-Raw/*/*/*/data/*/*/*/{speaker_id}.spl')[0]
 
     with open(spl_file, 'r') as spl:
         spl = spl.read().lower()
