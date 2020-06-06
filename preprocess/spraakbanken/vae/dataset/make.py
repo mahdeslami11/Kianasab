@@ -137,7 +137,6 @@ if __name__ == '__main__':
                 print(f'processing {i} files')
             filename = path.strip().split('/')[-1]
             mel, mag = spec_feature_extraction(path)
-            print(mel)
             data[filename] = mel
             if dset == 'train' and i < n_utts_attr:
                 all_train_data.append(mel)

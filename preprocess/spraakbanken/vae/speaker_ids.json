@@ -1,6 +1,7 @@
 {
     "data_dir": "/work1/s183921/speaker_data/Spraakbanken-Corpus-Test",
     "train": [
+        "r6110050",
         "r6110013",
         "r6110015",
         "r6610005",
