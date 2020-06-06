@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
     print('Reading speaker ids')
     print(data_dir[-5:])
-    if not data_dir[-5:] is '.json':
+    if not data_dir.endswith('.json'):
         speaker_ids = read_speaker_info(data_dir)
         random.shuffle(speaker_ids)
 
