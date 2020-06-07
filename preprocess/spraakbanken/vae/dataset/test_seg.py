@@ -4,19 +4,7 @@ import sys
 import os
 import random
 
-def is_int(s:str):
-    try:
-        int(s)
-        return True
-    except:
-        return False
-
-if __name__ == '__main__':
-    pickle_path = sys.argv[1]
-    sample_path = sys.argv[2]
-    n_samples = int(sys.argv[3])
-    segment_size = int(sys.argv[4])
-
+def segment(pickle_path, sample_path, n_samples, segment_size):
     with open(pickle_path, 'rb') as f:
         data = pickle.load(f)
 
@@ -40,4 +28,3 @@ if __name__ == '__main__':
 
     with open(sample_path, 'w+') as f:
         json.dump(samples, f)
-
