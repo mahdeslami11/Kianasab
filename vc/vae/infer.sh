@@ -1,6 +1,6 @@
 #!/bin/bash
-source_folder=$1
-target=$2
+source_folder="/work1/s183921/speaker_data/source_speakers/william_test"
+target="/work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav"
 
 for source in $(ls $source_folder)
     do

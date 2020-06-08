@@ -707,3 +707,8 @@ log/
 
 #don't include submit shell scripts
 *submit*.sh*
+
+#don't include out put or error files from hpc server
+output_*
+error_*
+
