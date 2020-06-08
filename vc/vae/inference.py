@@ -86,9 +86,9 @@ class Inferencer(object):
         return
 
     def inference_from_path(self):
-        source = self.args.source.rsplit(self.args.source, 1)[1]
+        source = self.args.source.rsplit('/', 1)[1]
         source = source.split('.')[0] #remove .wav
-        target = self.args.target.rsplit(self.args.source, 1)[1] #keep .wav
+        target = self.args.target.rsplit('/', 1)[1] #keep .wav
         src_mel, _ = get_spectrograms(self.args.source)
         tar_mel, _ = get_spectrograms(self.args.target)
         src_mel = torch.from_numpy(self.normalize(src_mel)).cuda()
