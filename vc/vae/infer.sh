@@ -9,7 +9,7 @@ for source in $(ls $source_folder/*.wav)
                                 -c /work1/s183921/trained_models/vae/model_danish_10_test/model.config.yaml \
                                 -m /work1/s183921/trained_models/vae/model_danish_10_test/model.ckpt\
                                 -s $source\
-                                -t /work1/s183921/speaker_data/target_speakers/william_test/$target\
-                                -o /work1/s183921/converted_speakers/vae/$source_to_$target.wav
+                                -t $target\
+                                -o /work1/s183921/converted_speakers/vae
         echo "Completed conversion.."
     done
