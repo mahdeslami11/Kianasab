@@ -25,7 +25,7 @@ from os.path import join, basename
 
 def split_data(paths):
     indices = np.arange(len(paths))
-    test_size = 0.1
+    test_size = 0.01
     train_indices, test_indices = train_test_split(indices, test_size=test_size, random_state=1234)
     train_paths = list(np.array(paths)[train_indices])
     test_paths = list(np.array(paths)[test_indices])
@@ -78,8 +78,8 @@ if __name__ == '__main__':
 
     # # On ssh filesystem
     target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus-Test"
-    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/train'
-    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/test'
+    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All/train'
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All/test'
 
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
@@ -131,21 +131,64 @@ if __name__ == '__main__':
     #                 "r5650012"]
 
     # 10 big spraakbanken speakers
-    speaker_used = ['r6110050',  # Target Storkoebenhavn M
-                # 'r6110048',  # Storkoebenhavn F
-                'r6110013',  # Soenderjylland F
-                'r6110015',  # Soenderjylland M
-                'r6610005',  # Fyn F
-                'r6110034',  # Fyn M
-                'r6110049',  # Vestjylland F
-                # 'r6110008',  # Vestjylland M
-                # 'r6110043',  # Oestjylland F
-                'r6110009',  # Oestjylland M
-                'r6110010',  # Nordjylland F
-                # 'r6110011',  # Nordjylland M
-                'r6110032',  # VestSydSjaelland F
-                'r6110044']  # VestSydSjaelland M
+    # speaker_used = ['r6110050',  # Target Storkoebenhavn M
+    #             # 'r6110048',  # Storkoebenhavn F
+    #             'r6110013',  # Soenderjylland F
+    #             'r6110015',  # Soenderjylland M
+    #             'r6610005',  # Fyn F
+    #             'r6110034',  # Fyn M
+    #             'r6110049',  # Vestjylland F
+    #             # 'r6110008',  # Vestjylland M
+    #             # 'r6110043',  # Oestjylland F
+    #             'r6110009',  # Oestjylland M
+    #             'r6110010',  # Nordjylland F
+    #             # 'r6110011',  # Nordjylland M
+    #             'r6110032',  # VestSydSjaelland F
+    #             'r6110044']  # VestSydSjaelland M
 
+    # All big spraakbanken speakers len 42
+    speaker_used = ['r6110005',
+                'r6110007',
+                'r6110008',
+                'r6110009',
+                'r6110010',
+                'r6110011',
+                'r6110012',
+                'r6110013',
+                'r6110014',
+                'r6110015',
+                'r6110018',
+                'r6110019',
+                'r6110020',
+                'r6110021',
+                'r6110022',
+                'r6110023',
+                'r6110024',
+                'r6110025',
+                'r6110026',
+                'r6110027',
+                'r6110028',
+                'r6110030',
+                'r6110031',
+                'r6110032',
+                'r6110033',
+                'r6110034',
+                'r6110035',
+                'r6110036',
+                'r6110037',
+                'r6110038',
+                'r6110039',
+                'r6110040',
+                'r6110041',
+                'r6110042',
+                'r6110043',
+                'r6110044',
+                'r6110046',
+                'r6110047',
+                'r6110048',
+                'r6110049',
+                'r6110050',
+                'r6110051']
 
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
