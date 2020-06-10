@@ -8,7 +8,9 @@ import re
 import numpy as np
 import json
 from tacotron.utils import get_spectrograms
+from tinydb import TinyDB
 
+################################ Train Test Speaker Load  ###################################
 def read_speaker_info(speaker_info_path):
     '''
     Reads all lines of a text-file. Each line is regarded as a path to a speaker audio file.
@@ -58,7 +60,7 @@ def read_json_filenames(json_obj):
                 os.path.join(data_dir, speaker_id, '*.wav'))
 
     return speaker2filenames
-
+#############################################################################################
 
 def spec_feature_extraction(wav_file):
     '''
@@ -79,7 +81,7 @@ if __name__ == '__main__':
     sample_rate = int(sys.argv[5])
     n_utts_attr = int(sys.argv[6])
 
-
+################################ Train Test Speaker Load  ###################################
     print('Reading speaker ids')
     print(data_dir[-5:])
     if not data_dir.endswith('.json'):
@@ -98,6 +100,7 @@ if __name__ == '__main__':
             test_speaker_ids = train_test['test']
             speaker_ids = train_speaker_ids + test_speaker_ids
             speaker2filenames = read_json_filenames(train_test)
+
 
     #Speaker file extraction
     train_path_list, in_test_path_list, out_test_path_list = [], [], []
@@ -124,7 +127,9 @@ if __name__ == '__main__':
         for path in out_test_path_list:
             f.write(f'{path}\n')
 
-    #Feature extraction, mean and variance vectors, saved as pickle
+#############################################################################################
+
+######Feature extraction, mean and variance vectors, saved as pickle
     for dset, path_list in zip(['train', 'in_test', 'out_test'], \
             [train_path_list, in_test_path_list, out_test_path_list]):
 
@@ -154,4 +159,4 @@ if __name__ == '__main__':
             data[key] = val
         with open(output_path, 'wb+') as f:
             pickle.dump(data, f)
-
+#############################################################################################
