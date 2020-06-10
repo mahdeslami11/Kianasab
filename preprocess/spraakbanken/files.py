@@ -8,6 +8,7 @@ import glob
 import json
 import librosa
 import meta
+from argparse import ArgumentParser
 
 def is_valid_wav(fpath):
     '''
@@ -24,7 +25,7 @@ def is_valid_wav(fpath):
     except:
         return False
 
-def preprocess(data_path:str):
+def preprocess(args):
     '''
     Preprocess function for extracting usable wav speaker files from Spraakbanken Danish speech data.
     The function expects the data_path to reference a folder containing Stasjon folders from Spraakbanken.
@@ -34,23 +35,23 @@ def preprocess(data_path:str):
     :param data_path:   The path to the folder containing the Statsjon speech data.
     '''
     log = Logger()
-    out_put_folder = join(data_path.rsplit(sep, 1)[0], 'Spraakbanken-Corpus')
+    out_put_folder = args.out_dir
     if not isdir(out_put_folder):
         os.mkdir(out_put_folder)
     log.write_line(f'# Preprocessing of {data_path}')
     log.write_line(f'Danish preprocessed data from Spraakbanken is output to: {out_put_folder}')
 
     #Search for all speaker audio files
-    speaker_paths = glob.glob('/work1/s183921/speaker_data/Spraakbanken-Raw/*/*/*/speech/*/*/*/r*') 
+    speaker_paths = glob.glob(join(args.data_dir, f'*{sep}*{sep}*{sep}speech{sep}*{se[}*{sep}*{sep}r*'))
     for sp in speaker_paths:
-        speaker_id = sp.split('/')[-1]
+        speaker_id = sp.split(sep)[-1]
         out_speaker = join(out_put_folder, speaker_id)
         if not isdir(out_speaker):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
             if len(wav_files) > 1:
                 #Change the path to fit your own file structure if needed
-                spl_file = glob.glob(f'/work1/s183921/speaker_data/Spraakbanken-Raw/*/*/*/data/*/*/*/{speaker_id}.spl')[0]
+                spl_file = glob.glob(join(args.data_dir, f'*{sep}*{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl'))[0]
                 #Save speaker and utterance meta data as json
                 meta_data = meta.read_spl_file(speaker_id, spl_file)
                 if 'dialect' not in meta_data.keys():
@@ -75,8 +76,10 @@ def preprocess(data_path:str):
 
 if __name__ == '__main__':
     '''
-    Expects this script to be located on the DTU HPC Server with access to the
-    work1 scratch
+    Preprocessing speaker data for wav files stored in the same directory structure as Spraakbanken NST.
     '''
-    speaker_data_path = join(f'{sep}work1', 's183921', 'speaker_data', 'Spraakbanken-Raw')
-    preprocess(speaker_data_path)
+    parser =  ArgumentParser()
+    parser.add_argument('-data_dir', '-d', default='/work1/s183921/speaker_data/Spraakbanken-Raw')
+    parser.add_argument('-out_dir', '-o', default='/work1/s183921/speaker_data/Spraakbanken-Corpus')
+    args = parser.parse_args()
+    preprocess(args)
