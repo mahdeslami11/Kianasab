@@ -14,7 +14,6 @@ from concurrent.futures import ProcessPoolExecutor
 from multiprocessing import cpu_count
 from functools import partial
 from tqdm import tqdm
-# from preprocess import resample, resample_to_16k
 import subprocess
 
 # Imports for convert.py
@@ -116,31 +115,46 @@ class TestDataset(object):
         self.mcep_std_trg = self.trg_spk_stats['coded_sps_std']
 
         # Define target speaker from trained speakers
-        self.speakers = ["r5650072",  # Target speaker
-                         "r5650060",
-                         "r5650006",
-                         "r5650013",
-                         "r5650101",
-                         "r5650044",
-                         "r5650024",
-                         "r5650085",
-                         "r5650103",
-                         "r5650082",
-                         "r5650007",
-                         "r5650080",
-                         "r5650010",
-                         "r5650105",
-                         "r5650114",
-                         "r5650111",
-                         "r5650107",
-                         "r5650109",
-                         "r5650077",
-                         "r5650090",
-                         "r5650096",
-                         "r5650095",
-                         "r5650032",
-                         "r5650055",
-                         "r5650012"]
+        # self.speakers = ["r5650072",  # Target speaker
+        #                  "r5650060",
+        #                  "r5650006",
+        #                  "r5650013",
+        #                  "r5650101",
+        #                  "r5650044",
+        #                  "r5650024",
+        #                  "r5650085",
+        #                  "r5650103",
+        #                  "r5650082",
+        #                  "r5650007",
+        #                  "r5650080",
+        #                  "r5650010",
+        #                  "r5650105",
+        #                  "r5650114",
+        #                  "r5650111",
+        #                  "r5650107",
+        #                  "r5650109",
+        #                  "r5650077",
+        #                  "r5650090",
+        #                  "r5650096",
+        #                  "r5650095",
+        #                  "r5650032",
+        #                  "r5650055",
+        #                  "r5650012"]
+
+        self.speakers = ['r6110050',  # Target Storkoebenhavn M
+                    # 'r6110048',  # Storkoebenhavn F
+                    'r6110013',  # Soenderjylland F
+                    'r6110015',  # Soenderjylland M
+                    'r6610005',  # Fyn F
+                    'r6110034',  # Fyn M
+                    'r6110049',  # Vestjylland F
+                    # 'r6110008',  # Vestjylland M
+                    # 'r6110043',  # Oestjylland F
+                    'r6110009',  # Oestjylland M
+                    'r6110010',  # Nordjylland F
+                    # 'r6110011',  # Nordjylland M
+                    'r6110032',  # VestSydSjaelland F
+                    'r6110044']  # VestSydSjaelland M
 
 
         assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
@@ -157,7 +171,7 @@ class TestDataset(object):
         for i in range(batch_size):
             print(i)
             mcfile = self.mc_files[i]
-            filename = basename(mcfile)#.split('-')[-1]
+            filename = basename(mcfile).split('-')[-1]
             print(filename)
             wavfile_path = join(self.src_wav_dir, filename.replace('npy', 'wav'))
             print(wavfile_path)
@@ -183,7 +197,7 @@ def test(config):
     print(f'Loading the trained models from step {config.resume_iters}...')
     G_path = join(config.model_save_dir, f'{config.resume_iters}-G.ckpt')
     G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
-    print(G)
+    # print(G)
     # Read a batch of testdata
     test_wavfiles = test_loader.get_batch_test_data(batch_size=config.num_converted_wavs)
     test_wavs = [load_wav(wavfile, sampling_rate) for wavfile in test_wavfiles]
@@ -207,7 +221,7 @@ def test(config):
             coded_sp_norm = (coded_sp - test_loader.mcep_mean_src) / test_loader.mcep_std_src
             coded_sp_norm_tensor = torch.FloatTensor(coded_sp_norm.T).unsqueeze_(0).unsqueeze_(1).to(device)
             spk_conds = torch.FloatTensor(test_loader.spk_c_trg).to(device)
-            # print(spk_conds.size())
+            print(spk_conds.size())
             coded_sp_converted_norm = G(coded_sp_norm_tensor, spk_conds).data.cpu().numpy()
             coded_sp_converted = np.squeeze(
                 coded_sp_converted_norm).T * test_loader.mcep_std_trg + test_loader.mcep_mean_trg
@@ -243,13 +257,17 @@ if __name__ == '__main__':
 
     # On August's machine
     sample_rate_default = 16000
-    resume_iters_default = 100000
+    # resume_iters_default = 100000
+    resume_iters_default = 200000
+
     origin_wavpath_default = "../../../newspeakers/wav48"
     target_wavpath_default = "../../../newspeakers/stargan/wav16"
     # mc_dir_train_default = '../../../newspeakers/stargan/mc/'
     mc_dir_test_default = '../../../newspeakers/stargan/mc/'
     logs_dir_default = '../../../newspeakers/stargan/logs'
     models_dir_default = '../../../trained_models/stargan/spraakbanken'
+    # models_dir_default = '../../../trained_models/stargan/10spk_spraakbanken'
+
     converted_dir_default = '../../../converted_speakers/stargan'
 
     # Parser takes inputs for running file as main
@@ -263,7 +281,7 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    parser.add_argument('--trg_spk', type=str, default="r5650072", help='Target speaker (FIXED).')
+    parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
     # Directories of preprocessing and converting

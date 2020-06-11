@@ -196,7 +196,7 @@ def test(config):
     print(f'Loading the trained models from step {config.resume_iters}...')
     G_path = join(config.model_save_dir, f'{config.resume_iters}-G.ckpt')
     G.load_state_dict(torch.load(G_path, map_location=lambda storage, loc: storage))
-    print(G)
+    # print(G)
     # Read a batch of testdata
     test_wavfiles = test_loader.get_batch_test_data(batch_size=config.num_converted_wavs)
     test_wavs = [load_wav(wavfile, sampling_rate) for wavfile in test_wavfiles]
@@ -256,7 +256,7 @@ if __name__ == '__main__':
 
     # On August's machine
     sample_rate_default = 16000
-    resume_iters_default = 80000
+    resume_iters_default = 200000
     origin_wavpath_default = "../../../newspeakers/wav48"
     target_wavpath_default = "../../../newspeakers/stargan/wav16"
     # mc_dir_train_default = '../../../newspeakers/stargan/mc/'

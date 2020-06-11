@@ -26,16 +26,38 @@ def read_speaker_info(speaker_info_path):
 
 def read_filenames(root_dir):
     '''
-    Creates a map with speaker ids as keys and a collection with the speaker's audio files.
+    Creates a map with speaker ids as keys and a collection with the speaker's audio file paths.
     
     :param root_dir:   The root dir of the speaker corpus 
 
-    returns a dictionary with speaker ids mapped to a collection of speaker audio files
+    returns a dictionary with speaker ids mapped to a collection of speaker audio file paths
     '''
     speaker2filenames = defaultdict(lambda : [])
     for path in sorted(glob.glob(os.path.join(root_dir, '*/*.wav'))):
         speaker_id = path.strip().split('/')[-2]
         speaker2filenames[speaker_id].append(path)
+    return speaker2filenames
+
+def read_json_filenames(json_obj):
+    '''
+    Creates a map with speaker ids as keys and a collection with the speaker's audio file paths.
+    
+    :param json_obj:    A json object containing:
+                        :data_dir:  Path to speaker data folder
+                        :train:     Ids of speakers to train on
+                        :test:      Ids of speakers to test on
+
+    returns a dictionary with speaker ids mapped to a collection of speaker audio file paths
+    '''
+    data_dir = json_obj['data_dir']
+    speaker2filenames = defaultdict(lambda : [])
+    for speaker_id in json_obj['train']:
+        speaker2filenames[speaker_id] = glob.glob(
+                os.path.join(data_dir, speaker_id, '*.wav'))
+    for speaker_id in json_obj['test']:
+        speaker2filenames[speaker_id] = glob.glob(
+                os.path.join(data_dir, speaker_id, '*.wav'))
+
     return speaker2filenames
 
 
@@ -62,14 +84,23 @@ if __name__ == '__main__':
         
 
     print('Reading speaker ids')
-    speaker_ids = read_speaker_info(data_dir)
-    random.shuffle(speaker_ids)
+    print(data_dir[-5:])
+    if not data_dir.endswith('.json'):
+        speaker_ids = read_speaker_info(data_dir)
+        random.shuffle(speaker_ids)
 
-    train_speaker_ids = speaker_ids[:-test_speakers]
-    test_speaker_ids = speaker_ids[-test_speakers:]
+        train_speaker_ids = speaker_ids[:-test_speakers]
+        test_speaker_ids = speaker_ids[-test_speakers:]
 
-    print('Reading speaker2filenames')
-    speaker2filenames = read_filenames(data_dir)
+        print('Reading speaker2filenames')
+        speaker2filenames = read_filenames(data_dir)
+    else:
+        with open(data_dir, 'r') as speakers:
+            train_test = json.loads(speakers.read())
+            train_speaker_ids = train_test['train']
+            test_speaker_ids = train_test['test']
+            speaker_ids = train_speaker_ids + test_speaker_ids
+            speaker2filenames = read_json_filenames(train_test)
 
     #Speaker file extraction
     train_path_list, in_test_path_list, out_test_path_list = [], [], []
@@ -109,7 +140,6 @@ if __name__ == '__main__':
                 print(f'processing {i} files')
             filename = path.strip().split('/')[-1]
             mel, mag = spec_feature_extraction(path)
-            db.insert({
             data[filename] = mel
             if dset == 'train' and i < n_utts_attr:
                 all_train_data.append(mel)

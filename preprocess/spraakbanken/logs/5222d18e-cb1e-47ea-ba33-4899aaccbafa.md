@@ -1,0 +1,6 @@
+# Preprocessing of /work1/s183921/speaker_data/Spraakbanken-Raw/da_0611_test
+Danish preprocessed data from Spraakbanken is output to: /work1/s183921/speaker_data/Spraakbanken-Corpus-Test
+Found new speaker r6110047
+Copying to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110047...
+Found new speaker r6110005
+Copying to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110005...

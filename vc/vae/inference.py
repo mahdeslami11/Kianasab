@@ -3,6 +3,7 @@ sys.path.append('/work1/s183921/fagprojekt2020/')
 import torch
 import numpy as np
 import os
+from os.path import join
 import torch.nn as nn
 import torch.nn.functional as F
 import yaml
@@ -85,12 +86,15 @@ class Inferencer(object):
         return
 
     def inference_from_path(self):
+        source = self.args.source.rsplit('/', 1)[1]
+        source = source.split('.')[0] #remove .wav
+        target = self.args.target.rsplit('/', 1)[1] #keep .wav
         src_mel, _ = get_spectrograms(self.args.source)
         tar_mel, _ = get_spectrograms(self.args.target)
         src_mel = torch.from_numpy(self.normalize(src_mel)).cuda()
         tar_mel = torch.from_numpy(self.normalize(tar_mel)).cuda()
         conv_wav, conv_mel = self.inference_one_utterance(src_mel, tar_mel)
-        self.write_wav_to_file(conv_wav, self.args.output)
+        self.write_wav_to_file(conv_wav, join(self.args.output, f'{source}_to_{target}'))
         return
 
 if __name__ == '__main__':
@@ -101,7 +105,7 @@ if __name__ == '__main__':
     parser.add_argument('-source', '-s', help='source wav path')
     parser.add_argument('-target', '-t', help='target wav path')
     parser.add_argument('-output', '-o', help='output wav path')
-    parser.add_argument('-sample_rate', '-sr', help='sample rate', default=24000, type=int)
+    parser.add_argument('-sample_rate', '-sr', help='sample rate', default=16000, type=int)
     args = parser.parse_args()
     # load config file
     with open(args.config) as f:
