@@ -26,7 +26,7 @@ class ResidualBlock(nn.Module):
 
 class Generator(nn.Module):
     """Generator network."""
-    def __init__(self, conv_dim=64, num_speakers=42, repeat_num=6):  # Specified
+    def __init__(self, conv_dim=64, num_speakers=10, repeat_num=6):  # Specified
         super(Generator, self).__init__()
         c_dim = num_speakers
         layers = []
@@ -66,7 +66,7 @@ class Generator(nn.Module):
 
 class Discriminator(nn.Module):
     """Discriminator network with PatchGAN."""
-    def __init__(self, input_size=(36, 256), conv_dim=64, repeat_num=5, num_speakers=42):  # Specified
+    def __init__(self, input_size=(36, 256), conv_dim=64, repeat_num=5, num_speakers=10):  # Specified
         super(Discriminator, self).__init__()
         layers = []
         layers.append(nn.Conv2d(1, conv_dim, kernel_size=4, stride=2, padding=1))
