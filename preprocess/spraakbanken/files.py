@@ -40,6 +40,7 @@ def preprocess(args):
             if len(wav_files) > 1:
                 #Change the path to fit your own file structure if needed
                 print(f'{station}{sep}{substation}{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl')
+                print(args.data_dir)
                 spl_file = glob.glob(join(args.data_dir, 
                     f'{station}{sep}{substation}{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl'))[0]
                 #Save speaker and utterance meta data as json
