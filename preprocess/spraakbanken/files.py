@@ -1,29 +1,14 @@
 import sys
 import os
-import shutil
 from os import listdir, sep
 from os.path import isdir, join, isfile
 from logger import Logger
 import glob
 import json
 import librosa
+import soundfile as sf
 import meta
 from argparse import ArgumentParser
-
-def is_valid_wav(fpath):
-    '''
-    Test if a given wav file is valid by testing if scipy can read the file.
-
-    :param fpath:   Path of the wav file to validate
-
-    Returns:        True if the wav file can be opened without any exception errors.
-                    False otherwise.
-    '''
-    try:
-        librosa.load(fpath)
-        return True
-    except:
-        return False
 
 def preprocess(args):
     '''
@@ -65,13 +50,14 @@ def preprocess(args):
 
                     count = 0
                     for wav in wav_files:
-                        if is_valid_wav(wav):
+                        try:
                             count += 1
                             filename = wav.split(sep)[-1]
-                            shutil.copy(wav, join(out_speaker, f'{speaker_id}_{filename}'))
+                            x, _ = librosa.load(wav, sr=16000)
+                            sf.write(join(out_speaker, f'{speaker_id}_{filename}'), x, 16000)
                             print(f'Copying file {count}...', end='\r')
-                        else:
-                            print(f'File {wav} was invalid. Could not be opened by librosa')
+                        except:
+                            print(f'File {wav} was invalid')
 
 
 if __name__ == '__main__':
