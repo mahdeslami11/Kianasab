@@ -25,7 +25,7 @@ from os.path import join, basename
 
 def split_data(paths):
     indices = np.arange(len(paths))
-    test_size = 0.01
+    test_size = 0.05
     train_indices, test_indices = train_test_split(indices, test_size=test_size, random_state=1234)
     train_paths = list(np.array(paths)[train_indices])
     test_paths = list(np.array(paths)[test_indices])
@@ -78,8 +78,8 @@ if __name__ == '__main__':
 
     # # On ssh filesystem
     target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus-Test"
-    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All/train'
-    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All/test'
+    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/train'
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/test'
 
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
@@ -167,28 +167,28 @@ if __name__ == '__main__':
                 'r6110025',
                 'r6110026',
                 'r6110027',
-                'r6110028',
-                'r6110030',
-                'r6110031',
-                'r6110032',
-                'r6110033',
-                'r6110034',
-                'r6110035',
-                'r6110036',
-                'r6110037',
-                'r6110038',
-                'r6110039',
-                'r6110040',
-                'r6110041',
-                'r6110042',
-                'r6110043',
-                'r6110044',
-                'r6110046',
-                'r6110047',
-                'r6110048',
-                'r6110049',
-                'r6110050',
-                'r6110051']
+                'r6110028']#,
+                # 'r6110030',
+                # 'r6110031',
+                # 'r6110032',
+                # 'r6110033',
+                # 'r6110034',
+                # 'r6110035',
+                # 'r6110036',
+                # 'r6110037',
+                # 'r6110038',
+                # 'r6110039',
+                # 'r6110040',
+                # 'r6110041',
+                # 'r6110042',
+                # 'r6110043',
+                # 'r6110044',
+                # 'r6110046',
+                # 'r6110047',
+                # 'r6110048',
+                # 'r6110049',
+                # 'r6110050',
+                # 'r6110051']
 
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
