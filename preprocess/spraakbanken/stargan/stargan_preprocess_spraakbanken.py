@@ -25,7 +25,7 @@ from os.path import join, basename
 
 def split_data(paths):
     indices = np.arange(len(paths))
-    test_size = 0.01
+    test_size = 0.05
     train_indices, test_indices = train_test_split(indices, test_size=test_size, random_state=1234)
     train_paths = list(np.array(paths)[train_indices])
     test_paths = list(np.array(paths)[test_indices])
@@ -78,8 +78,8 @@ if __name__ == '__main__':
 
     # # On ssh filesystem
     target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus-Test"
-    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All/train'
-    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All/test'
+    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/train'
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/test'
 
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
@@ -147,27 +147,27 @@ if __name__ == '__main__':
     #             'r6110044']  # VestSydSjaelland M
 
     # All big spraakbanken speakers len 42
-    speaker_used = ['r6110005',
-                'r6110007',
-                'r6110008',
-                'r6110009',
-                'r6110010',
-                'r6110011',
-                'r6110012',
-                'r6110013',
-                'r6110014',
-                'r6110015',
-                'r6110018',
-                'r6110019',
-                'r6110020',
-                'r6110021',
-                'r6110022',
-                'r6110023',
-                'r6110024',
-                'r6110025',
-                'r6110026',
-                'r6110027',
-                'r6110028',
+    speaker_used = [#'r6110005',
+    #             'r6110007',
+    #             'r6110008',
+    #             'r6110009',
+    #             'r6110010',
+    #             'r6110011',
+    #             'r6110012',
+    #             'r6110013',
+    #             'r6110014',
+    #             'r6110015',
+    #             'r6110018',
+    #             'r6110019',
+    #             'r6110020',
+    #             'r6110021',
+    #             'r6110022',
+    #             'r6110023',
+    #             'r6110024',
+    #             'r6110025',
+    #             'r6110026',
+    #             'r6110027',
+    #             'r6110028',
                 'r6110030',
                 'r6110031',
                 'r6110032',

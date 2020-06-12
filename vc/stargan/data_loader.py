@@ -97,77 +97,66 @@ min_length = 256   # Since we slice 256 frames from each utterance when training
 #             "r5650012"]
 
 # 10 big spraakbanken speakers
-# speakers = ['r6110050',  # Target Storkoebenhavn M
-#             # 'r6110048',  # Storkoebenhavn F
-#             'r6110013',  # Soenderjylland F
-#             'r6110015',  # Soenderjylland M
-#             'r6610005',  # Fyn F
-#             'r6110034',  # Fyn M
-#             'r6110049',  # Vestjylland F
-#             # 'r6110008',  # Vestjylland M
-#             # 'r6110043',  # Oestjylland F
-#             'r6110009',  # Oestjylland M
-#             'r6110010',  # Nordjylland F
-#             # 'r6110011',  # Nordjylland M
-#             'r6110032',  # VestSydSjaelland F
-#             'r6110044']  # VestSydSjaelland
-
-speakers = ['r6110005',
-            'r6110007',
-            'r6110008',
-            'r6110009',
-            'r6110010',
-            'r6110011',
-            'r6110012',
-            'r6110013',
-            'r6110014',
-            'r6110015',
-            'r6110018',
-            'r6110019',
-            'r6110020',
-            'r6110021',
-            'r6110022',
-            'r6110023',
-            'r6110024',
-            'r6110025',
-            'r6110026',
-            'r6110027',
-            'r6110028',
-            'r6110030',
-            'r6110031',
-            'r6110032',
-            'r6110033',
-            'r6110034',
-            'r6110035',
-            'r6110036',
-            'r6110037',
-            'r6110038',
-            'r6110039',
-            'r6110040',
-            'r6110041',
-            'r6110042',
-            'r6110043',
-            'r6110044',
-            'r6110046',
-            'r6110047',
-            'r6110048',
-            'r6110049',
-            'r6110050',
-            'r6110051']
+speakers = ['r6110050',  # Target Storkoebenhavn M
+            # 'r6110048',  # Storkoebenhavn F
+            # 'r6110013',  # Soenderjylland F
+            'r6110015',  # Soenderjylland M
+            # 'r6610005',  # Fyn F
+            'r6110034',  # Fyn M
+            # 'r6110049',  # Vestjylland F
+            # 'r6110008',  # Vestjylland M
+            # 'r6110043',  # Oestjylland F
+            'r6110009',  # Oestjylland M
+            # 'r6110010',  # Nordjylland F
+            # 'r6110011',  # Nordjylland M
+            # 'r6110032',  # VestSydSjaelland F
+            'r6110044']  # VestSydSjaelland M
 
 
+# ALl spraakbanken-Test speakers
+# speakers = ['r6110005',
+#             'r6110007',
+#             'r6110008',
+#             'r6110009',
+#             'r6110010',
+#             'r6110011',
+#             'r6110012',
+#             'r6110013',
+#             'r6110014',
+#             'r6110015',
+#             'r6110018',
+#             'r6110019',
+#             'r6110020',
+#             'r6110021',
+#             'r6110022',
+#             'r6110023',
+#             'r6110024',
+#             'r6110025',
+#             'r6110026',
+#             'r6110027',
+#             'r6110028',
+#             'r6110030',
+#             'r6110031',
+#             'r6110032',
+#             'r6110033',
+#             'r6110034',
+#             'r6110035',
+#             'r6110036',
+#             'r6110037',
+#             'r6110038',
+#             'r6110039',
+#             'r6110040',
+#             'r6110041',
+#             'r6110042',
+#             'r6110043',
+#             'r6110044',
+#             'r6110046',
+#             'r6110047',
+#             'r6110048',
+#             'r6110049',
+#             'r6110050',
+#             'r6110051']
 
-# 10 VCTK speakers
-# speakers = ['p262',
-#             'p272',
-#             'p229',
-#             'p232',
-#             'p292',
-#             'p293',
-#             'p360',
-#             'p361',
-#             'p248',
-#             'p251']
 
 spk2idx = dict(zip(speakers, range(len(speakers))))
 
@@ -241,7 +230,7 @@ class MyDataset(data.Dataset):
 
 class TestDataset(object):
     """Dataset for testing."""
-    def __init__(self, data_dir, wav_dir, src_spk="r6110013", trg_spk="r6110050"):  # Specified
+    def __init__(self, data_dir, wav_dir, src_spk="r6110009", trg_spk="r6110050"):  # Specified
         self.src_spk = src_spk
         self.trg_spk = trg_spk
         self.mc_files = sorted(glob.glob(join(data_dir, '{}*.npy'.format(self.src_spk))))
