@@ -60,3 +60,5 @@ def train_test_validation_split(data_dir, path_out_dir):
     with open(os.path.join(path_output_dir, 'out_test_files.txt'), 'w+') as f:
         for path in validation_data_paths:
             f.write(f'{path}\n')
+
+    return train_path_list, in_test_path_list, out_test_path_list
