@@ -156,6 +156,49 @@ class TestDataset(object):
                     'r6110032',  # VestSydSjaelland F
                     'r6110044']  # VestSydSjaelland M
 
+        # ALl spraakbanken-Test speakers
+        # self.speakers = ['r6110005',
+        #             'r6110007',
+        #             'r6110008',
+        #             'r6110009',
+        #             'r6110010',
+        #             'r6110011',
+        #             'r6110012',
+        #             'r6110013',
+        #             'r6110014',
+        #             'r6110015',
+        #             'r6110018',
+        #             'r6110019',
+        #             'r6110020',
+        #             'r6110021',
+        #             'r6110022',
+        #             'r6110023',
+        #             'r6110024',
+        #             'r6110025',
+        #             'r6110026',
+        #             'r6110027',
+        #             'r6110028',
+        #             'r6110030',
+        #             'r6110031',
+        #             'r6110032',
+        #             'r6110033',
+        #             'r6110034',
+        #             'r6110035',
+        #             'r6110036',
+        #             'r6110037',
+        #             'r6110038',
+        #             'r6110039',
+        #             'r6110040',
+        #             'r6110041',
+        #             'r6110042',
+        #             'r6110043',
+        #             'r6110044',
+        #             'r6110046',
+        #             'r6110047',
+        #             'r6110048',
+        #             'r6110049',
+        #             'r6110050',
+        #             'r6110051']
 
         assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
         spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
@@ -191,7 +234,7 @@ def test(config):
     sampling_rate, num_mcep, frame_period = 16000, 36, 5
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    G = Generator(num_speakers=config.num_speakers).to(device)  # Now we should'nt have to change num_speakers in model.py
+    G = Generator(num_speakers=10).to(device)  # Now we should'nt have to change num_speakers in model.py
     test_loader = TestDataset(config)
     # Restore model
     print(f'Loading the trained models from step {config.resume_iters}...')
@@ -281,7 +324,8 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')
+    # parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')
+    parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
     # Directories of preprocessing and converting
