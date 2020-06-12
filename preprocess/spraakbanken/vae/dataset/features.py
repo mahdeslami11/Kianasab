@@ -10,7 +10,7 @@ def __get_spectrograms(path_list,n_utts_attr, db:TinyDB):
             print(f'processing {i} files')
         filename = path.strip().split('/')[-1]
         mel, mag = get_spectrograms(path)
-        db.insert({'key': filename, 'val': mel})
+        db.insert({'key': filename, 'val': mel.tolist()})
         if dset == 'train' and i < n_utts_attr:
             train.append(mel)
 
@@ -18,15 +18,14 @@ def __get_spectrograms(path_list,n_utts_attr, db:TinyDB):
 
 ######Feature extraction, mean and variance vectors, saved as pickle
 def extract(train_path_list, in_test_path_list, out_test_path_list, 
-            n_utts_attr, out_dir):
-    
-    db = TinyDB(os.join(out_dir, 'spectrograms.json'))
+        n_utts_attr, out_dir):
 
     for dset, path_list in zip(['train', 'in_test', 'out_test'], \
             [train_path_list, in_test_path_list, out_test_path_list]):
 
+        db = TinyDB(os.join(out_dir, f'{dset}.json'))
+
         print(f'processing {dset} set, {len(path_list)} files')
-        data = {}
         all_train_data = __get_spectrograms(path_list, n_utts_attr, db)
         #Extrating mean and standard deviation for training data and saves it in .pkl
         if dset == 'train':
@@ -39,5 +38,6 @@ def extract(train_path_list, in_test_path_list, out_test_path_list,
         #Normalizing mel spectrogram data
         Q = Query()
         for record in db.all():
-           val = (record['val']-mean) / std 
-           db.update({'key': record['key'], 'val': val}, Q.key == record['key']})
+            val = np.asarray(record['val'])
+            val = (val-mean) / std 
+            db.update({'key': record['key'], 'val': val.tolist()}, Q.key == record['key']})

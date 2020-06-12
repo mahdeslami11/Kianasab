@@ -11,6 +11,7 @@ def is_int(s:str):
     except:
         return False
 
+#TODO rewrite to work with tinydb
 if __name__ == '__main__':
     pickle_path = sys.argv[1]
     sample_path = sys.argv[2]

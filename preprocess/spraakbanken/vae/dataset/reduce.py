@@ -1,5 +1,6 @@
 import sys
 from TinyDB import TinyDB, Query
+import numpy as np
 
 if __name__ == '__main__':
     db_path = sys.argv[1]
@@ -10,5 +11,6 @@ if __name__ == '__main__':
     reduced_db = TinyDB(output_path)
 
     for record in db.all():
-        if record['val'].shape[0] > segment_size:
+        val = np.asarray(record['val'])
+        if val.shape[0] > segment_size:
             reduced_db.insert(record)
