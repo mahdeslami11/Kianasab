@@ -3,7 +3,7 @@ import numpy as np
 import os
 from spectrogramdb import SpectrogramDB
 
-def __get_spectrograms(path_list,n_utts_attr, db:SpectrogramDB):
+def __get_spectrograms(dset, path_list,n_utts_attr, db:SpectrogramDB):
     all_train_data = []
     for i, path in enumerate(sorted(path_list)):
         if i % 500 == 0 or i == len(path_list) - 1:
@@ -29,7 +29,7 @@ def extract(train_path_list, in_test_path_list, out_test_path_list,
 
         db = SpectrogramDB(os.path.join(out_dir, f'{dset}.json'), overwrite=True)
         print(f'processing {dset} set, {len(path_list)} files')
-        all_train_data = __get_spectrograms(path_list, n_utts_attr, db)
+        all_train_data = __get_spectrograms(dset, path_list, n_utts_attr, db)
         #Extrating mean and standard deviation for training data and saves it in .pkl
         if dset == 'train':
             all_train_data = np.concatenate(all_train_data)
