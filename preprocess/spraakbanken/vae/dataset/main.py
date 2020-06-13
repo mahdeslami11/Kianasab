@@ -3,7 +3,6 @@ import re
 import numpy as np
 import json
 from tacotron.utils import get_spectrograms
-from tinydb import TinyDB
 import speaker
 import features
 from argparse import ArgumentParser
@@ -21,9 +20,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    #Json database for saving speaker wav spectrograms
-    db = TinyDB(os.path.join(args.out_dir, args.database_name))
-
     train_path_list, in_test_path_list, out_test_path_list = speaker.train_test_validation_split(args.data_dir, args.out_dir)
 
-    features.extract(train_path_list, in_test_path_list, out_test_path_list, args.n_utts_attr, db)
+    features.extract(train_path_list, in_test_path_list, out_test_path_list, args.n_utts_attr, args.out_dir)

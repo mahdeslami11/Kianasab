@@ -5,10 +5,9 @@ import os
 import torch.nn as nn
 import torch.nn.functional as F
 import yaml
-import pickle
 from model import AE
 from data_utils import get_data_loader
-from data_utils import PickleDataset
+from data_utils import SpectrogramDBDataset
 from utils import *
 from functools import reduce
 from collections import defaultdict
@@ -56,7 +55,7 @@ class Solver(object):
 
     def get_data_loaders(self):
         data_dir = self.args.data_dir
-        self.train_dataset = PickleDataset(os.path.join(data_dir, f'{self.args.train_set}.pkl'), 
+        self.train_dataset = SpectrogramDBDataset(os.path.join(data_dir, f'{self.args.train_set}.pkl'), 
                 os.path.join(data_dir, self.args.train_index_file), 
                 segment_size=self.config['data_loader']['segment_size'])
         self.train_loader = get_data_loader(self.train_dataset,
