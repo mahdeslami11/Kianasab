@@ -23,7 +23,7 @@ def extract(train_path_list, in_test_path_list, out_test_path_list,
     for dset, path_list in zip(['train', 'in_test', 'out_test'], \
             [train_path_list, in_test_path_list, out_test_path_list]):
 
-        db = SpectrogramDB(os.join(out_dir, f'{dset}.json'))
+        db = SpectrogramDB(os.join(out_dir, f'{dset}.json'), overwrite=True)
 
         print(f'processing {dset} set, {len(path_list)} files')
         all_train_data = __get_spectrograms(path_list, n_utts_attr, db)

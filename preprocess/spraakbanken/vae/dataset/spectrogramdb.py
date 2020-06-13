@@ -1,8 +1,11 @@
+import os
 from numpy import ndarray, asarray
 from tinydb import TinyDB, Query
 
 class SpectrogramDB(TinyDB):
-    def __init__(self, db_path:str):
+    def __init__(self, db_path:str, overwrite=False):
+        if overwrite and os.path.exists(db_path):
+            os.remove(db_path)
         self.query = Query()
         super().__init__(db_path)
 
