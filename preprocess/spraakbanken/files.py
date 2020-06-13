@@ -33,7 +33,7 @@ def preprocess(args):
         station = split_path[5]
         substation = split_path[6]
         speaker_id = split_path[-1]
-        out_speaker = join(out_put_folder, station, substation, speaker_id)
+        out_speaker = join(out_put_folder, f'{station}_{substation}_{speaker_id}')
         if not isdir(out_speaker):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
