@@ -1,5 +1,6 @@
 import os
 import utils
+import random
 
 def __train_test_split(train_speaker_ids, speaker2filenames, test_proportion):
     train_path_list, test_path_list = [], []
