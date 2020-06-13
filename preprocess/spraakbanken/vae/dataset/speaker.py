@@ -25,7 +25,7 @@ def __validation_data(test_speaker_ids, speaker2filenames):
     return out_test_path_list
 
 
-def train_test_validation_split(data_dir, path_out_dir, test_proportion):
+def train_test_validation_split(data_dir, path_output_dir, test_proportion):
     '''
     Reads data from a data location with speaker audio files and 
     splits it into training, test, and validation speaker data.
