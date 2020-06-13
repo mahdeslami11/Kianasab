@@ -38,7 +38,7 @@ def train_test_validation_split(args):
     :returns:               
     '''
     data_dir = args.data_dir
-    path_output_dir = args.path_output_dir
+    path_output_dir = args.out_dir
     test_proportion = args.test_proportion
     validation_speakers = args.validation_speakers
 
