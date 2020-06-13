@@ -47,7 +47,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Model configuration.
-    parser.add_argument('--num_speakers', type=int, default=5, help='dimension of speaker labels')  # Specified
+    parser.add_argument('--num_speakers', type=int, default=42, help='dimension of speaker labels')  # Specified
     parser.add_argument('--lambda_cls', type=float, default=10, help='weight for domain classification loss')  # Specified
     parser.add_argument('--lambda_rec', type=float, default=10, help='weight for reconstruction loss')  # Specified
     parser.add_argument('--lambda_gp', type=float, default=10, help='weight for gradient penalty')  # Specified
@@ -89,12 +89,12 @@ if __name__ == '__main__':
     # parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken')
 
     # Directories on SSH big spraakbanken dataset
-    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/train')
-    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/test')
+    parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/train')
+    parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/test')
     parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus-Test")
     parser.add_argument('--log_dir', type=str, default='/work1/s183921/trained_models/stargan/logs/spraakbanken')
-    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken-Test-5Male')
-    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken-Test-5Male')
+    parser.add_argument('--model_save_dir', type=str, default='/work1/s183921/trained_models/stargan/spraakbanken-Test-42')
+    parser.add_argument('--sample_dir', type=str, default='/work1/s183921/trained_models/stargan/samples/spraakbanken-Test-42')
 
     # Directories on SSH training VCTK
     # parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/speaker_data/mc/train')
