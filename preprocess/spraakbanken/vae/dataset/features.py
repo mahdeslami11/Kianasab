@@ -1,4 +1,4 @@
-from tacotron.utils import get_spectrograms, spec_feature_extraction
+from tacotron.utils import get_spectrograms
 import numpy as np
 import os
 from spectrogramdb import SpectrogramDB
