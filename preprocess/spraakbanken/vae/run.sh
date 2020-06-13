@@ -1,7 +1,7 @@
 . preprocess.config
 
 if [ $stage -le 0 ]; then
-    python dataset/main.py -d $raw_data_dir -o $data_dir -vs $validation_speakers -ts $test_prop -sr $sample_rate -u $n_utt_attr
+    python dataset/main.py -d $raw_data_dir -o $data_dir -vs $validation_speakers -tp $test_prop -sr $sample_rate -u $n_utt_attr
 fi
 
 if [ $stage -le 1 ]; then
