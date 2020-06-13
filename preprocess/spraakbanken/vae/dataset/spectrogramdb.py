@@ -24,3 +24,6 @@ class SpectrogramDB():
 
     def get_vals(self):
         return [asarray(record['val']) for record in self.db.all()]
+
+    def all(self):
+        return self.db.all()
