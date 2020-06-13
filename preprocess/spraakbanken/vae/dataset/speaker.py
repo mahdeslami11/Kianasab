@@ -25,7 +25,7 @@ def __validation_data(test_speaker_ids, speaker2filenames):
     return out_test_path_list
 
 
-def train_test_validation_split(data_dir, path_output_dir, test_proportion):
+def train_test_validation_split(args data_dir, path_output_dir, test_proportion):
     '''
     Reads data from a data location with speaker audio files and 
     splits it into training, test, and validation speaker data.
@@ -37,12 +37,17 @@ def train_test_validation_split(data_dir, path_output_dir, test_proportion):
 
     :returns:               
     '''
+    data_dir = args.data_dir
+    path_output_dir = args.path_output_dir
+    test_proportion = args.test_proportion
+    validation_speakers = args.validation_speakers
+
     if data_dir.endswith('.json'):
         print(f'Reading from json train_test file: {data_dir}')
         train_speaker_ids, test_speaker_ids, speaker2filenames = utils.load_from_json(data_dir)
     else:
         print(f'Reading from directory: {data_dir}')
-        train_speaker_ids, test_speaker_ids, speaker2filenames = utils.load_from_dir(data_dir)
+        train_speaker_ids, test_speaker_ids, speaker2filenames = utils.load_from_dir(data_dir, validation_speakers)
 
     print('Splitting training data into training and test')
     print(f'Using {1-test_proportion} training and {test_proportion} test proportions')

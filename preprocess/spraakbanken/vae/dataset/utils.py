@@ -54,14 +54,14 @@ def read_json_filenames(json_obj):
 
     return speaker2filenames
 
-def load_from_dir(data_dir, test_speakers):
+def load_from_dir(data_dir, validation_speakers):
     print('Reading speaker ids')
     speaker_ids = read_speaker_info(data_dir)
     random.shuffle(speaker_ids)
 
     print('Splitting into train and test speakers')
-    train_speaker_ids = speaker_ids[:-test_speakers]
-    test_speaker_ids = speaker_ids[-test_speakers:]
+    train_speaker_ids = speaker_ids[:-validation_speakers]
+    test_speaker_ids = speaker_ids[-validation_speakers:]
 
     print('Reading speaker2filenames')
     speaker2filenames = read_filenames(data_dir)
