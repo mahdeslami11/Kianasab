@@ -62,4 +62,4 @@ def train_test_validation_split(data_dir, path_output_dir, test_proportion):
         for path in validation_data_paths:
             f.write(f'{path}\n')
 
-    return train_path_list, in_test_path_list, out_test_path_list
+    return train_data_paths, test_data_paths, validation_data_paths
