@@ -38,6 +38,7 @@ def preprocess(args):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
             if len(wav_files) > 1:
+                print(f'{station}{sep}{substation}{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl')
                 #Change the path to fit your own file structure if needed
                 spl_file = glob.glob(join(args.data_dir, 
                     f'{station}{sep}{substation}{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl'))[0]
