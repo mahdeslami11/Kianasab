@@ -11,7 +11,7 @@ def __train_test_split(train_speaker_ids, speaker2filenames, test_proportion):
         random.shuffle(path_list)
         test_data_size = int(len(path_list) * test_proportion) #test_proportion defined in config file
         train_path_list += path_list[:-test_data_size]
-        in_test_path_list += path_list[-test_data_size:]
+        test_path_list += path_list[-test_data_size:]
 
     return train_path_list, test_path_list
 
