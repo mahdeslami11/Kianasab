@@ -54,7 +54,7 @@ def read_json_filenames(json_obj):
 
     return speaker2filenames
 
-def load_from_json(data_dir, test_speakers):
+def load_from_dir(data_dir, test_speakers):
     print('Reading speaker ids')
     speaker_ids = read_speaker_info(data_dir)
     random.shuffle(speaker_ids)
@@ -68,7 +68,7 @@ def load_from_json(data_dir, test_speakers):
 
     return train_speaker_ids, test_speaker_ids, speaker2filenames
 
-def load_from_dir(data_dir):
+def load_from_json(data_dir):
     with open(data_dir, 'r') as speakers:
         print('Reading train and test speakers')
         train_test = json.loads(speakers.read())
