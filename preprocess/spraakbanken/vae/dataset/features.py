@@ -11,7 +11,6 @@ def __get_spectrograms(path_list,n_utts_attr, db:SpectrogramDB):
         filename = path.strip().split('/')[-1]
         mel, mag = get_spectrograms(path)
         db.insert_spectrogram(filename,mel)
-        print(f'Records in database {len(db.all())}')
         if dset == 'train' and i < n_utts_attr:
             all_train_data.append(mel)
 
@@ -20,6 +19,10 @@ def __get_spectrograms(path_list,n_utts_attr, db:SpectrogramDB):
 ######Feature extraction, mean and variance vectors, saved as pickle
 def extract(train_path_list, in_test_path_list, out_test_path_list, 
         n_utts_attr, out_dir):
+
+    print(f'Train paths: {len(train_path_list)}')
+    print(f'In Test paths: {len(in_test_path_list)}')
+    print(f'Out Test paths: {len(out_test_path_list)}')
 
     for dset, path_list in zip(['train', 'in_test', 'out_test'], \
             [train_path_list, in_test_path_list, out_test_path_list]):
