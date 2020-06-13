@@ -11,12 +11,14 @@ if __name__ == '__main__':
     segment_size = int(sys.argv[4])
 
     db = SpectrogramDB(db_path)
+    print(f'Spectrogram Database has {len(db.all())} records')
 
     # (utt_id, timestep, neg_utt_id, neg_timestep)
     samples = []
 
     # filter length > segment_size
     utt_list = db.get_keys()
+    print(f'Loaded {len(utt_list) keys')
     utt_list = sorted(list(filter(lambda u : len(db.get_spectrogram(u)) > segment_size, utt_list)))
     print(f'{len(utt_list)} utterances')
     sample_utt_index_list = random.choices(range(len(utt_list)), k=n_samples)
