@@ -37,7 +37,7 @@ def train_test_validation_split(data_dir, path_output_dir, test_proportion):
 
     :returns:               
     '''
-    if not data_dir.endswith('.json'):
+    if data_dir.endswith('.json'):
         print(f'Reading from json train_test file: {data_dir}')
         train_speaker_ids, test_speaker_ids, speaker2filenames = utils.load_from_json(data_dir)
     else:
