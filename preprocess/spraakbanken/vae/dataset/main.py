@@ -20,6 +20,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    train_path_list, in_test_path_list, out_test_path_list = speaker.train_test_validation_split(args.data_dir, args.out_dir)
+    train_path_list, in_test_path_list, out_test_path_list = speaker.train_test_validation_split(
+                                                                args.data_dir, args.out_dir, args.test_proportion)
 
     features.extract(train_path_list, in_test_path_list, out_test_path_list, args.n_utts_attr, args.out_dir)
