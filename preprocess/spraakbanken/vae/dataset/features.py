@@ -12,7 +12,7 @@ def __get_spectrograms(path_list,n_utts_attr, db:SpectrogramDB):
         mel, mag = get_spectrograms(path)
         db.insert_spectrogram(filename,mel)
         if dset == 'train' and i < n_utts_attr:
-            train.append(mel)
+            all_train_data.append(mel)
 
     return all_train_data
 
@@ -24,7 +24,6 @@ def extract(train_path_list, in_test_path_list, out_test_path_list,
             [train_path_list, in_test_path_list, out_test_path_list]):
 
         db = SpectrogramDB(os.join(out_dir, f'{dset}.json'), overwrite=True)
-
         print(f'processing {dset} set, {len(path_list)} files')
         all_train_data = __get_spectrograms(path_list, n_utts_attr, db)
         #Extrating mean and standard deviation for training data and saves it in .pkl
@@ -36,7 +35,6 @@ def extract(train_path_list, in_test_path_list, out_test_path_list,
             with open(os.path.join(output_dir, 'attr.pkl'), 'wb+') as f:
                 pickle.dump(attr, f)
         #Normalizing mel spectrogram data
-        Q = Query()
         for key in db.get_keys():
             spectrogram = db.get_spectrogram(key)
             normalized_spectrogram = (val-mean) / std 
