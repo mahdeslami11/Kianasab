@@ -30,8 +30,11 @@ def preprocess(args):
     speaker_paths = glob.glob(join(args.data_dir, f'*{sep}*{sep}*{sep}speech{sep}*{sep}*{sep}*{sep}r*'))
     for sp in speaker_paths:
         split_path = sp.split(sep)
+        print(f'Split path: {split_path}')
         station = split_path[0]
+        print(f'station: {station}')
         substation = split_path[1]
+        print(f'substation: {substation}')
         speaker_id = split_path[-1]
         out_speaker = join(out_put_folder, station, substation, speaker_id)
         if not isdir(out_speaker):
