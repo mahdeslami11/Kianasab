@@ -13,7 +13,7 @@ if __name__ == '__main__':
     parser.add_argument('-data_dir', '-d', default='/work1/s183921/speaker_data/Spraakbanken-Corpus')
     parser.add_argument('-out_dir', '-o', default='/work1/s183921/preprocessed_data/vae/spraakbanken')
     parser.add_argument('-validation_speakers', '-vs', default=20, type=int)
-    parser.add_argument('-test_proportion', '-tp', default=0.1, type=int)
+    parser.add_argument('-test_proportion', '-tp', default=0.1, type=float)
     parser.add_argument('-sample_rate', '-sr', default=16000, type=int)
     parser.add_argument('-n_utts_attr', '-u', default=5000, type=int)
     parser.add_argument('-database_name', '-db', default='spectrograms.json')
