@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     # filter length > segment_size
     utt_list = db.get_keys()
-    print(f'Loaded {len(utt_list) keys')
+    print(f'Loaded {len(utt_list) keys}')
     utt_list = sorted(list(filter(lambda u : len(db.get_spectrogram(u)) > segment_size, utt_list)))
     print(f'{len(utt_list)} utterances')
     sample_utt_index_list = random.choices(range(len(utt_list)), k=n_samples)
