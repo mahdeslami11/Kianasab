@@ -54,17 +54,6 @@ import numpy as np
 #             'r6110032': 'VestSydSjaelland',
 #             'r6110044': 'VestSydSjaelland'}
 
-# Below is the accent info for the used 10 VCTK speakers.
-# spk2acc = {'262': 'Edinburgh', #F
-#            '272': 'Edinburgh', #M
-#            '229': 'SouthEngland', #F
-#            '232': 'SouthEngland', #M
-#            '292': 'NorthernIrishBelfast', #M
-#            '293': 'NorthernIrishBelfast', #F
-#            '360': 'AmericanNewJersey', #M
-#            '361': 'AmericanNewJersey', #F
-#            '248': 'India', #F
-#            '251': 'India'} #M
 
 spk2acc = {'r6110005': 'Storkoebenhavn',
             'r6110007': 'Storkoebenhavn',
@@ -140,33 +129,29 @@ min_length = 256   # Since we slice 256 frames from each utterance when training
 #             "r5650012"]
 
 # 10 big spraakbanken speakers
-# speakers = ['r6110050',  # Target Storkoebenhavn M
-#             # 'r6110048',  # Storkoebenhavn F
-#             # 'r6110013',  # Soenderjylland F
-#             'r6110015',  # Soenderjylland M
-#             # 'r6610005',  # Fyn F
-#             'r6110034',  # Fyn M
-#             # 'r6110049',  # Vestjylland F
-#             # 'r6110008',  # Vestjylland M
-#             # 'r6110043',  # Oestjylland F
-#             'r6110009',  # Oestjylland M
-#             # 'r6110010',  # Nordjylland F
-#             # 'r6110011',  # Nordjylland M
-#             # 'r6110032',  # VestSydSjaelland F
-#             'r6110044']  # VestSydSjaelland M
+speakers = ['r6110050',  # Target Storkoebenhavn M
+            'r6110013',  # Soenderjylland F
+            'r6110015',  # Soenderjylland M
+            'r6610005',  # Fyn F
+            'r6110034',  # Fyn M
+            'r6110049',  # Vestjylland F
+            'r6110009',  # Oestjylland M
+            'r6110010',  # Nordjylland F
+            'r6110011',  # Nordjylland M
+            'r6110044']  # VestSydSjaelland M
 
 
 # ALl spraakbanken-Test speakers
-speakers = ['r6110005',
+speakers = ['r6110005',  # Fyn F
             'r6110007',
-            'r6110008',
-            'r6110009',
-            'r6110010',
-            'r6110011',
+            'r6110008',  # Vestjylland M
+            'r6110009',  # Oestjylland M
+            'r6110010',  # Nordjylland F
+            'r6110011',  # Nordjylland M
             'r6110012',
-            'r6110013',
+            'r6110013',  # Soenderjylland F
             'r6110014',
-            'r6110015',
+            'r6110015',  # Soenderjylland M
             'r6110018',
             'r6110019',
             'r6110020',
@@ -180,9 +165,9 @@ speakers = ['r6110005',
             'r6110028',
             'r6110030',
             'r6110031',
-            'r6110032',
+            'r6110032',  # VestSydSjaelland F
             'r6110033',
-            'r6110034',
+            'r6110034',  # Fyn M
             'r6110035',
             'r6110036',
             'r6110037',
@@ -191,13 +176,13 @@ speakers = ['r6110005',
             'r6110040',
             'r6110041',
             'r6110042',
-            'r6110043',
-            'r6110044',
+            'r6110043',  # Oestjylland F
+            'r6110044',  # VestSydSjaelland M
             'r6110046',
             'r6110047',
-            'r6110048',
-            'r6110049',
-            'r6110050',
+            'r6110048',  # Storkoebenhavn F
+            'r6110049',  # Vestjylland F
+            'r6110050',  # Target Storkoebenhavn M
             'r6110051']
 
 
