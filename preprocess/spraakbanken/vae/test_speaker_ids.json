@@ -1,0 +1,10 @@
+{
+    "data_dir": "/work1/s183921/speaker_data/Spraakbanken-Corpus-Test",
+    "train": [
+        "r6110050"
+
+    ],
+    "test": [
+        "r6110048"
+    ]
+}

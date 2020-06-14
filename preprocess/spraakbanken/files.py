@@ -30,17 +30,16 @@ def preprocess(args):
     speaker_paths = glob.glob(join(args.data_dir, f'*{sep}*{sep}*{sep}speech{sep}*{sep}*{sep}*{sep}r*'))
     for sp in speaker_paths:
         split_path = sp.split(sep)
-        station = split_path[0]
-        substation = split_path[1]
+        station = split_path[5]
+        substation = split_path[6]
         speaker_id = split_path[-1]
-        out_speaker = join(out_put_folder, speaker_id)
+        out_speaker = join(out_put_folder, f'{station}_{substation}_{speaker_id}')
         if not isdir(out_speaker):
             log.write_line(f'Found new speaker {speaker_id}', verbose=True)
             wav_files = glob.glob(join(sp, '*.wav'))
             if len(wav_files) > 1:
-                #Change the path to fit your own file structure if needed
                 print(f'{station}{sep}{substation}{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl')
-                print(args.data_dir)
+                #Change the path to fit your own file structure if needed
                 spl_file = glob.glob(join(args.data_dir, 
                     f'{station}{sep}{substation}{sep}*{sep}data{sep}*{sep}*{sep}*{sep}{speaker_id}.spl'))[0]
                 #Save speaker and utterance meta data as json
@@ -51,7 +50,7 @@ def preprocess(args):
                 else:
                     log.write_line(f'Copying to {out_speaker}...', verbose=True)
                     os.mkdir(out_speaker)
-                    with open(join(out_speaker, f'{speaker_id}_meta.json'), 'w+') as meta_file:
+                    with open(join(out_speaker, f'{station}_{substation}_{speaker_id}_meta.json'), 'w+') as meta_file:
                         meta_file.write(json.dumps(meta_data, indent=4))
 
                     count = 0
@@ -60,7 +59,7 @@ def preprocess(args):
                             count += 1
                             filename = wav.split(sep)[-1]
                             x, _ = librosa.load(wav, sr=16000)
-                            sf.write(join(out_speaker, f'{speaker_id}_{filename}'), x, 16000)
+                            sf.write(join(out_speaker, f'{station}_{substation}_{speaker_id}_{filename}'), x, 16000)
                             print(f'Copying file {count}...', end='\r')
                         except:
                             print(f'File {wav} was invalid')

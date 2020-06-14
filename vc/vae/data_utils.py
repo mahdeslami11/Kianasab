@@ -6,6 +6,9 @@ import json
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
+import sys
+sys.path.append('../../preprocess/spraakbanken/vae/dataset')
+from spectrogramdb import SpectrogramDB
 
 class CollateFn(object):
     def __init__(self, frame_size):
@@ -53,6 +56,25 @@ class PickleDataset(Dataset):
         #Extract speech segment from audio from time t till t + segment size.
         #t is randomly defined for each utterence, to get segments from different times in the speeches
         segment = self.data[utt_id][t:t + self.segment_size]
+        return segment
+
+    def __len__(self):
+        return len(self.indexes)
+
+###### Custom added as part of Fagprojekt 2020
+class SpectrogramDBDataset(Dataset):
+    def __init__(self, db_path, sample_index_path, segment_size):
+        self.data = SpectrogramDB(db_path)
+        with open(sample_index_path, 'r') as f:
+            self.indexes = json.load(f)
+        self.segment_size = segment_size
+
+    def __getitem__(self, ind):
+        utt_id, t = self.indexes[ind]
+        #Extract speech segment from audio from time t till t + segment size.
+        #t is randomly defined for each utterence, to get segments from different times in the speeches
+        spectrogram = self.data.get_spectrogram(utt_id)
+        segment = spectrogram[t:t + self.segment_size]
         return segment
 
     def __len__(self):

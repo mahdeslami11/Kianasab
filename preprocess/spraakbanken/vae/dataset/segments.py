@@ -1,31 +1,25 @@
 import json 
-import pickle 
 import sys
 import os
 import random
-
-def is_int(s:str):
-    try:
-        int(s)
-        return True
-    except:
-        return False
+from spectrogramdb import SpectrogramDB
 
 if __name__ == '__main__':
-    pickle_path = sys.argv[1]
+    db_path = sys.argv[1]
     sample_path = sys.argv[2]
     n_samples = int(sys.argv[3])
     segment_size = int(sys.argv[4])
 
-    with open(pickle_path, 'rb') as f:
-        data = pickle.load(f)
+    db = SpectrogramDB(db_path)
+    print(f'Spectrogram Database has {len(db.all())} records')
 
     # (utt_id, timestep, neg_utt_id, neg_timestep)
     samples = []
 
     # filter length > segment_size
-    utt_list = [key for key in data]
-    utt_list = sorted(list(filter(lambda u : len(data[u]) > segment_size, utt_list)))
+    utt_list = db.get_keys()
+    print(f'Loaded {len(utt_list)} keys')
+    utt_list = sorted(list(filter(lambda u : len(db.get_spectrogram(u)) > segment_size, utt_list)))
     print(f'{len(utt_list)} utterances')
     sample_utt_index_list = random.choices(range(len(utt_list)), k=n_samples)
 
@@ -33,7 +27,8 @@ if __name__ == '__main__':
         if i % 500 == 0:
             print(f'sample {i} samples')
         utt_id = utt_list[utt_ind]
-        t = random.randint(0, len(data[utt_id]) - segment_size)
+        spectrogram = db.get_spectrogram(utt_id)
+        t = random.randint(0, len(spectrogram) - segment_size)
         samples.append((utt_id, t))
 
     with open(sample_path, 'w+') as f:
