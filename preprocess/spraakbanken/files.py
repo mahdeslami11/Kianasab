@@ -29,8 +29,8 @@ def preprocess(args):
     #Search for all speaker audio files
     speaker_paths = glob.glob(join(args.data_dir, f'*{sep}*{sep}*{sep}speech{sep}*{sep}*{sep}*{sep}r*'))
     for sp in speaker_paths:
-	sp = sp[len(args.data_dir):]
-        split_path = sp.split(sep)
+        sp_short = sp[len(args.data_dir):]
+        split_path = sp_short.split(sep)
         station = split_path[1] #first entry is empty
         substation = split_path[2]
         speaker_id = split_path[-1]
