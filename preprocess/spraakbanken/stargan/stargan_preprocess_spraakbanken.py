@@ -78,8 +78,8 @@ if __name__ == '__main__':
 
     # # On ssh filesystem
     target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus-Test"
-    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/train'
-    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test-All-1/test'
+    mc_dir_train_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/train'
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-Test/test'
 
 
     parser.add_argument("--sample_rate", type=int, default=16000, help="Sample rate.")
@@ -146,49 +146,60 @@ if __name__ == '__main__':
     #             'r6110032',  # VestSydSjaelland F
     #             'r6110044']  # VestSydSjaelland M
 
+    speaker_used = ['chunkxxx']#,  # Target
+                # 'r6110050',  # Storkoebenhavn M t
+                # 'r6110013',  # Soenderjylland F t
+                # 'r6110015',  # Soenderjylland M t
+                # 'r6110034',  # Fyn M t
+                # 'r6110049',  # Vestjylland F t
+                # 'r6110009',  # Oestjylland M t
+                # 'r6110010',  # Nordjylland F t
+                # 'r6110044',  # VestSydSjaelland M t
+                # 'r6110032']  # VestSydSjaelland F t
+
     # All big spraakbanken speakers len 42
-    speaker_used = ['r6110005',
-                'r6110007',
-                'r6110008',
-                'r6110009',
-                'r6110010',
-                'r6110011',
-                'r6110012',
-                'r6110013',
-                'r6110014',
-                'r6110015',
-                'r6110018',
-                'r6110019',
-                'r6110020',
-                'r6110021',
-                'r6110022',
-                'r6110023',
-                'r6110024',
-                'r6110025',
-                'r6110026',
-                'r6110027',
-                'r6110028',
-                'r6110030',
-                'r6110031',
-                'r6110032',
-                'r6110033',
-                'r6110034',
-                'r6110035',
-                'r6110036',
-                'r6110037',
-                'r6110038',
-                'r6110039',
-                'r6110040',
-                'r6110041',
-                'r6110042',
-                'r6110043',
-                'r6110044',
-                'r6110046',
-                'r6110047',
-                'r6110048',
-                'r6110049',
-                'r6110050',
-                'r6110051']
+    # speaker_used = ['r6110005',
+    #             'r6110007',
+    #             'r6110008',
+    #             'r6110009',
+    #             'r6110010',
+    #             'r6110011',
+    #             'r6110012',
+    #             'r6110013',
+    #             'r6110014',
+    #             'r6110015',
+    #             'r6110018',
+    #             'r6110019',
+    #             'r6110020',
+    #             'r6110021',
+    #             'r6110022',
+    #             'r6110023',
+    #             'r6110024',
+    #             'r6110025',
+    #             'r6110026',
+    #             'r6110027',
+    #             'r6110028',
+    #             'r6110030',
+    #             'r6110031',
+    #             'r6110032',
+    #             'r6110033',
+    #             'r6110034',
+    #             'r6110035',
+    #             'r6110036',
+    #             'r6110037',
+    #             'r6110038',
+    #             'r6110039',
+    #             'r6110040',
+    #             'r6110041',
+    #             'r6110042',
+    #             'r6110043',
+    #             'r6110044',
+    #             'r6110046',
+    #             'r6110047',
+    #             'r6110048',
+    #             'r6110049',
+    #             'r6110050',
+    #             'r6110051']
 
 
     ## Next we are to extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).

@@ -39,64 +39,60 @@ import numpy as np
 #            "r5650012": "Ostjylland"}
 
 # Below is the accent info for the used 10 big spraakbanken speakers.
-# spk2acc = {'r6110050': 'Storkoebenhavn',
-#             # 'r6110048': 'Storkoebenhavn',
-#             'r6110013': 'Soenderjylland',
-#             'r6110015': 'Soenderjylland',
-#             'r6610005': 'Fyn',
-#             'r6110034': 'Fyn',
-#             'r6110049': 'Vestjylland',
-#             # 'r6110008': 'Vestjylland',
-#             # 'r6110043': 'Oestjylland',
-#             'r6110009': 'Oestjylland',
-#             'r6110010': 'Nordjylland',
-#             # 'r6110011': 'Nordjylland',
-#             'r6110032': 'VestSydSjaelland',
-#             'r6110044': 'VestSydSjaelland'}
-
-
-spk2acc = {'r6110005': 'Storkoebenhavn',
-            'r6110007': 'Storkoebenhavn',
-            'r6110008': 'Storkoebenhavn',
-            'r6110009': 'Storkoebenhavn',
-            'r6110010': 'Storkoebenhavn',
-            'r6110011': 'Storkoebenhavn',
-            'r6110012': 'Storkoebenhavn',
-            'r6110013': 'Storkoebenhavn',
-            'r6110014': 'Storkoebenhavn',
-            'r6110015': 'Storkoebenhavn',
-            'r6110018': 'Storkoebenhavn',
-            'r6110019': 'Storkoebenhavn',
-            'r6110020': 'Storkoebenhavn',
-            'r6110021': 'Storkoebenhavn',
-            'r6110022': 'Storkoebenhavn',
-            'r6110023': 'Storkoebenhavn',
-            'r6110024': 'Storkoebenhavn',
-            'r6110025': 'Storkoebenhavn',
-            'r6110026': 'Storkoebenhavn',
-            'r6110027': 'Storkoebenhavn',
-            'r6110028': 'Storkoebenhavn',
-            'r6110030': 'Storkoebenhavn',
-            'r6110031': 'Storkoebenhavn',
-            'r6110032': 'Storkoebenhavn',
-            'r6110033': 'Storkoebenhavn',
-            'r6110034': 'Storkoebenhavn',
-            'r6110035': 'Storkoebenhavn',
-            'r6110036': 'Storkoebenhavn',
-            'r6110037': 'Storkoebenhavn',
-            'r6110038': 'Storkoebenhavn',
-            'r6110039': 'Storkoebenhavn',
-            'r6110040': 'Storkoebenhavn',
-            'r6110041': 'Storkoebenhavn',
-            'r6110042': 'Storkoebenhavn',
-            'r6110043': 'Storkoebenhavn',
-            'r6110044': 'Storkoebenhavn',
-            'r6110046': 'Storkoebenhavn',
-            'r6110047': 'Storkoebenhavn',
-            'r6110048': 'Storkoebenhavn',
-            'r6110049': 'Storkoebenhavn',
+spk2acc = {'chunkxxx': 'Storkoebenhavn',
             'r6110050': 'Storkoebenhavn',
-            'r6110051': 'Storkoebenhavn'}
+            'r6110013': 'Soenderjylland',
+            'r6110015': 'Soenderjylland',
+            'r6110034': 'Fyn',
+            'r6110049': 'Vestjylland',
+            'r6110009': 'Oestjylland',
+            'r6110010': 'Nordjylland',
+            'r6110032': 'VestSydSjaelland',
+            'r6110044': 'VestSydSjaelland'}
+
+
+# spk2acc = {'r6110005': 'Storkoebenhavn',
+#             'r6110007': 'Storkoebenhavn',
+#             'r6110008': 'Storkoebenhavn',
+#             'r6110009': 'Storkoebenhavn',
+#             'r6110010': 'Storkoebenhavn',
+#             'r6110011': 'Storkoebenhavn',
+#             'r6110012': 'Storkoebenhavn',
+#             'r6110013': 'Storkoebenhavn',
+#             'r6110014': 'Storkoebenhavn',
+#             'r6110015': 'Storkoebenhavn',
+#             'r6110018': 'Storkoebenhavn',
+#             'r6110019': 'Storkoebenhavn',
+#             'r6110020': 'Storkoebenhavn',
+#             'r6110021': 'Storkoebenhavn',
+#             'r6110022': 'Storkoebenhavn',
+#             'r6110023': 'Storkoebenhavn',
+#             'r6110024': 'Storkoebenhavn',
+#             'r6110025': 'Storkoebenhavn',
+#             'r6110026': 'Storkoebenhavn',
+#             'r6110027': 'Storkoebenhavn',
+#             'r6110028': 'Storkoebenhavn',
+#             'r6110030': 'Storkoebenhavn',
+#             'r6110031': 'Storkoebenhavn',
+#             'r6110032': 'Storkoebenhavn',
+#             'r6110033': 'Storkoebenhavn',
+#             'r6110034': 'Storkoebenhavn',
+#             'r6110035': 'Storkoebenhavn',
+#             'r6110036': 'Storkoebenhavn',
+#             'r6110037': 'Storkoebenhavn',
+#             'r6110038': 'Storkoebenhavn',
+#             'r6110039': 'Storkoebenhavn',
+#             'r6110040': 'Storkoebenhavn',
+#             'r6110041': 'Storkoebenhavn',
+#             'r6110042': 'Storkoebenhavn',
+#             'r6110043': 'Storkoebenhavn',
+#             'r6110044': 'Storkoebenhavn',
+#             'r6110046': 'Storkoebenhavn',
+#             'r6110047': 'Storkoebenhavn',
+#             'r6110048': 'Storkoebenhavn',
+#             'r6110049': 'Storkoebenhavn',
+#             'r6110050': 'Storkoebenhavn',
+#             'r6110051': 'Storkoebenhavn'}
 
 min_length = 256   # Since we slice 256 frames from each utterance when training.
 
@@ -129,61 +125,61 @@ min_length = 256   # Since we slice 256 frames from each utterance when training
 #             "r5650012"]
 
 # 10 big spraakbanken speakers
-speakers = ['r6110050',  # Target Storkoebenhavn M
-            'r6110013',  # Soenderjylland F
-            'r6110015',  # Soenderjylland M
-            'r6610005',  # Fyn F
-            'r6110034',  # Fyn M
-            'r6110049',  # Vestjylland F
-            'r6110009',  # Oestjylland M
-            'r6110010',  # Nordjylland F
-            'r6110011',  # Nordjylland M
-            'r6110044']  # VestSydSjaelland M
+speakers = ['chunkxxx',  # Target
+            'r6110050',  # Storkoebenhavn M t
+            'r6110013',  # Soenderjylland F t
+            'r6110015',  # Soenderjylland M t
+            'r6110034',  # Fyn M t
+            'r6110049',  # Vestjylland F t
+            'r6110009',  # Oestjylland M t
+            'r6110010',  # Nordjylland F t
+            'r6110044',  # VestSydSjaelland M t
+            'r6110032']  # VestSydSjaelland F t
 
 
 # ALl spraakbanken-Test speakers
-speakers = ['r6110005',  # Fyn F
-            'r6110007',
-            'r6110008',  # Vestjylland M
-            'r6110009',  # Oestjylland M
-            'r6110010',  # Nordjylland F
-            'r6110011',  # Nordjylland M
-            'r6110012',
-            'r6110013',  # Soenderjylland F
-            'r6110014',
-            'r6110015',  # Soenderjylland M
-            'r6110018',
-            'r6110019',
-            'r6110020',
-            'r6110021',
-            'r6110022',
-            'r6110023',
-            'r6110024',
-            'r6110025',
-            'r6110026',
-            'r6110027',
-            'r6110028',
-            'r6110030',
-            'r6110031',
-            'r6110032',  # VestSydSjaelland F
-            'r6110033',
-            'r6110034',  # Fyn M
-            'r6110035',
-            'r6110036',
-            'r6110037',
-            'r6110038',
-            'r6110039',
-            'r6110040',
-            'r6110041',
-            'r6110042',
-            'r6110043',  # Oestjylland F
-            'r6110044',  # VestSydSjaelland M
-            'r6110046',
-            'r6110047',
-            'r6110048',  # Storkoebenhavn F
-            'r6110049',  # Vestjylland F
-            'r6110050',  # Target Storkoebenhavn M
-            'r6110051']
+# speakers = [#'r6110005',  # Fyn F el.   # Oestjylland F
+#             # 'r6110007',  # Soenderjylland M el.   # Nordjylland F
+#             # 'r6110008',  # Vestjylland M el.   # Nordjylland M
+#             # 'r6110009',  # Oestjylland M el.   # Nordjylland M
+#             # 'r6110010',  # Nordjylland F el.   # Storkoebenhavn F
+#             'r6110011',  # Nordjylland M
+#             'r6110012',  # Storkoebenhavn M
+#             # 'r6110013',  # Soenderjylland F el.   # Storkoebenhavn M
+#             'r6110014',  # Storkoebenhavn M
+#             # 'r6110015',  # Soenderjylland M el.   # Storkoebenhavn M
+#             'r6110018',  # Fyn F
+#             'r6110019',  # Fyn M
+#             'r6110020',  # Storkoebenhavn F
+#             'r6110021',  # Storkoebenhavn F
+#             'r6110022',  # Vestjylland F
+#             'r6110023',  # Oestjylland M
+#             'r6110024',  # Storkoebenhavn F
+#             'r6110025',  # Storkoebenhavn M
+#             'r6110026',  # Vestjylland M
+#             'r6110027',  # Storkoebenhavn M
+#             'r6110028',  # VestSydSjaelland F
+#             'r6110030',  # Storkoebenhavn M
+#             'r6110031',  # Nordjylland F
+#             'r6110032',  # VestSydSjaelland F
+#             'r6110033',  # Storkoebenhavn F
+#             'r6110034',  # Fyn M
+#             'r6110035',  # Storkoebenhavn F
+#             'r6110036',  # Storkoebenhavn M
+#             'r6110037',  # VestSydSjaelland F
+#             'r6110038',  # Storkoebenhavn F
+#             'r6110039',  # Storkoebenhavn F
+#             # 'r6110040',
+#             'r6110041',  # Soenderjylland F
+#             'r6110042',  # VestSydSjaelland M
+#             'r6110043',  # Oestjylland F
+#             'r6110044',  # VestSydSjaelland M
+#             'r6110046',  # VestSydSjaelland M
+#             # 'r6110047',  # Storkoebenhavn M el.   # Oestjylland M
+#             'r6110048',  # Storkoebenhavn F
+#             'r6110049',  # Vestjylland F el.   # Soenderjylland F
+#             'r6110050',  # Target Storkoebenhavn M
+#             'r6110051']  # Fyn F
 
 
 spk2idx = dict(zip(speakers, range(len(speakers))))
