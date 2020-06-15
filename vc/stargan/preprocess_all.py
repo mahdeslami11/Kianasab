@@ -116,108 +116,7 @@ class TestDataset(object):
 
         # Define target speaker from trained speakers
         # self.speakers = ["r5650072",  # Target speaker
-        #                  "r5650060",
-        #                  "r5650006",
-        #                  "r5650013",
-        #                  "r5650101",
-        #                  "r5650044",
-        #                  "r5650024",
-        #                  "r5650085",
-        #                  "r5650103",
-        #                  "r5650082",
-        #                  "r5650007",
-        #                  "r5650080",
-        #                  "r5650010",
-        #                  "r5650105",
-        #                  "r5650114",
-        #                  "r5650111",
-        #                  "r5650107",
-        #                  "r5650109",
-        #                  "r5650077",
-        #                  "r5650090",
-        #                  "r5650096",
-        #                  "r5650095",
-        #                  "r5650032",
-        #                  "r5650055",
-        #                  "r5650012"]
 
-        # 10 Big spraakbanken speakers
-        self.speakers = ['r6110050',  # Target Storkoebenhavn M
-                    # 'r6110048',  # Storkoebenhavn F
-                    'r6110013',  # Soenderjylland F
-                    'r6110015',  # Soenderjylland M
-                    'r6610005',  # Fyn F
-                    'r6110034',  # Fyn M
-                    'r6110049',  # Vestjylland F
-                    # 'r6110008',  # Vestjylland M
-                    # 'r6110043',  # Oestjylland F
-                    'r6110009',  # Oestjylland M
-                    'r6110010',  # Nordjylland F
-                    # 'r6110011',  # Nordjylland M
-                    'r6110032',  # VestSydSjaelland F
-                    'r6110044']  # VestSydSjaelland M
-
-
-        # 5 male big spraakbanken speakers
-        # self.speakers = ['r6110050',  # Target Storkoebenhavn M
-        #             # 'r6110048',  # Storkoebenhavn F
-        #             # 'r6110013',  # Soenderjylland F
-        #             'r6110015',  # Soenderjylland M
-        #             # 'r6610005',  # Fyn F
-        #             'r6110034',  # Fyn M
-        #             # 'r6110049',  # Vestjylland F
-        #             # 'r6110008',  # Vestjylland M
-        #             # 'r6110043',  # Oestjylland F
-        #             'r6110009',  # Oestjylland M
-        #             # 'r6110010',  # Nordjylland F
-        #             # 'r6110011',  # Nordjylland M
-        #             # 'r6110032',  # VestSydSjaelland F
-        #             'r6110044']  # VestSydSjaelland M
-
-
-        # ALl spraakbanken-Test speakers
-        # self.speakers = ['r6110005',
-        #             'r6110007',
-        #             'r6110008',
-        #             'r6110009',
-        #             'r6110010',
-        #             'r6110011',
-        #             'r6110012',
-        #             'r6110013',
-        #             'r6110014',
-        #             'r6110015',
-        #             'r6110018',
-        #             'r6110019',
-        #             'r6110020',
-        #             'r6110021',
-        #             'r6110022',
-        #             'r6110023',
-        #             'r6110024',
-        #             'r6110025',
-        #             'r6110026',
-        #             'r6110027',
-        #             'r6110028',
-        #             'r6110030',
-        #             'r6110031',
-        #             'r6110032',
-        #             'r6110033',
-        #             'r6110034',
-        #             'r6110035',
-        #             'r6110036',
-        #             'r6110037',
-        #             'r6110038',
-        #             'r6110039',
-        #             'r6110040',
-        #             'r6110041',
-        #             'r6110042',
-        #             'r6110043',
-        #             'r6110044',
-        #             'r6110046',
-        #             'r6110047',
-        #             'r6110048',
-        #             'r6110049',
-        #             'r6110050',
-        #             'r6110051']
 
         assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
         spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
@@ -322,19 +221,12 @@ if __name__ == '__main__':
     # resume_iters_default = 100000
     resume_iters_default = 200000
 
-    origin_wavpath_default = "../../../newspeakers/wav48_Q1"
-    target_wavpath_default = "../../../newspeakers/stargan/wav16_Q1"
-    mc_dir_test_default = '../../../newspeakers/stargan/mc_Q1/'
-    # origin_wavpath_default = "../../../newspeakers/wav48"
-    # target_wavpath_default = "../../../newspeakers/stargan/wav16"
-    # mc_dir_test_default = '../../../newspeakers/stargan/mc/'
+    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus"
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-All'
     logs_dir_default = '../../../newspeakers/stargan/logs'
-    # models_dir_default = '../../../trained_models/stargan/spraakbanken'
-    models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
+    models_dir_default = '/work1/s183921/trained_models/stargan/spraakbanken-Test-42'
+    converted_dir_default = '/work1/s183921/speaker_data/Spraakbanken-Corpus-StarGAN'
 
-    # models_dir_default = '../../../trained_models/stargan/10spk_spraakbanken'
-
-    converted_dir_default = '../../../converted_speakers/stargan'
 
     # Parser takes inputs for running file as main
     parser = argparse.ArgumentParser()
@@ -347,16 +239,13 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    # parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')  # M trg speaker
-    parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')  # F trg speaker
+    parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')  # M trg speaker
+    # parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')  # F trg speaker
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
     # Directories of preprocessing and converting
-    parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default, help="48 kHz wav path.")
     parser.add_argument("--target_wavpath", type=str, default=target_wavpath_default, help="16 kHz wav path.")
-    # parser.add_argument("--mc_dir_train", type=str, default=mc_dir_train_default, help="Dir for training features.")
     parser.add_argument("--mc_dir_test", type=str, default=mc_dir_test_default, help="Dir for testing features.")
-    # parser.add_argument('--train_data_dir', type=str, default=mc_dir_train_default)
     parser.add_argument('--test_data_dir', type=str, default=mc_dir_test_default)
     parser.add_argument('--wav_dir', type=str, default=target_wavpath_default)
     parser.add_argument('--log_dir', type=str, default=logs_dir_default)
@@ -377,38 +266,30 @@ if __name__ == '__main__':
     converted_dir_default = argv.convert_dir
 
     # Set num_workers to number og cpus unless specified
-    num_workers = argv.num_workers if argv.num_workers is not None else (cpu_count() - 1)
+    num_workers = argv.num_workers if argv.num_workers is not None else cpu_count()
 
-    '''Usually below statement is the case, but we define default resume-iteration.'''
-    # If no model-iteration has been specified, don't run
-    if argv.resume_iters is None:
-        raise RuntimeError("Please specify the step number for resuming.")
 
     # If the original wav is 48K, first we want to resample to 16K
-    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
+    # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     # Here it is specified which speakers should be converted
     speaker_used = argv.src_spk if argv.src_spk is not None else None
-
     if speaker_used is None:
         speaker_used = os.listdir(target_wavpath)
-        print(speaker_used)
+        # print(speaker_used)
         argv.src_spk = speaker_used
-
-    # If no speakers are specified, make it clear that nothing will be converted
+    # If speaker_used is empty, end
     if speaker_used == []:
         raise RuntimeError("No speakers available in wav48 dir - No conversion will take place")
-
     # Setting number of speakers
     argv.num_speakers = len(speaker_used)
 
     ## Next extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
     # Make dirs to contain the MCEPs
-    # os.makedirs(mc_dir_train, exist_ok=True)
     os.makedirs(mc_dir_test, exist_ok=True)
 
     # num_workers = len(speaker_used)  # cpu_count()
-    print("number of workers: ", num_workers)
+    # print("number of workers: ", num_workers)
     executor = ProcessPoolExecutor(max_workers=num_workers)
 
     work_dir = target_wavpath
@@ -431,21 +312,21 @@ if __name__ == '__main__':
     '''
 
     # print(argv)
-
-    # If only one speaker should be converted
-    if len(speaker_used) == 1:
-        argv.src_spk = speaker_used[0]
-        argv.num_converted_wavs = len(glob.glob(join(argv.test_data_dir, f'{speaker_used[0]}*.npy')))
-        test(argv)
-
-    # If more than one speaker should be converted, test runs that number of times
-    else:
-        for speaker_to_convert in speaker_used:
-            argv.src_spk = speaker_to_convert  # Redifine for only one speaker
-
-            # Redefine number og wavs to convert to suit each speakers count
-            argv.num_converted_wavs = len(glob.glob(join(argv.test_data_dir, f'{speaker_to_convert}*.npy')))
-            test(argv)
+    #
+    # # If only one speaker should be converted
+    # if len(speaker_used) == 1:
+    #     argv.src_spk = speaker_used[0]
+    #     argv.num_converted_wavs = len(glob.glob(join(argv.test_data_dir, f'{speaker_used[0]}*.npy')))
+    #     test(argv)
+    #
+    # # If more than one speaker should be converted, test runs that number of times
+    # else:
+    #     for speaker_to_convert in speaker_used:
+    #         argv.src_spk = speaker_to_convert  # Redifine for only one speaker
+    #
+    #         # Redefine number og wavs to convert to suit each speakers count
+    #         argv.num_converted_wavs = len(glob.glob(join(argv.test_data_dir, f'{speaker_to_convert}*.npy')))
+    #         test(argv)
 
 
 

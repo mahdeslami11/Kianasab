@@ -322,19 +322,12 @@ if __name__ == '__main__':
     # resume_iters_default = 100000
     resume_iters_default = 200000
 
-    origin_wavpath_default = "../../../newspeakers/wav48_Q1"
-    target_wavpath_default = "../../../newspeakers/stargan/wav16_Q1"
-    mc_dir_test_default = '../../../newspeakers/stargan/mc_Q1/'
-    # origin_wavpath_default = "../../../newspeakers/wav48"
-    # target_wavpath_default = "../../../newspeakers/stargan/wav16"
-    # mc_dir_test_default = '../../../newspeakers/stargan/mc/'
+    target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Corpus"
+    mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-All'
     logs_dir_default = '../../../newspeakers/stargan/logs'
-    # models_dir_default = '../../../trained_models/stargan/spraakbanken'
-    models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
+    models_dir_default = '/work1/s183921/trained_models/stargan/spraakbanken-Test-42'
+    converted_dir_default = '/work1/s183921/speaker_data/Spraakbanken-Corpus-StarGAN'
 
-    # models_dir_default = '../../../trained_models/stargan/10spk_spraakbanken'
-
-    converted_dir_default = '../../../converted_speakers/stargan'
 
     # Parser takes inputs for running file as main
     parser = argparse.ArgumentParser()
@@ -347,16 +340,13 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    # parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')  # M trg speaker
-    parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')  # F trg speaker
+    parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')  # M trg speaker
+    # parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')  # F trg speaker
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
     # Directories of preprocessing and converting
-    parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default, help="48 kHz wav path.")
     parser.add_argument("--target_wavpath", type=str, default=target_wavpath_default, help="16 kHz wav path.")
-    # parser.add_argument("--mc_dir_train", type=str, default=mc_dir_train_default, help="Dir for training features.")
     parser.add_argument("--mc_dir_test", type=str, default=mc_dir_test_default, help="Dir for testing features.")
-    # parser.add_argument('--train_data_dir', type=str, default=mc_dir_train_default)
     parser.add_argument('--test_data_dir', type=str, default=mc_dir_test_default)
     parser.add_argument('--wav_dir', type=str, default=target_wavpath_default)
     parser.add_argument('--log_dir', type=str, default=logs_dir_default)
@@ -377,51 +367,43 @@ if __name__ == '__main__':
     converted_dir_default = argv.convert_dir
 
     # Set num_workers to number og cpus unless specified
-    num_workers = argv.num_workers if argv.num_workers is not None else (cpu_count() - 1)
+    num_workers = argv.num_workers if argv.num_workers is not None else cpu_count()
 
-    '''Usually below statement is the case, but we define default resume-iteration.'''
-    # If no model-iteration has been specified, don't run
-    if argv.resume_iters is None:
-        raise RuntimeError("Please specify the step number for resuming.")
 
     # If the original wav is 48K, first we want to resample to 16K
-    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
+    # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     # Here it is specified which speakers should be converted
     speaker_used = argv.src_spk if argv.src_spk is not None else None
-
     if speaker_used is None:
         speaker_used = os.listdir(target_wavpath)
-        print(speaker_used)
+        # print(speaker_used)
         argv.src_spk = speaker_used
-
-    # If no speakers are specified, make it clear that nothing will be converted
+    # If speaker_used is empty, end
     if speaker_used == []:
         raise RuntimeError("No speakers available in wav48 dir - No conversion will take place")
-
     # Setting number of speakers
     argv.num_speakers = len(speaker_used)
 
     ## Next extract the acoustic features (MCEPs, lf0) and compute the corresponding stats (means, stds).
     # Make dirs to contain the MCEPs
-    # os.makedirs(mc_dir_train, exist_ok=True)
     os.makedirs(mc_dir_test, exist_ok=True)
 
     # num_workers = len(speaker_used)  # cpu_count()
-    print("number of workers: ", num_workers)
+    # print("number of workers: ", num_workers)
     executor = ProcessPoolExecutor(max_workers=num_workers)
 
     work_dir = target_wavpath
 
 
-    futures = []
-    for spk in speaker_used:
-        spk_mc_dir_test = mc_dir_test
-        spk_path = os.path.join(work_dir, spk)
-        # Do processing
-        futures.append(executor.submit(partial(get_spk_world_feats, spk_path, spk_mc_dir_test, sample_rate)))
-        # futures.append(executor.submit(partial(get_spk_world_feats, spk_path, mc_dir_train, spk_mc_dir_test, sample_rate)))
-    result_list = [future.result() for future in tqdm(futures)]
+    # futures = []
+    # for spk in speaker_used:
+    #     spk_mc_dir_test = mc_dir_test
+    #     spk_path = os.path.join(work_dir, spk)
+    #     # Do processing
+    #     futures.append(executor.submit(partial(get_spk_world_feats, spk_path, spk_mc_dir_test, sample_rate)))
+    #     # futures.append(executor.submit(partial(get_spk_world_feats, spk_path, mc_dir_train, spk_mc_dir_test, sample_rate)))
+    # result_list = [future.result() for future in tqdm(futures)]
     # print(result_list)
 
     '''
@@ -430,7 +412,7 @@ if __name__ == '__main__':
     ONTO CONVERT.PY
     '''
 
-    # print(argv)
+    print(argv)
 
     # If only one speaker should be converted
     if len(speaker_used) == 1:
