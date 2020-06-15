@@ -78,8 +78,6 @@ if __name__ == '__main__':
     test_proportion = float(sys.argv[4])
     sample_rate = int(sys.argv[5])
     n_utts_attr = int(sys.argv[6])
-    test_file_paths = sys.argv[7]
-    validation_file_paths = sys.argv[8]
 
     print('Reading speaker ids')
     print(data_dir[-5:])
@@ -112,7 +110,7 @@ if __name__ == '__main__':
         in_test_path_list += path_list[-test_data_size:]
 
     #Train speakers
-    with open(os.path.join(output_dir, test_file_paths), 'w+') as f:
+    with open(os.path.join(output_dir, 'in_test_paths.txt'), 'w+') as f:
         for path in in_test_path_list:
             f.write(f'{path}\n')
 
@@ -121,7 +119,7 @@ if __name__ == '__main__':
         path_list = speaker2filenames[speaker]
         out_test_path_list += path_list
 
-    with open(os.path.join(output_dir, validation_file_paths), 'w+') as f:
+    with open(os.path.join(output_dir, 'out_test_paths.txt'), 'w+') as f:
         for path in out_test_path_list:
             f.write(f'{path}\n')
 
