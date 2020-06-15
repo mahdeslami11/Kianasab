@@ -254,7 +254,7 @@ class MyDataset(data.Dataset):
 
 class TestDataset(object):
     """Dataset for testing."""
-    def __init__(self, data_dir, wav_dir, src_spk="r6110009", trg_spk="r6110050"):  # Specified
+    def __init__(self, data_dir, wav_dir, src_spk="r6110009", trg_spk="chunkxxx"):  # Specified
         self.src_spk = src_spk
         self.trg_spk = trg_spk
         self.mc_files = sorted(glob.glob(join(data_dir, '{}*.npy'.format(self.src_spk))))
