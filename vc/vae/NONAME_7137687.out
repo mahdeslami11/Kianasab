@@ -1,0 +1,126 @@
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk1_1.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 3, in <module>
+    import torch
+  File "/zhome/bd/0/137202/miniconda3/lib/python3.7/site-packages/torch/__init__.py", line 375, in <module>
+    import torch.utils.data
+  File "/zhome/bd/0/137202/miniconda3/lib/python3.7/site-packages/torch/utils/data/__init__.py", line 1, in <module>
+    from .sampler import Sampler, SequentialSampler, RandomSampler, SubsetRandomSampler, WeightedRandomSampler, BatchSampler
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 963, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 906, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1280, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1252, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1364, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 81, in _path_stat
+KeyboardInterrupt
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk1_2.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk1_3.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk1_4.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk2.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk3_1.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk3_2.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynk3_3.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynm1.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynm2.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Traceback (most recent call last):
+  File "inference.py", line 9, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+Completed conversion..
+Converting /work1/s183921/speaker_data/Validation-Corpus/VC_original/fynm3.wav to /work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav...
+Terminated
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@n-62-21-97>
+Subject: Job 7137687: <NONAME> in cluster <dcc> Exited
+
+Job <NONAME> was submitted from host <n-62-27-22> by user <s183921> in cluster <dcc> at Tue Jun 16 13:59:55 2020
+Job was executed on host(s) <n-62-21-97>, in queue <hpc>, as user <s183921> in cluster <dcc> at Tue Jun 16 13:59:57 2020
+</zhome/bd/0/137202> was used as the home directory.
+</work1/s183921/fagprojekt2020/vc/vae> was used as the working directory.
+Started at Tue Jun 16 13:59:57 2020
+Terminated at Tue Jun 16 14:00:16 2020
+Results reported at Tue Jun 16 14:00:16 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+source_folder="/work1/s183921/speaker_data/Validation-Corpus/VC_original"
+target="/work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110050/r6110050_u0050891.wav"
+
+for source in $(ls $source_folder/*.wav)
+    do
+        echo "Converting $source to $target..."
+        python3 inference.py    -a /work1/s183921/preprocessed_data/vae/spraakbanken/sanity_check/attr.pkl \
+                                -c /work1/s183921/trained_models/vae/sanity_check_first/model.config.yaml \
+                                -m /work1/s183921/trained_models/vae/sanity_check_first/model.ckpt\
+                                -s $source\
+                                -t $target\
+                                -o /work1/s183921/converted_speakers/vae/sanity_check_first
+        echo "Completed conversion.."
+    done
+
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 143.
+
+Resource usage summary:
+
+    CPU time :                                   7.23 sec.
+    Max Memory :                                 54 MB
+    Average Memory :                             11.00 MB
+    Total Requested Memory :                     1024.00 MB
+    Delta Memory :                               970.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                5
+    Run time :                                   33 sec.
+    Turnaround time :                            21 sec.
+
+The output (if any) is above this job summary.
+
