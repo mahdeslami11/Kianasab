@@ -114,49 +114,35 @@ class TestDataset(object):
         self.mcep_mean_trg = self.trg_spk_stats['coded_sps_mean']
         self.mcep_std_trg = self.trg_spk_stats['coded_sps_std']
 
-        # Define target speaker from trained speakers
-        # self.speakers = ["r5650072",  # Target speaker
-        #                  "r5650060",
-        #                  "r5650006",
-        #                  "r5650013",
-        #                  "r5650101",
-        #                  "r5650044",
-        #                  "r5650024",
-        #                  "r5650085",
-        #                  "r5650103",
-        #                  "r5650082",
-        #                  "r5650007",
-        #                  "r5650080",
-        #                  "r5650010",
-        #                  "r5650105",
-        #                  "r5650114",
-        #                  "r5650111",
-        #                  "r5650107",
-        #                  "r5650109",
-        #                  "r5650077",
-        #                  "r5650090",
-        #                  "r5650096",
-        #                  "r5650095",
-        #                  "r5650032",
-        #                  "r5650055",
-        #                  "r5650012"]
+
 
         # 10 Big spraakbanken speakers
-        self.speakers = ['r6110050',  # Target Storkoebenhavn M
-                    # 'r6110048',  # Storkoebenhavn F
-                    'r6110013',  # Soenderjylland F
-                    'r6110015',  # Soenderjylland M
-                    'r6610005',  # Fyn F
-                    'r6110034',  # Fyn M
-                    'r6110049',  # Vestjylland F
-                    # 'r6110008',  # Vestjylland M
-                    # 'r6110043',  # Oestjylland F
-                    'r6110009',  # Oestjylland M
-                    'r6110010',  # Nordjylland F
-                    # 'r6110011',  # Nordjylland M
-                    'r6110032',  # VestSydSjaelland F
-                    'r6110044']  # VestSydSjaelland M
+        # self.speakers = ['r6110050',  # Target Storkoebenhavn M
+        #             # 'r6110048',  # Storkoebenhavn F
+        #             'r6110013',  # Soenderjylland F
+        #             'r6110015',  # Soenderjylland M
+        #             'r6610005',  # Fyn F
+        #             'r6110034',  # Fyn M
+        #             'r6110049',  # Vestjylland F
+        #             # 'r6110008',  # Vestjylland M
+        #             # 'r6110043',  # Oestjylland F
+        #             'r6110009',  # Oestjylland M
+        #             'r6110010',  # Nordjylland F
+        #             # 'r6110011',  # Nordjylland M
+        #             'r6110032',  # VestSydSjaelland F
+        #             'r6110044']  # VestSydSjaelland M
 
+        # Final training with Chunk
+        self.speakers = ['chunkxxx',  # Target
+                        'r6110050',  # Storkoebenhavn M t
+                        'r6110013',  # Soenderjylland F t
+                        'r6110015',  # Soenderjylland M t
+                        'r6110034',  # Fyn M t
+                        'r6110049',  # Vestjylland F t
+                        'r6110009',  # Oestjylland M t
+                        'r6110010',  # Nordjylland F t
+                        'r6110044',  # VestSydSjaelland M t
+                        'r6110032']  # VestSydSjaelland F t
 
         # 5 male big spraakbanken speakers
         # self.speakers = ['r6110050',  # Target Storkoebenhavn M
@@ -319,22 +305,27 @@ if __name__ == '__main__':
 
     # On August's machine
     sample_rate_default = 16000
-    # resume_iters_default = 100000
     resume_iters_default = 200000
 
-    origin_wavpath_default = "../../../newspeakers/wav48_Q1"
-    target_wavpath_default = "../../../newspeakers/stargan/wav16_Q1"
-    mc_dir_test_default = '../../../newspeakers/stargan/mc_Q1/'
+    # origin_wavpath_default = "../../../newspeakers/wav48_Q1"
+    target_wavpath_default = "../../../newspeakers/stargan/wav16_WER-Test"
+    mc_dir_test_default = '../../../newspeakers/stargan/mc_WER-Test/'
+
+    # origin_wavpath_default = "../../../newspeakers/wav48_Q1"
+    # target_wavpath_default = "../../../newspeakers/stargan/wav16_Q1"
+    # mc_dir_test_default = '../../../newspeakers/stargan/mc_Q1/'
+
     # origin_wavpath_default = "../../../newspeakers/wav48"
     # target_wavpath_default = "../../../newspeakers/stargan/wav16"
     # mc_dir_test_default = '../../../newspeakers/stargan/mc/'
+
     logs_dir_default = '../../../newspeakers/stargan/logs'
+
     # models_dir_default = '../../../trained_models/stargan/spraakbanken'
-    models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
+    # models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
+    models_dir_default = '../../../trained_models/stargan/spraakbanken-Test-Chunk'
 
-    # models_dir_default = '../../../trained_models/stargan/10spk_spraakbanken'
-
-    converted_dir_default = '../../../converted_speakers/stargan'
+    converted_dir_default = '../../../converted_speakers/stargan/Q2'
 
     # Parser takes inputs for running file as main
     parser = argparse.ArgumentParser()
@@ -347,12 +338,14 @@ if __name__ == '__main__':
     parser.add_argument('--num_speakers', type=int, default=None, help='dimension of speaker labels')
     # parser.add_argument('--num_converted_wavs', type=int, default=1, help='number of wavs to convert.')
     parser.add_argument('--src_spk', type=str, default=None, help="Source speakers.")
-    # parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')  # M trg speaker
-    parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')  # F trg speaker
+    parser.add_argument('--trg_spk', type=str, default="r6110050", help='Target speaker (FIXED).')  # M trg speaker
+    # parser.add_argument('--trg_spk', type=str, default="r6110032", help='Target speaker (FIXED).')  # F trg speaker
+    # parser.add_argument('--trg_spk', type=str, default="chunkxxx", help='Target speaker (FIXED).')  # Chunk trg speaker
     parser.add_argument("--speakers", type=str, default=None)  # This is used for TestDataset class
 
+
     # Directories of preprocessing and converting
-    parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default, help="48 kHz wav path.")
+    # parser.add_argument("--origin_wavpath", type=str, default=origin_wavpath_default, help="48 kHz wav path.")
     parser.add_argument("--target_wavpath", type=str, default=target_wavpath_default, help="16 kHz wav path.")
     # parser.add_argument("--mc_dir_train", type=str, default=mc_dir_train_default, help="Dir for training features.")
     parser.add_argument("--mc_dir_test", type=str, default=mc_dir_test_default, help="Dir for testing features.")
@@ -368,7 +361,7 @@ if __name__ == '__main__':
 
     # Redefine paths in case parsed arguments differ from default
     sample_rate = argv.sample_rate
-    origin_wavpath = argv.origin_wavpath
+    # origin_wavpath = argv.origin_wavpath
     target_wavpath = argv.target_wavpath
     # mc_dir_train = argv.mc_dir_train
     mc_dir_test = argv.mc_dir_test
@@ -379,13 +372,9 @@ if __name__ == '__main__':
     # Set num_workers to number og cpus unless specified
     num_workers = argv.num_workers if argv.num_workers is not None else (cpu_count() - 1)
 
-    '''Usually below statement is the case, but we define default resume-iteration.'''
-    # If no model-iteration has been specified, don't run
-    if argv.resume_iters is None:
-        raise RuntimeError("Please specify the step number for resuming.")
 
     # If the original wav is 48K, first we want to resample to 16K
-    resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
+    # resample_to_16k(origin_wavpath, target_wavpath, num_workers=num_workers)
 
     # Here it is specified which speakers should be converted
     speaker_used = argv.src_spk if argv.src_spk is not None else None

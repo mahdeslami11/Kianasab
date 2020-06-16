@@ -183,6 +183,10 @@ class Solver(object):
             start_iters = self.resume_iters
             self.restore_model(self.resume_iters)
 
+        # Open file for logging learning function losses
+        loggin_file = open("25_Spraakbanken-Test_log.txt", "w")
+        loggin_file2 = open("25_Spraakbanken-Test_log2.txt", "w")
+
         # Start training.
         print('Start training...')
         start_time = time.time()
@@ -280,9 +284,13 @@ class Solver(object):
                 et = time.time() - start_time
                 et = str(datetime.timedelta(seconds=et))[:-7]
                 log = "Elapsed [{}], Iteration [{}/{}]".format(et, i+ 1, self.num_iters)
+                log2 = ""
                 for tag, value in loss.items():
                     log += ", {}: {:.4f}".format(tag, value)
+                    log2 += "{:.4f},".format(value)
                 print(log)
+                loggin_file.write(log + "\n")
+                loggin_file2.write(log2 + "\n")
 
                 if self.use_tensorboard:
                     for tag, value in loss.items():
@@ -339,3 +347,6 @@ class Solver(object):
                 d_lr -= (self.d_lr / float(self.num_iters_decay))
                 self.update_lr(g_lr, d_lr)
                 print('Decayed learning rates, g_lr: {}, d_lr: {}.'.format(g_lr, d_lr))
+
+        loggin_file.close()
+        loggin_file2.close()
