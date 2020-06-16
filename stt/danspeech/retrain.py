@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/work1/s183921/fagprojekt2020/stt/danspeech/danspeech_training')
 from deepspeech.train import train_new
 from argparse import ArgumentParser, Namespace
 import torch
