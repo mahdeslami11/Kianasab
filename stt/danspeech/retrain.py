@@ -1,4 +1,4 @@
-from danspeech.train import train_new
+from deepspeech.train import train_new
 from argparse import ArgumentParser, Namespace
 import torch
 if torch.cuda.is_available():
