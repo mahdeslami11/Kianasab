@@ -106,6 +106,7 @@ class Solver(object):
             else:
                 lambda_kl = self.config['lambda']['lambda_kl'] * (iteration + 1) / self.config['annealing_iters'] 
             data = next(self.train_iter)
+            #TODO target=self.target
             meta = self.ae_step(data, lambda_kl)
             # add to logger
             if iteration % self.args.summary_steps == 0:
