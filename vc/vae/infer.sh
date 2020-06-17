@@ -6,10 +6,10 @@ for source in $(ls $source_folder/*.wav)
     do
         echo "Converting $source to $target..."
         python3 inference.py    -a /work1/s183921/preprocessed_data/vae/spraakbanken/sanity_check/attr.pkl \
-                                -c /work1/s183921/trained_models/vae/sanity_check_first/model.config.yaml \
-                                -m /work1/s183921/trained_models/vae/sanity_check_first/model.ckpt\
+                                -c /work1/s183921/trained_models/vae/sanity_check/model.config.yaml \
+                                -m /work1/s183921/trained_models/vae/sanity_check/model.ckpt\
                                 -s $source\
                                 -t $target\
-                                -o /work1/s183921/converted_speakers/vae/word_error_rate
+                                -o /work1/s183921/converted_speakers/vae/full_spraakbanken_test
         echo "Completed conversion.."
     done
