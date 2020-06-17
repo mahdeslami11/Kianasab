@@ -11,5 +11,6 @@ def preprocess(args):
     print(f'Found {len(paths)} .wav files')
 
     for i, p in enumerate(paths):
-        shutil.copyfile(p, out_path)
+        file_name = p.rsplit(os.sep, 1)[1]
+        shutil.copyfile(p, os.path.join(out_path, file_name))
         print(f'Copied {i+1}', end='\r') 
