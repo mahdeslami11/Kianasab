@@ -133,16 +133,16 @@ class TestDataset(object):
         #             'r6110044']  # VestSydSjaelland M
 
         # Final training with Chunk
-        self.speakers = ['chunkxxx',  # Target
-                        'r6110050',  # Storkoebenhavn M t
-                        'r6110013',  # Soenderjylland F t
-                        'r6110015',  # Soenderjylland M t
-                        'r6110034',  # Fyn M t
-                        'r6110049',  # Vestjylland F t
-                        'r6110009',  # Oestjylland M t
-                        'r6110010',  # Nordjylland F t
-                        'r6110044',  # VestSydSjaelland M t
-                        'r6110032']  # VestSydSjaelland F t
+        # self.speakers = ['chunkxxx',  # Target
+        #                 'r6110050',  # Storkoebenhavn M t
+        #                 'r6110013',  # Soenderjylland F t
+        #                 'r6110015',  # Soenderjylland M t
+        #                 'r6110034',  # Fyn M t
+        #                 'r6110049',  # Vestjylland F t
+        #                 'r6110009',  # Oestjylland M t
+        #                 'r6110010',  # Nordjylland F t
+        #                 'r6110044',  # VestSydSjaelland M t
+        #                 'r6110032']  # VestSydSjaelland F t
 
         # 5 male big spraakbanken speakers
         # self.speakers = ['r6110050',  # Target Storkoebenhavn M
@@ -161,49 +161,32 @@ class TestDataset(object):
         #             'r6110044']  # VestSydSjaelland M
 
 
-        # ALl spraakbanken-Test speakers
-        # self.speakers = ['r6110005',
-        #             'r6110007',
-        #             'r6110008',
-        #             'r6110009',
-        #             'r6110010',
-        #             'r6110011',
-        #             'r6110012',
-        #             'r6110013',
-        #             'r6110014',
-        #             'r6110015',
-        #             'r6110018',
-        #             'r6110019',
-        #             'r6110020',
-        #             'r6110021',
-        #             'r6110022',
-        #             'r6110023',
-        #             'r6110024',
-        #             'r6110025',
-        #             'r6110026',
-        #             'r6110027',
-        #             'r6110028',
-        #             'r6110030',
-        #             'r6110031',
-        #             'r6110032',
-        #             'r6110033',
-        #             'r6110034',
-        #             'r6110035',
-        #             'r6110036',
-        #             'r6110037',
-        #             'r6110038',
-        #             'r6110039',
-        #             'r6110040',
-        #             'r6110041',
-        #             'r6110042',
-        #             'r6110043',
-        #             'r6110044',
-        #             'r6110046',
-        #             'r6110047',
-        #             'r6110048',
-        #             'r6110049',
-        #             'r6110050',
-        #             'r6110051']
+        # spraakbanken-Test-25-Final training
+        self.speakers = ['r6110005',  # Oestjylland F
+                    'r6110008',  # Vestjylland M
+                    'r6110009',  # Oestjylland M
+                    'r6110011',  # Nordjylland M
+                    'r6110018',  # Fyn F
+                    'r6110019',  # Fyn M
+                    'r6110022',  # Vestjylland F
+                    'r6110023',  # Oestjylland M
+                    'r6110026',  # Vestjylland M
+                    'r6110027',  # Storkoebenhavn M
+                    'r6110028',  # VestSydSjaelland F
+                    'r6110030',  # Storkoebenhavn M
+                    'r6110031',  # Nordjylland F
+                    'r6110034',  # Fyn M
+                    'r6110037',  # VestSydSjaelland F
+                    'r6110038',  # Storkoebenhavn F
+                    'r6110041',  # Soenderjylland F
+                    'r6110042',  # VestSydSjaelland M
+                    'r6110043',  # Oestjylland F
+                    'r6110044',  # VestSydSjaelland M
+                    'r6110046',  # VestSydSjaelland M
+                    'r6110048',  # Storkoebenhavn F
+                    'r6110049',  # Soenderjylland F
+                    'r6110050',  # Target Storkoebenhavn M
+                    'r6110051']  # Fyn F
 
         assert self.trg_spk in self.speakers, f'The trg_spk should be chosen from {self.speakers}, but you choose {self.trg_spk}.'
         spk2idx = dict(zip(self.speakers, range(len(self.speakers))))
@@ -239,7 +222,7 @@ def test(config):
     sampling_rate, num_mcep, frame_period = 16000, 36, 5
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    G = Generator(num_speakers=10).to(device)  # Now we should'nt have to change num_speakers in model.py
+    G = Generator(num_speakers=25).to(device)  # Now we should'nt have to change num_speakers in model.py
     test_loader = TestDataset(config)
     # Restore model
     print(f'Loading the trained models from step {config.resume_iters}...')
@@ -323,7 +306,7 @@ if __name__ == '__main__':
 
     # models_dir_default = '../../../trained_models/stargan/spraakbanken'
     # models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
-    models_dir_default = '../../../trained_models/stargan/spraakbanken-Test-Chunk'
+    models_dir_default = '../../../trained_models/stargan/spraakbanken-Test-25-Final'
 
     converted_dir_default = '../../../converted_speakers/stargan/Q2'
 

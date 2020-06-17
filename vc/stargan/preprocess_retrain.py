@@ -211,12 +211,12 @@ if __name__ == '__main__':
     target_wavpath_default = "/work1/s183921/speaker_data/Spraakbanken-Selected"
     mc_dir_test_default = '/work1/s183921/preprocessed_data/stargan/spraakbanken/mc-retrain'
     logs_dir_default = '/work1/s183921/newspeakers/stargan/logs'
-    models_dir_default = '/work1/s183921/trained_models/stargan/spraakbanken-Test-Chunk'
-    converted_dir_default = '/work1/s183921/speaker_data/Spraakbanken-Retrain-Stargan'
+    models_dir_default = '/work1/s183921/trained_models/stargan/spraakbanken-Test-25-Final'
+    converted_dir_default = '/work1/s183921/converted_speakers/stargan/Spraakbanken-Selected'
 
     # On August's machine
-    sample_rate_default = 16000
-    resume_iters_default = 200000
+    # sample_rate_default = 16000
+    # resume_iters_default = 200000
     # target_wavpath_default = "../../../speaker_data/Spraakbanken-Selected"
     # mc_dir_test_default = '../../../preprocessed_data/stargan/spraakbanken/mc-retrain'
     # logs_dir_default = '../../../newspeakers/stargan/logs'
