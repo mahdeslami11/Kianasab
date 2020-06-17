@@ -1,6 +1,5 @@
 import sys
-sys.path.append('/work1/s183921/fagprojekt2020/stt/danspeech/danspeech_training/deepspeech')
-sys.path.append('/work1/s183921/STT/warp-ctc/pytorch_binding/warpctc_pytorch')
+sys.path.append('danspeech_training/deepspeech')
 from train import train_new
 from argparse import ArgumentParser, Namespace
 import torch
