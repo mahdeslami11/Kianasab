@@ -91,7 +91,7 @@ class Inferencer(object):
         target = self.args.target.rsplit('/', 1)[1] #keep .wav
         src_mel, _ = get_spectrograms(self.args.source)
         tar_mel, _ = get_spectrograms(self.args.target)
-        src_mel = torch.from_numpy(self.normalize(src_mel)).cuda()
+        src_mel = torch.from_numpy(self.normalize(src_mel)).cuda() 
         tar_mel = torch.from_numpy(self.normalize(tar_mel)).cuda()
         conv_wav, conv_mel = self.inference_one_utterance(src_mel, tar_mel)
         self.write_wav_to_file(conv_wav, join(self.args.output, f'{source}_to_{target}'))
