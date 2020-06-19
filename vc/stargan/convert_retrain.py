@@ -254,7 +254,6 @@ if __name__ == '__main__':
     #        speaker_used = speaker_used[index - step_size:]
     #    else:
     #        raise RuntimeError("No more speakers")
-  dd
     # print(speaker_used)
     argv.src_spk = speaker_used
 
