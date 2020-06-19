@@ -246,15 +246,15 @@ if __name__ == '__main__':
     # print(speaker_used)
     index = argv.index
     # print(index)
-    step_size = 20
-    if index is not None:
-        if index <= len(speaker_used):
-            speaker_used = speaker_used[index - step_size:index]
-        elif index - step_size < len(speaker_used) and index > len(speaker_used):
-            speaker_used = speaker_used[index - step_size:]
-        else:
-            raise RuntimeError("No more speakers")
-
+    #step_size = 20
+    #if index is not None:
+    #    if index <= len(speaker_used):
+    #        speaker_used = speaker_used[index - step_size:index]
+    #    elif index - step_size < len(speaker_used) and index > len(speaker_used):
+    #        speaker_used = speaker_used[index - step_size:]
+    #    else:
+    #        raise RuntimeError("No more speakers")
+  dd
     # print(speaker_used)
     argv.src_spk = speaker_used
 
