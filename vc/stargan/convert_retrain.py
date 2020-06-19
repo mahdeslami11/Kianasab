@@ -255,11 +255,13 @@ if __name__ == '__main__':
         else:
             raise RuntimeError("No more speakers")
 
+
+
     # print(speaker_used)
     argv.src_spk = speaker_used
 
 
-    # Setting number of speakers
+    # Setting number of speakerst
     argv.num_speakers = len(speaker_used)
 
 
