@@ -243,6 +243,7 @@ if __name__ == '__main__':
 
     # Here the interval of speakers to be preprocessed is specified
     speaker_used = os.listdir(target_wavpath)  # First define speaker_used as all speakers in corpus
+    speaker_already_converted = os.listdir(converted_dir_default)
     # print(speaker_used)
     index = argv.index
     # print(index)
@@ -254,6 +255,11 @@ if __name__ == '__main__':
     #        speaker_used = speaker_used[index - step_size:]
     #    else:
     #        raise RuntimeError("No more speakers")
+    speaker_used_temp = []
+    for speaker in speaker_used:
+        if speaker not in speaker_already_converted:
+            speaker_used_temp.append(speaker)
+    speaker_used = speaker_used_temp
     # print(speaker_used)
     argv.src_spk = speaker_used
 

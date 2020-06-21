@@ -23,5 +23,5 @@ if __name__ == '__main__':
 
     print('Preprocessing meta data')
     meta.preprocess(args)
-    print('Preprocessing audio files')
-    audio.preprocess(args)
+    #print('Preprocessing audio files')
+    #audio.preprocess(args)
