@@ -22,8 +22,6 @@ import random
 from preprocess.spraakbanken.vae.dataset.tacotron.utils import melspectrogram2wav
 from preprocess.spraakbanken.vae.dataset.tacotron.utils import get_spectrograms
 import librosa
-import matplotlib.pyplot as plt
-plt.style.use('ggplot')
 
 class Inferencer(object):
     def __init__(self, config, args):

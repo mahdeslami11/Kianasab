@@ -386,10 +386,7 @@ class AE(nn.Module):
 
     def inference(self, x, x_cond):
         emb = self.speaker_encoder(x_cond)
-        np.save(emb, '/work1/s183921/emb.npy')
         mu, sigma = self.content_encoder(x)
-        np.save(mu, '/work1/s183921/mu.npy')
-        np.save(sigma, '/work1/s183921/sigma.npy')
         dec = self.decoder(mu, emb)
         return dec
 
