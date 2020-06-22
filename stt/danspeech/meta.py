@@ -6,13 +6,10 @@ import regex
 
 def __clean_utt(utt):
     utt = utt.lower()
-    utt = utt.replace(".", "")
+    utt = regex.sub(r'(?![a-zæøåéüö_\s])$*.', '', utt)
     utt = utt.replace("é", "e")
-    utt = utt.replace("\\", " ")
-    utt = utt.replace(",", "")
-    utt = utt.replace("?", "")
-    utt = utt.replace("!", "")
-    utt = utt.replace('"', "")
+    utt = utt.replace('ö', 'ø')
+    utt = utt.replace('ü', 'u')
     utt = regex.sub(' +', ' ', utt)
     return utt
 

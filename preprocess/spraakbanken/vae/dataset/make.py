@@ -32,11 +32,7 @@ def read_filenames(root_dir):
     returns a dictionary with speaker ids mapped to a collection of speaker audio file paths
     '''
     speaker2filenames = defaultdict(lambda : [])
-    paths = sorted(glob.glob(os.path.join(root_dir, '*/*.wav')))
-    if len(paths) >= 50:
-        samples = random.sample(range(1, len(paths)), 50)
-        paths = [paths[s] for s in samples]
-
+    paths = sorted(glob.glob(os.path.join(root_dir, 'Stasjon*/*.wav')))
     for path in paths:
         speaker_id = path.strip().split('/')[-2]
         speaker2filenames[speaker_id].append(path)
