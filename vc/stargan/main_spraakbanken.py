@@ -1,8 +1,7 @@
 '''
 Code taken directly from StarGAN-Voice-Conversion repo.
-
-Modified specifically for Spraakbanken audio data.
-By August Semrau Andersen for DTU course #02466.
+main.py modified specifically for Spraakbanken audio data.
+@AugustSemrau for DTU course #02466.
 '''
 
 import os
@@ -80,7 +79,7 @@ if __name__ == '__main__':
     # parser.add_argument('--model_save_dir', type=str, default='../../../trained_models/stargan/spraakbanken')
     # parser.add_argument('--sample_dir', type=str, default='../../../trained_models/stargan/samples/spraakbanken')
 
-    # Directories on SSH normal spraakbanken dataset
+    # Directories on SSH normal Spraakbanken dataset
     # parser.add_argument('--train_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/train')
     # parser.add_argument('--test_data_dir', type=str, default='/work1/s183921/preprocessed_data/stargan/spraakbanken/mc/test')
     # parser.add_argument('--wav_dir', type=str, default="/work1/s183921/speaker_data/Spraakbanken-Corpus")

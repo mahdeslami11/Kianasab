@@ -712,3 +712,9 @@ log/
 output_*
 error_*
 
+#don't include danspeech
+*danspeech_training*
+
+#don't include warp-ctc
+*warp-ctc*
+*/warp-ctc
