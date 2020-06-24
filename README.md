@@ -82,6 +82,7 @@ There are three runnable scripts, which have been used for this project, and the
     ```
     python3 convert_noTrain.py --resume_iters 200000 --src_spk p200+p201+p201
     ```
+
 ### Usin VAE
 As with StarGAN there are three runnable scripts which have been used for running VAE in this project.
 * preprocess/spraakbanken/vae/run.sh
