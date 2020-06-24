@@ -1,3 +1,10 @@
+'''
+The script is created from an original implementation by: 
+https://github.com/jjery2243542/adaptive_voice_conversion
+
+Second part of the VAE preprocess, where all speaker utterances
+with fewer segments than the given segment_size are filtered out.
+'''
 import pickle
 import sys
 import os

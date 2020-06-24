@@ -1,3 +1,11 @@
+'''
+The script is created from an original implementation by: 
+https://github.com/jjery2243542/adaptive_voice_conversion
+
+Last script for the VAE preprocessing where segments are 
+randomly sampled from the remaining .wav speaker files.
+Then number of samples is defined by the param n_samples
+'''
 import json 
 import pickle 
 import sys

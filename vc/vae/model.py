@@ -1,3 +1,7 @@
+'''
+The script is created from an original implementation by: 
+https://github.com/jjery2243542/adaptive_voice_conversion
+'''
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
