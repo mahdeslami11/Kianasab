@@ -1,4 +1,4 @@
-#Voice Conversion - DTU Project Work 4th Semester
+# Voice Conversion - DTU Project Work 4th Semester
 This repo contains the code for the project undertaken 
 as part of the course Project Work in Artificial Intelligence at the Technical University of Denmark.<br>
 For English voice conversion the [VCTK Multi-speaker Corpus](https://datashare.is.ed.ac.uk/handle/10283/3443) was used for preliminary experiments.<br>
@@ -56,7 +56,7 @@ This module includes code for evaluating and comparing the accuracy of the Speec
 To move files from a Spraakbanken folder structure (nested structure with StasjonXX folders)
 use the script preprocess/spraakbanken/files.py. Meta .json files will also be created for each speaker in the process.
 ```
-files.py -data_dir <Location of Spraakbanken Directory> -out_dir <Location of where to create the new file structure>
+files.py -data_dir <Spraakbanken Directory Path> -out_dir <Path to create the new file structure>
 ```
 
 ### Using StarGAN
