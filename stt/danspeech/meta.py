@@ -2,6 +2,16 @@ import pandas as pd
 import json
 import os
 import glob
+import regex
+
+def __clean_utt(utt):
+    utt = utt.lower()
+    utt = regex.sub(r'(?![a-zæøåéüö_\s])$*.', '', utt)
+    utt = utt.replace("é", "e")
+    utt = utt.replace('ö', 'ø')
+    utt = utt.replace('ü', 'u')
+    utt = regex.sub(' +', ' ', utt)
+    return utt
 
 def __write_to_csv(p, meta, csv:pd.DataFrame):
     split_p = p.rsplit(os.sep, 1)[1].split('_')
@@ -9,7 +19,7 @@ def __write_to_csv(p, meta, csv:pd.DataFrame):
     substation = split_p[1]
     speaker_id = split_p[2]
 
-    utterances          = {f'{station}_{substation}_{speaker_id}_{key}':val for key,val in meta.items() if key.startswith('u')}
+    utterances          = {f'{station}_{substation}_{speaker_id}_{key}': __clean_utt(val) for key,val in meta.items() if key.startswith('u')}
     filename_col        = list(utterances.keys())
     transcription_col   = list(utterances.values())
     gender_col          = [meta['sex']]*len(utterances)
