@@ -1,3 +1,6 @@
+'''
+Custom logger class, that can be used for minor logging during batch jobs on the DTU hpc.
+'''
 import os
 import uuid
 

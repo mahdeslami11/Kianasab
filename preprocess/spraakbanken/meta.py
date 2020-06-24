@@ -1,3 +1,8 @@
+'''
+Script for extracting meta data from Spraakbanken .spl files as .json files.
+The .spl data is important to extract if you want meta data about the speakers 
+e.g. for statistical purposes.
+'''
 import glob
 
 def read_record_states(c, info_dict):

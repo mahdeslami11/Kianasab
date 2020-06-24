@@ -287,28 +287,37 @@ if __name__ == '__main__':
     # converted_dir_default = '/work1/s183921/converted_speakers/stargan'
 
     # On August's machine
+    # sample_rate_default = 16000
+    # resume_iters_default = 200000
+    # # origin_wavpath_default = "../../../newspeakers/wav48_Q1"
+    # target_wavpath_default = "../../../newspeakers/stargan/wav16_WER-Test"
+    # mc_dir_test_default = '../../../newspeakers/stargan/mc_WER-Test/'
+    # # origin_wavpath_default = "../../../newspeakers/wav48_Q1"
+    # # target_wavpath_default = "../../../newspeakers/stargan/wav16_Q1"
+    # # mc_dir_test_default = '../../../newspeakers/stargan/mc_Q1/'
+    # # origin_wavpath_default = "../../../newspeakers/wav48"
+    # # target_wavpath_default = "../../../newspeakers/stargan/wav16"
+    # # mc_dir_test_default = '../../../newspeakers/stargan/mc/'
+    # logs_dir_default = '../../../newspeakers/stargan/logs'
+    # # models_dir_default = '../../../trained_models/stargan/spraakbanken'
+    # # models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
+    # models_dir_default = '../../../trained_models/stargan/spraakbanken-Test-25-Final'
+    # converted_dir_default = '../../../converted_speakers/stargan/Q2'
+
+
+    # Your Machine
     sample_rate_default = 16000
-    resume_iters_default = 200000
+    resume_iters_default = 100000
+    origin_wavpath_default = ""  # Folder with 48k .wav files, every speaker in  its own folder
+    target_wavpath_default = ""  # Folder with 16k .wav files, every speaker in  its own folder (will be created)
+    mc_dir_test_default = ""  # Folder whereto the features of speech samples are extracted. add included trg-speaker_stats.npz files to this
+    logs_dir_default = ""  # Folder for log-files, irellevant here..
+    models_dir_default = ""  # Folder with trained models, the two currently setup for here are included
+    converted_dir_default = ""  # Folder to which converted speech samples should be saved
 
-    # origin_wavpath_default = "../../../newspeakers/wav48_Q1"
-    target_wavpath_default = "../../../newspeakers/stargan/wav16_WER-Test"
-    mc_dir_test_default = '../../../newspeakers/stargan/mc_WER-Test/'
 
-    # origin_wavpath_default = "../../../newspeakers/wav48_Q1"
-    # target_wavpath_default = "../../../newspeakers/stargan/wav16_Q1"
-    # mc_dir_test_default = '../../../newspeakers/stargan/mc_Q1/'
 
-    # origin_wavpath_default = "../../../newspeakers/wav48"
-    # target_wavpath_default = "../../../newspeakers/stargan/wav16"
-    # mc_dir_test_default = '../../../newspeakers/stargan/mc/'
 
-    logs_dir_default = '../../../newspeakers/stargan/logs'
-
-    # models_dir_default = '../../../trained_models/stargan/spraakbanken'
-    # models_dir_default = '../../../trained_models/stargan/10_Big_Spraakbanken'
-    models_dir_default = '../../../trained_models/stargan/spraakbanken-Test-25-Final'
-
-    converted_dir_default = '../../../converted_speakers/stargan/Q2'
 
     # Parser takes inputs for running file as main
     parser = argparse.ArgumentParser()

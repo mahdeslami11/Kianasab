@@ -247,6 +247,7 @@ if __name__ == '__main__':
     # print(speaker_used)
     index = argv.index
     # print(index)
+
     #step_size = 20
     #if index is not None:
     #    if index <= len(speaker_used):
@@ -260,11 +261,12 @@ if __name__ == '__main__':
         if speaker not in speaker_already_converted:
             speaker_used_temp.append(speaker)
     speaker_used = speaker_used_temp
+
     # print(speaker_used)
     argv.src_spk = speaker_used
 
 
-    # Setting number of speakers
+    # Setting number of speakerst
     argv.num_speakers = len(speaker_used)
 
 

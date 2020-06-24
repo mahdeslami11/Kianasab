@@ -1,3 +1,24 @@
+'''
+The script is created from an original implementation by: 
+https://github.com/jjery2243542/adaptive_voice_conversion
+
+This is the main script for the VAE speaker preprocessing.
+It selects .wav files from speakers in a given directory and
+generates mel spectrograms for them. From the mel spectrograms
+segments are selected to be used for the training of VAE.
+This script is set up to work with Spraakbanken speaker data
+which is 16 kHz recordings. It is important to adjust the 
+sampling rate in /tacotron/hyperparams.py and
+../preprocess.config if any other audio frequencies are used.
+
+IMPORTANT:
+Even though the script is run on Spraakbanken data it does not fit
+the original folder structure of Spraakbanken. Instead it fits that
+of VCTK (see https://homepages.inf.ed.ac.uk/jyamagis/page3/page58/page58.html)
+
+See the script ../../files.py which can be used to select files from Spraakbanken
+and move them to a folder structure similar to that of VCTK.
+'''
 import pickle 
 import sys
 import glob 
