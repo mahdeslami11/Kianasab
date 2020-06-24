@@ -82,14 +82,14 @@ These are modified of the StarGAN cloned scripts preprocess.py, main.py and conv
     ```
     python3 main_spraakbanken.py --num_speakers xx
     ```
-* /fagprojekt2020/vc/stargan/convert_noTrain.py  
+* /fagprojekt2020/vc/stargan/convertnew.py  
     - This script is used for converting .wav files directly, meaning preprocess and converting happens together and no training data for StarGAN model training is produces.  
     - The default iteration model used is 200,000 and its path is needed.
     - The mc folder needs to include the _stats.npz file of target speaker, and the same list of training speakers used for training the model need to be included under the class TestDataset as self.speakers.  
     - Every speaker included in the origin_wavpath will be converted.
     - Run in terminal
     ```
-    python3 convert_noTrain.py 
+    python3 convertnew.py 
     ```
 
 ### Usin VAE
