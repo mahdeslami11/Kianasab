@@ -12,8 +12,5 @@ for source in $(ls $source_folder/*.wav)
                                 -s $source\
                                 -t $target\
                                 -o /work1/s183921/converted_speakers/vae/sanity_check/female_r6110032
-        mv /work1/s183921/emb.npy /work1/s183921/$source_emb.npy
-        mv /work1/s183921/mu.npy /work1/s183921/$source_mu.npy
-        mv /work1/s183921/sigma.npy /work1/s183921/$source_sigma.npy
         echo "Completed conversion.."
     done
