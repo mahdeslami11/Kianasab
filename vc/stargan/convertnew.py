@@ -222,8 +222,9 @@ def test(config):
     sampling_rate, num_mcep, frame_period = 16000, 36, 5
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    G = Generator(num_speakers=25).to(device)  # Now we should'nt have to change num_speakers in model.py
     test_loader = TestDataset(config)
+    G = Generator(num_speakers=len(test_loader.speakers)).to(device)  # Now we should'nt have to change num_speakers in model.py
+
     # Restore model
     print(f'Loading the trained models from step {config.resume_iters}...')
     G_path = join(config.model_save_dir, f'{config.resume_iters}-G.ckpt')
