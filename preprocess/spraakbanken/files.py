@@ -1,3 +1,9 @@
+'''
+This script is made to select valid .wav files from the Spraakbanken data set.
+It works on the original Spraakbanken structure, where it selects the .wav files 
+and copies them to a VCTK file structure.
+(see https://homepages.inf.ed.ac.uk/jyamagis/page3/page58/page58.html for VCTK)
+'''
 import sys
 import os
 from os import listdir, sep

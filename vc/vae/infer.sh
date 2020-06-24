@@ -1,4 +1,5 @@
 #!/bin/bash
+#Main shell script for running speaker conversions with VAE
 source_folder="/work1/s183921/speaker_data/Validation-Corpus/VC_original"
 target="/work1/s183921/speaker_data/Spraakbanken-Corpus-Test/r6110032/r6110032_u0032133.wav"
 

@@ -1,3 +1,5 @@
+#!/bin/bash
+#Main shell script for running the preprocessing of speaker data for VAE
 . preprocess.config
 
 if [ $stage -le 0 ]; then

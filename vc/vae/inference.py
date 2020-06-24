@@ -1,3 +1,9 @@
+'''
+The script is created from an original implementation by: 
+https://github.com/jjery2243542/adaptive_voice_conversion
+
+This is the script used for VAE speaker conversions.
+'''
 import sys
 sys.path.append('/work1/s183921/fagprojekt2020/')
 import torch

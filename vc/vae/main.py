@@ -1,3 +1,10 @@
+'''
+The script is created from an original implementation by: 
+https://github.com/jjery2243542/adaptive_voice_conversion
+
+Main script for running the training of VAE.
+To run the script in the terminal see train.sh
+'''
 from argparse import ArgumentParser, Namespace
 import torch
 from solver import Solver
