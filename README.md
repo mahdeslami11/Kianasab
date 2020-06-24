@@ -2,7 +2,9 @@
 This repo contains the code for the project undertaken 
 as part of the course Project Work in Artificial Intelligence at the Technical University of Denmark.<br>
 For English voice conversion the [VCTK Multi-speaker Corpus](https://datashare.is.ed.ac.uk/handle/10283/3443) was used for preliminary experiments.<br>
-For Danish voice conversion the [Språkbankens ressurskatalog](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-19/) is used.
+For Danish voice conversion the [Språkbankens ressurskatalog](https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-19/) is used.<br>
+To run the full project, you need GPU hardware. This project has been run using the gpuv100 server on the **DTU HPC Server**.
+
 
 ## Project Statement
 This project specifically looks at, to which degree voice conversion technologies can be utilized fortransforming dialect heavy speech into a standard voice, to improve the performance of the existingDanish state-of-the-art speech to text system danspeech.
