@@ -132,3 +132,10 @@ As with StarGAN there are three runnable scripts which have been used for runnin
     ```
     infer.sh
     ```
+}
+
+
+1- target
+
+Voice conversion (VC) is a technique for converting para/nonlinguistic information contained in a given utterance while preserving linguistic information. This technique can be applied to various tasks such as speaker-identity modification for text-to-speech (TTS) systems [1], speaking assistance , speech enhancement , and pronunciation conversion.
+One successful VC framework involves statistical methods based on Gaussian mixture models (GMMs). Recently, a neural network (NN)-based framework based on feed-forward deep NNs , recurrent NNs , and generative adversarial nets (GANs) , and an exemplarbased framework based on non-negative matrix factorization (NMF) have also proved successful.
