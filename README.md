@@ -139,3 +139,7 @@ As with StarGAN there are three runnable scripts which have been used for runnin
 
 Voice conversion (VC) is a technique for converting para/nonlinguistic information contained in a given utterance while preserving linguistic information. This technique can be applied to various tasks such as speaker-identity modification for text-to-speech (TTS) systems [1], speaking assistance , speech enhancement , and pronunciation conversion.
 One successful VC framework involves statistical methods based on Gaussian mixture models (GMMs). Recently, a neural network (NN)-based framework based on feed-forward deep NNs , recurrent NNs , and generative adversarial nets (GANs) , and an exemplarbased framework based on non-negative matrix factorization (NMF) have also proved successful.
+
+2-Describe innovation
+
+This paper proposes a method that allows non-parallel manyto-many voice conversion (VC) by using a variant of a generative adversarial network (GAN) called StarGAN. Our method, which we call StarGAN-VC, is noteworthy in that it requires no parallel utterances, transcriptions, or time alignment procedures for speech generator training, simultaneously learns many-to-many mappings across different attribute domains using a single generator network, is able to generate converted speech signals quickly enough to allow real-time implementations and  requires only several minutes of training examples to generate reasonably realistic sounding speech.
