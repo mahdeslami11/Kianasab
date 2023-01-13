@@ -143,3 +143,11 @@ One successful VC framework involves statistical methods based on Gaussian mixtu
 2-Describe innovation
 
 This paper proposes a method that allows non-parallel manyto-many voice conversion (VC) by using a variant of a generative adversarial network (GAN) called StarGAN. Our method, which we call StarGAN-VC, is noteworthy in that it requires no parallel utterances, transcriptions, or time alignment procedures for speech generator training, simultaneously learns many-to-many mappings across different attribute domains using a single generator network, is able to generate converted speech signals quickly enough to allow real-time implementations and  requires only several minutes of training examples to generate reasonably realistic sounding speech.
+
+
+3- change source code
+import pandas as pd
+import json
+import os
+import glob
+import regex
