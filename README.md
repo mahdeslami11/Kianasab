@@ -154,6 +154,9 @@ import librosamport numpy as np
 4- conclusion 
 This paper proposed a method that allows non-parallel many- to-many VC by using a novel GAN variant called StarGAN. Our method, which we call StarGAN-VC, is noteworthy in that it requires no parallel utterances, time alignment procedures for speech generator training, simultaneously learns many-to-many mappings across differ- ent voice attribute domains using a single generator network, is able to generate signals of converted speech quickly enough to allow real-time implementations and requires only several minutes of training examples to generate rea- sonably realistic sounding speech. 
 
-5-
+5-link
 
 https://github.com/andabi/deep-voice-conversion
+
+6- self introduction
+Sepideh Kianasab from Tehran-South branch of Azad University.
