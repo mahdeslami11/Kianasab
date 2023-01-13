@@ -151,3 +151,9 @@ import json
 import os
 import glob
 import regex
+
+
+4- conclusion 
+This paper proposed a method that allows non-parallel many- to-many VC by using a novel GAN variant called StarGAN. Our method, which we call StarGAN-VC, is noteworthy in that it requires no parallel utterances, time alignment procedures for speech generator training, simultaneously learns many-to-many mappings across differ- ent voice attribute domains using a single generator network, is able to generate signals of converted speech quickly enough to allow real-time implementations and requires only several minutes of training examples to generate rea- sonably realistic sounding speech. 
+
+
